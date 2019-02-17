@@ -9,23 +9,16 @@
         </transform>
         <transform>
             <set>
-                <translate>0 20 0</translate>
+                <translate>0 30 0</translate>
             </set>
             <group name="2nd_floor" from="scenegraphmodels/building/floor.xml">
             </group>
         </transform>
         <transform>
             <set>
-                <translate>0 40 0</translate>
-            </set>
-            <group name="3rd_floor" from="scenegraphmodels/building/floor.xml">
-            </group>
-        </transform>
-        <transform>
-            <set>
                 <translate>0 60 0</translate>
             </set>
-            <group name="roof" from="scenegraphmodels/building/roof.xml">
+            <group name="3rd_floor" from="scenegraphmodels/building/floor.xml">
             </group>
         </transform>
     </group>
