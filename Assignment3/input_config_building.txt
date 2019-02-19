@@ -1,1 +1,1 @@
-scenegraphmodels/building.xml 0.0 50.0 80.0
+scenegraphmodels/two_buildings.xml 0.0 50.0 80.0
