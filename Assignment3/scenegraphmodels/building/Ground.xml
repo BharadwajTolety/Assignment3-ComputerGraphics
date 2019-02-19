@@ -4,11 +4,11 @@
         <transform>
             <set>
                 <translate>0 -15 0</translate>
-                <scale>30 0.125 30</scale>
+                <scale>100 0.5 100</scale>
             </set>
             <object instanceof="box">
                 <material>
-                    <color>1 1 0</color>
+                    <color>0.3 0.2 0.2</color>
                 </material>
             </object>
         </transform>

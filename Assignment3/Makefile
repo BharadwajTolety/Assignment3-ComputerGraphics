@@ -263,7 +263,9 @@ DIST          = shaders/default.frag \
 		sgraph/Scenegraph.h \
 		sgraph/scenegraphinfo.h \
 		sgraph/SceneXMLReader.h \
-		sgraph/TransformNode.h main.cpp \
+		sgraph/TransformNode.h \
+		Camera.h \
+		FileReader.h main.cpp \
 		OpenGLWindow.cpp \
 		View.cpp
 QMAKE_TARGET  = Scenegraphs
@@ -696,7 +698,7 @@ distdir: FORCE
 	@test -d $(DISTDIR) || mkdir -p $(DISTDIR)
 	$(COPY_FILE) --parents $(DIST) $(DISTDIR)/
 	$(COPY_FILE) --parents /Users/sribharadwajtolety/Qt/5.12.0/clang_64/mkspecs/features/data/dummy.cpp $(DISTDIR)/
-	$(COPY_FILE) --parents OpenGLWindow.h VertexAttrib.h View.h sgraph/AbstractNode.h sgraph/GLScenegraphRenderer.h sgraph/GroupNode.h sgraph/INode.h sgraph/IScenegraph.h sgraph/LeafNode.h sgraph/Scenegraph.h sgraph/scenegraphinfo.h sgraph/SceneXMLReader.h sgraph/TransformNode.h $(DISTDIR)/
+	$(COPY_FILE) --parents OpenGLWindow.h VertexAttrib.h View.h sgraph/AbstractNode.h sgraph/GLScenegraphRenderer.h sgraph/GroupNode.h sgraph/INode.h sgraph/IScenegraph.h sgraph/LeafNode.h sgraph/Scenegraph.h sgraph/scenegraphinfo.h sgraph/SceneXMLReader.h sgraph/TransformNode.h Camera.h FileReader.h $(DISTDIR)/
 	$(COPY_FILE) --parents main.cpp OpenGLWindow.cpp View.cpp $(DISTDIR)/
 
 
@@ -736,6 +738,7 @@ moc_OpenGLWindow.cpp: /Users/sribharadwajtolety/Qt/5.12.0/clang_64/lib/QtCore.fr
 		/Users/sribharadwajtolety/Qt/5.12.0/clang_64/lib/QtCore.framework/Headers/qcoreapplication.h \
 		/Users/sribharadwajtolety/Qt/5.12.0/clang_64/lib/QtGui.framework/Headers/QMouseEvent \
 		/Users/sribharadwajtolety/Qt/5.12.0/clang_64/lib/QtGui.framework/Headers/qevent.h \
+		/Users/sribharadwajtolety/Qt/5.12.0/clang_64/lib/QtGui.framework/Headers/QKeyEvent \
 		../headers/OpenGLFunctions.h \
 		/Users/sribharadwajtolety/Qt/5.12.0/clang_64/lib/QtGui.framework/Headers/QOpenGLFunctions_3_3_Core \
 		/Users/sribharadwajtolety/Qt/5.12.0/clang_64/lib/QtGui.framework/Headers/qopenglfunctions_3_3_core.h \
@@ -843,6 +846,11 @@ moc_OpenGLWindow.cpp: /Users/sribharadwajtolety/Qt/5.12.0/clang_64/lib/QtCore.fr
 		../headers/PolygonMesh.h \
 		../headers/IVertexData.h \
 		VertexAttrib.h \
+		Camera.h \
+		GameObject.h \
+		Component.h \
+		Transform.h \
+		RevolveCamera.h \
 		OpenGLWindow.h \
 		moc_predefs.h \
 		/Users/sribharadwajtolety/Qt/5.12.0/clang_64/bin/moc
@@ -873,120 +881,7 @@ main.o: main.cpp /Users/sribharadwajtolety/Qt/5.12.0/clang_64/lib/QtWidgets.fram
 		/Users/sribharadwajtolety/Qt/5.12.0/clang_64/lib/QtCore.framework/Headers/qcoreapplication.h \
 		/Users/sribharadwajtolety/Qt/5.12.0/clang_64/lib/QtGui.framework/Headers/QMouseEvent \
 		/Users/sribharadwajtolety/Qt/5.12.0/clang_64/lib/QtGui.framework/Headers/qevent.h \
-		../headers/OpenGLFunctions.h \
-		/Users/sribharadwajtolety/Qt/5.12.0/clang_64/lib/QtGui.framework/Headers/QOpenGLFunctions_3_3_Core \
-		/Users/sribharadwajtolety/Qt/5.12.0/clang_64/lib/QtGui.framework/Headers/qopenglfunctions_3_3_core.h \
-		/Users/sribharadwajtolety/Qt/5.12.0/clang_64/lib/QtGui.framework/Headers/QOpenGLShaderProgram \
-		/Users/sribharadwajtolety/Qt/5.12.0/clang_64/lib/QtGui.framework/Headers/qopenglshaderprogram.h \
-		/Users/sribharadwajtolety/Qt/5.12.0/clang_64/lib/QtCore.framework/Headers/QTime \
-		/Users/sribharadwajtolety/Qt/5.12.0/clang_64/lib/QtCore.framework/Headers/qdatetime.h \
-		View.h \
-		../headers/glm/glm.hpp \
-		../headers/glm/detail/_fixes.hpp \
-		../headers/glm/fwd.hpp \
-		../headers/glm/detail/type_int.hpp \
-		../headers/glm/detail/setup.hpp \
-		../headers/glm/detail/type_float.hpp \
-		../headers/glm/detail/type_vec.hpp \
-		../headers/glm/detail/precision.hpp \
-		../headers/glm/detail/type_mat.hpp \
-		../headers/glm/vec2.hpp \
-		../headers/glm/detail/type_vec2.hpp \
-		../headers/glm/detail/_swizzle.hpp \
-		../headers/glm/detail/_swizzle_func.hpp \
-		../headers/glm/detail/type_vec2.inl \
-		../headers/glm/vec3.hpp \
-		../headers/glm/detail/type_vec3.hpp \
-		../headers/glm/detail/type_vec3.inl \
-		../headers/glm/vec4.hpp \
-		../headers/glm/detail/type_vec4.hpp \
-		../headers/glm/detail/type_vec4.inl \
-		../headers/glm/detail/type_vec4_sse2.inl \
-		../headers/glm/detail/type_vec4_avx.inl \
-		../headers/glm/detail/type_vec4_avx2.inl \
-		../headers/glm/mat2x2.hpp \
-		../headers/glm/detail/type_mat2x2.hpp \
-		../headers/glm/detail/type_mat2x2.inl \
-		../headers/glm/mat2x3.hpp \
-		../headers/glm/detail/type_mat2x3.hpp \
-		../headers/glm/detail/type_mat2x3.inl \
-		../headers/glm/mat2x4.hpp \
-		../headers/glm/detail/type_mat2x4.hpp \
-		../headers/glm/detail/type_mat2x4.inl \
-		../headers/glm/mat3x2.hpp \
-		../headers/glm/detail/type_mat3x2.hpp \
-		../headers/glm/detail/type_mat3x2.inl \
-		../headers/glm/mat3x3.hpp \
-		../headers/glm/detail/type_mat3x3.hpp \
-		../headers/glm/detail/type_mat3x3.inl \
-		../headers/glm/mat3x4.hpp \
-		../headers/glm/detail/type_mat3x4.hpp \
-		../headers/glm/detail/type_mat3x4.inl \
-		../headers/glm/mat4x2.hpp \
-		../headers/glm/detail/type_mat4x2.hpp \
-		../headers/glm/detail/type_mat4x2.inl \
-		../headers/glm/mat4x3.hpp \
-		../headers/glm/detail/type_mat4x3.hpp \
-		../headers/glm/detail/type_mat4x3.inl \
-		../headers/glm/mat4x4.hpp \
-		../headers/glm/detail/type_mat4x4.hpp \
-		../headers/glm/detail/type_mat4x4.inl \
-		../headers/glm/trigonometric.hpp \
-		../headers/glm/detail/func_trigonometric.hpp \
-		../headers/glm/detail/func_trigonometric.inl \
-		../headers/glm/detail/_vectorize.hpp \
-		../headers/glm/detail/type_vec1.hpp \
-		../headers/glm/detail/type_vec1.inl \
-		../headers/glm/exponential.hpp \
-		../headers/glm/detail/func_exponential.hpp \
-		../headers/glm/detail/func_exponential.inl \
-		../headers/glm/detail/func_vector_relational.hpp \
-		../headers/glm/detail/func_vector_relational.inl \
-		../headers/glm/common.hpp \
-		../headers/glm/detail/func_common.hpp \
-		../headers/glm/detail/func_common.inl \
-		../headers/glm/packing.hpp \
-		../headers/glm/detail/func_packing.hpp \
-		../headers/glm/detail/func_packing.inl \
-		../headers/glm/detail/type_half.hpp \
-		../headers/glm/detail/type_half.inl \
-		../headers/glm/geometric.hpp \
-		../headers/glm/detail/func_geometric.hpp \
-		../headers/glm/detail/func_geometric.inl \
-		../headers/glm/matrix.hpp \
-		../headers/glm/detail/func_matrix.hpp \
-		../headers/glm/detail/func_matrix.inl \
-		../headers/glm/vector_relational.hpp \
-		../headers/glm/integer.hpp \
-		../headers/glm/detail/func_integer.hpp \
-		../headers/glm/detail/func_integer.inl \
-		../headers/ShaderProgram.h \
-		../headers/ShaderLocationsVault.h \
-		sgraph/Scenegraph.h \
-		sgraph/GLScenegraphRenderer.h \
-		sgraph/INode.h \
-		../headers/Light.h \
-		../headers/Material.h \
-		../headers/glm/gtc/type_ptr.hpp \
-		../headers/glm/gtc/quaternion.hpp \
-		../headers/glm/gtc/constants.hpp \
-		../headers/glm/gtc/constants.inl \
-		../headers/glm/gtc/quaternion.inl \
-		../headers/glm/gtc/type_ptr.inl \
-		../headers/TextureImage.h \
-		/Users/sribharadwajtolety/Qt/5.12.0/clang_64/lib/QtGui.framework/Headers/QOpenGLTexture \
-		/Users/sribharadwajtolety/Qt/5.12.0/clang_64/lib/QtGui.framework/Headers/qopengltexture.h \
-		../headers/ObjectInstance.h \
-		../headers/PolygonMesh.h \
-		../headers/IVertexData.h \
-		VertexAttrib.h
-	$(CXX) -c $(CXXFLAGS) $(INCPATH) -o main.o main.cpp
-
-OpenGLWindow.o: OpenGLWindow.cpp OpenGLWindow.h \
-		/Users/sribharadwajtolety/Qt/5.12.0/clang_64/lib/QtCore.framework/Headers/QCoreApplication \
-		/Users/sribharadwajtolety/Qt/5.12.0/clang_64/lib/QtCore.framework/Headers/qcoreapplication.h \
-		/Users/sribharadwajtolety/Qt/5.12.0/clang_64/lib/QtGui.framework/Headers/QMouseEvent \
-		/Users/sribharadwajtolety/Qt/5.12.0/clang_64/lib/QtGui.framework/Headers/qevent.h \
+		/Users/sribharadwajtolety/Qt/5.12.0/clang_64/lib/QtGui.framework/Headers/QKeyEvent \
 		../headers/OpenGLFunctions.h \
 		/Users/sribharadwajtolety/Qt/5.12.0/clang_64/lib/QtGui.framework/Headers/QOpenGLFunctions_3_3_Core \
 		/Users/sribharadwajtolety/Qt/5.12.0/clang_64/lib/QtGui.framework/Headers/qopenglfunctions_3_3_core.h \
@@ -1094,6 +989,131 @@ OpenGLWindow.o: OpenGLWindow.cpp OpenGLWindow.h \
 		../headers/PolygonMesh.h \
 		../headers/IVertexData.h \
 		VertexAttrib.h \
+		Camera.h \
+		GameObject.h \
+		Component.h \
+		Transform.h \
+		RevolveCamera.h
+	$(CXX) -c $(CXXFLAGS) $(INCPATH) -o main.o main.cpp
+
+OpenGLWindow.o: OpenGLWindow.cpp OpenGLWindow.h \
+		/Users/sribharadwajtolety/Qt/5.12.0/clang_64/lib/QtCore.framework/Headers/QCoreApplication \
+		/Users/sribharadwajtolety/Qt/5.12.0/clang_64/lib/QtCore.framework/Headers/qcoreapplication.h \
+		/Users/sribharadwajtolety/Qt/5.12.0/clang_64/lib/QtGui.framework/Headers/QMouseEvent \
+		/Users/sribharadwajtolety/Qt/5.12.0/clang_64/lib/QtGui.framework/Headers/qevent.h \
+		/Users/sribharadwajtolety/Qt/5.12.0/clang_64/lib/QtGui.framework/Headers/QKeyEvent \
+		../headers/OpenGLFunctions.h \
+		/Users/sribharadwajtolety/Qt/5.12.0/clang_64/lib/QtGui.framework/Headers/QOpenGLFunctions_3_3_Core \
+		/Users/sribharadwajtolety/Qt/5.12.0/clang_64/lib/QtGui.framework/Headers/qopenglfunctions_3_3_core.h \
+		/Users/sribharadwajtolety/Qt/5.12.0/clang_64/lib/QtGui.framework/Headers/QOpenGLShaderProgram \
+		/Users/sribharadwajtolety/Qt/5.12.0/clang_64/lib/QtGui.framework/Headers/qopenglshaderprogram.h \
+		/Users/sribharadwajtolety/Qt/5.12.0/clang_64/lib/QtCore.framework/Headers/QTime \
+		/Users/sribharadwajtolety/Qt/5.12.0/clang_64/lib/QtCore.framework/Headers/qdatetime.h \
+		View.h \
+		../headers/glm/glm.hpp \
+		../headers/glm/detail/_fixes.hpp \
+		../headers/glm/fwd.hpp \
+		../headers/glm/detail/type_int.hpp \
+		../headers/glm/detail/setup.hpp \
+		../headers/glm/detail/type_float.hpp \
+		../headers/glm/detail/type_vec.hpp \
+		../headers/glm/detail/precision.hpp \
+		../headers/glm/detail/type_mat.hpp \
+		../headers/glm/vec2.hpp \
+		../headers/glm/detail/type_vec2.hpp \
+		../headers/glm/detail/_swizzle.hpp \
+		../headers/glm/detail/_swizzle_func.hpp \
+		../headers/glm/detail/type_vec2.inl \
+		../headers/glm/vec3.hpp \
+		../headers/glm/detail/type_vec3.hpp \
+		../headers/glm/detail/type_vec3.inl \
+		../headers/glm/vec4.hpp \
+		../headers/glm/detail/type_vec4.hpp \
+		../headers/glm/detail/type_vec4.inl \
+		../headers/glm/detail/type_vec4_sse2.inl \
+		../headers/glm/detail/type_vec4_avx.inl \
+		../headers/glm/detail/type_vec4_avx2.inl \
+		../headers/glm/mat2x2.hpp \
+		../headers/glm/detail/type_mat2x2.hpp \
+		../headers/glm/detail/type_mat2x2.inl \
+		../headers/glm/mat2x3.hpp \
+		../headers/glm/detail/type_mat2x3.hpp \
+		../headers/glm/detail/type_mat2x3.inl \
+		../headers/glm/mat2x4.hpp \
+		../headers/glm/detail/type_mat2x4.hpp \
+		../headers/glm/detail/type_mat2x4.inl \
+		../headers/glm/mat3x2.hpp \
+		../headers/glm/detail/type_mat3x2.hpp \
+		../headers/glm/detail/type_mat3x2.inl \
+		../headers/glm/mat3x3.hpp \
+		../headers/glm/detail/type_mat3x3.hpp \
+		../headers/glm/detail/type_mat3x3.inl \
+		../headers/glm/mat3x4.hpp \
+		../headers/glm/detail/type_mat3x4.hpp \
+		../headers/glm/detail/type_mat3x4.inl \
+		../headers/glm/mat4x2.hpp \
+		../headers/glm/detail/type_mat4x2.hpp \
+		../headers/glm/detail/type_mat4x2.inl \
+		../headers/glm/mat4x3.hpp \
+		../headers/glm/detail/type_mat4x3.hpp \
+		../headers/glm/detail/type_mat4x3.inl \
+		../headers/glm/mat4x4.hpp \
+		../headers/glm/detail/type_mat4x4.hpp \
+		../headers/glm/detail/type_mat4x4.inl \
+		../headers/glm/trigonometric.hpp \
+		../headers/glm/detail/func_trigonometric.hpp \
+		../headers/glm/detail/func_trigonometric.inl \
+		../headers/glm/detail/_vectorize.hpp \
+		../headers/glm/detail/type_vec1.hpp \
+		../headers/glm/detail/type_vec1.inl \
+		../headers/glm/exponential.hpp \
+		../headers/glm/detail/func_exponential.hpp \
+		../headers/glm/detail/func_exponential.inl \
+		../headers/glm/detail/func_vector_relational.hpp \
+		../headers/glm/detail/func_vector_relational.inl \
+		../headers/glm/common.hpp \
+		../headers/glm/detail/func_common.hpp \
+		../headers/glm/detail/func_common.inl \
+		../headers/glm/packing.hpp \
+		../headers/glm/detail/func_packing.hpp \
+		../headers/glm/detail/func_packing.inl \
+		../headers/glm/detail/type_half.hpp \
+		../headers/glm/detail/type_half.inl \
+		../headers/glm/geometric.hpp \
+		../headers/glm/detail/func_geometric.hpp \
+		../headers/glm/detail/func_geometric.inl \
+		../headers/glm/matrix.hpp \
+		../headers/glm/detail/func_matrix.hpp \
+		../headers/glm/detail/func_matrix.inl \
+		../headers/glm/vector_relational.hpp \
+		../headers/glm/integer.hpp \
+		../headers/glm/detail/func_integer.hpp \
+		../headers/glm/detail/func_integer.inl \
+		../headers/ShaderProgram.h \
+		../headers/ShaderLocationsVault.h \
+		sgraph/Scenegraph.h \
+		sgraph/GLScenegraphRenderer.h \
+		sgraph/INode.h \
+		../headers/Light.h \
+		../headers/Material.h \
+		../headers/glm/gtc/type_ptr.hpp \
+		../headers/glm/gtc/quaternion.hpp \
+		../headers/glm/gtc/constants.hpp \
+		../headers/glm/gtc/constants.inl \
+		../headers/glm/gtc/quaternion.inl \
+		../headers/glm/gtc/type_ptr.inl \
+		../headers/TextureImage.h \
+		/Users/sribharadwajtolety/Qt/5.12.0/clang_64/lib/QtGui.framework/Headers/QOpenGLTexture \
+		/Users/sribharadwajtolety/Qt/5.12.0/clang_64/lib/QtGui.framework/Headers/qopengltexture.h \
+		../headers/ObjectInstance.h \
+		../headers/PolygonMesh.h \
+		../headers/IVertexData.h \
+		VertexAttrib.h \
+		Camera.h \
+		GameObject.h \
+		Component.h \
+		Transform.h \
+		RevolveCamera.h \
 		/Users/sribharadwajtolety/Qt/5.12.0/clang_64/lib/QtGui.framework/Headers/QScreen \
 		/Users/sribharadwajtolety/Qt/5.12.0/clang_64/lib/QtGui.framework/Headers/qscreen.h \
 		/Users/sribharadwajtolety/Qt/5.12.0/clang_64/lib/QtWidgets.framework/Headers/QMessageBox \
@@ -1209,6 +1229,11 @@ View.o: View.cpp View.h \
 		../headers/PolygonMesh.h \
 		../headers/IVertexData.h \
 		VertexAttrib.h \
+		Camera.h \
+		GameObject.h \
+		Component.h \
+		Transform.h \
+		RevolveCamera.h \
 		sgraph/ScenegraphInfo.h \
 		sgraph/SceneXMLReader.h \
 		../headers/glm/gtc/matrix_transform.hpp \
@@ -1219,7 +1244,8 @@ View.o: View.cpp View.h \
 		sgraph/TransformNode.h \
 		sgraph/AbstractNode.h \
 		sgraph/LeafNode.h \
-		sgraph/GroupNode.h
+		sgraph/GroupNode.h \
+		FileReader.h
 	$(CXX) -c $(CXXFLAGS) $(INCPATH) -o View.o View.cpp
 
 moc_OpenGLWindow.o: moc_OpenGLWindow.cpp 

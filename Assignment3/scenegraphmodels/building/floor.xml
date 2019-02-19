@@ -45,8 +45,8 @@
                                 </transform>
                                 <transform name="wall-block-left">
                                     <set>
-                                        <translate>-7 0 0</translate>
-                                        <scale>12 10 0.125</scale>
+                                        <translate>-10 0 0</translate>
+                                        <scale>10 10 0.125</scale>
                                     </set>
                                     <object instanceof="box">
                                         <material>
@@ -56,12 +56,23 @@
                                 </transform>
                                 <transform name="wall-block-right">
                                     <set>
-                                        <translate>7 0 0</translate>
-                                        <scale>12 10 0.125</scale>
+                                        <translate>10 0 0</translate>
+                                        <scale>10 10 0.125</scale>
                                     </set>
                                     <object instanceof="box">
                                         <material>
                                             <color>1 1 0</color>
+                                        </material>
+                                    </object>
+                                </transform>
+                                <transform name="wall-block-mid">
+                                    <set>
+                                        <translate>0 0 0</translate>
+                                        <scale>12 10 0.075</scale>
+                                    </set>
+                                    <object instanceof="box">
+                                        <material>
+                                            <color>1 1 1</color>
                                         </material>
                                     </object>
                                 </transform>

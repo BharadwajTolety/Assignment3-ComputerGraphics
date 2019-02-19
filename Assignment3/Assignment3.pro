@@ -29,7 +29,9 @@ HEADERS += \
     sgraph/Scenegraph.h \
     sgraph/scenegraphinfo.h \
     sgraph/SceneXMLReader.h \
-    sgraph/TransformNode.h
+    sgraph/TransformNode.h \
+    Camera.h \
+    FileReader.h
 
 DISTFILES += \
     shaders/default.frag \
