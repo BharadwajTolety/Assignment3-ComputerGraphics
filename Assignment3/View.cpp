@@ -7,9 +7,13 @@
 #include <vector>
 #include <map>
 #include <string>
+#include <iostream>
+
+#include "FileReader.h"
 using namespace std;
 
 View::View()
+    : staticCamera(nullptr), revolveCamera(nullptr)
 {   
   WINDOW_WIDTH = WINDOW_HEIGHT = 0;
   trackballRadius = 300;
@@ -22,6 +26,12 @@ View::~View()
 {
   if (scenegraph!=NULL)
     delete scenegraph;
+
+  for (auto obj: gameObjects)
+  {
+    if (obj != nullptr)
+       delete obj;
+  }
 }
 
 void View::initScenegraph(util::OpenGLFunctions &gl, const string& filename) throw(runtime_error)
@@ -45,6 +55,42 @@ void View::initScenegraph(util::OpenGLFunctions &gl, const string& filename) thr
 
 }
 
+void View::initScenegraph(util::OpenGLFunctions &gl) throw(runtime_error)
+{
+  if (scenegraph!=NULL)
+    delete scenegraph;
+
+  program.enable(gl);
+  sgraph::ScenegraphInfo<VertexAttrib> sinfo;
+  sinfo = sgraph::SceneXMLReader::importScenegraph<VertexAttrib>(sceneGraphPath);
+  scenegraph = sinfo.scenegraph;
+
+  renderer.setContext(&gl);
+  map<string,string> shaderVarsToVertexAttribs;
+  shaderVarsToVertexAttribs["vPosition"] = "position";
+  shaderVarsToVertexAttribs["vNormal"] = "normal";
+  shaderVarsToVertexAttribs["vTexCoord"] = "texcoord";
+  renderer.initShaderProgram(program,shaderVarsToVertexAttribs);
+  scenegraph->setRenderer<VertexAttrib>(&renderer,sinfo.meshes);
+  program.disable(gl);
+
+}
+
+
+std::vector<std::string> View::ParseConfig(const std::string& _path)
+{
+    std::string content = FileReader::ReadFile(_path);
+    std::vector <std::string> tokens;
+    std::stringstream check1(content);
+    std::string intermediate;
+
+    while(getline(check1, intermediate, ' '))
+    {
+        tokens.push_back(intermediate);
+    }
+    return tokens;
+}
+
 void View::init(util::OpenGLFunctions& gl) throw(runtime_error)
 {
   //do this if your initialization throws an error (e.g. shader not found,
@@ -59,6 +105,26 @@ void View::init(util::OpenGLFunctions& gl) throw(runtime_error)
   //assuming it got created, get all the shader variables that it uses
   //so we can initialize them at some point
   shaderLocations = program.getAllShaderVariables(gl);
+
+
+  std::string configFileName;
+  printf("config file path: ");
+  std::cin >> configFileName;
+  std::vector<std::string> tokens = ParseConfig(configFileName);
+  sceneGraphPath = tokens[CONFIG_SCENE_GRAPH_PATH_SLOT];
+  glm::vec3 camInitPos(atof(tokens[CONFIG_CAMERA_INIT_POS_SLOT + 0].c_str()),
+                       atof(tokens[CONFIG_CAMERA_INIT_POS_SLOT + 1].c_str()),
+                       atof(tokens[CONFIG_CAMERA_INIT_POS_SLOT + 2].c_str()));
+  staticCamera = new Camera();
+  staticCamera->GetTransform()->SetPosition(camInitPos);
+
+  revolveCamera = new RevolveCamera(glm::vec3(0.0f, 1.0f, 0.0f), 2.0f, 80.0f);
+  revolveCamera->GetTransform()->SetPosition(camInitPos);
+
+  gameObjects.push_back(staticCamera);
+  gameObjects.push_back(revolveCamera);
+
+  revolveCamera->SetToMainCamera();
 }
 
 void View::draw(util::OpenGLFunctions& gl)
@@ -81,11 +147,13 @@ void View::draw(util::OpenGLFunctions& gl)
          * Right now this matrix is identity, which means "no transformations"
          */
   modelview.push(glm::mat4(1.0));
-  modelview.top() = modelview.top() *
-      glm::lookAt(glm::vec3(0.0f,50.0f,80.0f),
-                  glm::vec3(0.0f,50.0f,0.0f),
-                  glm::vec3(0.0f,1.0f,0.0f)) *
-      trackballTransform;
+//  modelview.top() = modelview.top() *
+//      glm::lookAt(glm::vec3(0.0f,50.0f,80.0f),
+//                  glm::vec3(0.0f,50.0f,0.0f),
+//                  glm::vec3(0.0f,1.0f,0.0f)) *
+//      trackballTransform;
+
+  modelview.top() = modelview.top() * Camera::s_MainCamera->GetViewMat();
 
 
   /*
@@ -102,6 +170,14 @@ void View::draw(util::OpenGLFunctions& gl)
   gl.glFlush();
 
   program.disable(gl);
+}
+
+void View::Update()
+{
+    for (auto gobj: gameObjects)
+    {
+        gobj->Update();
+    }
 }
 
 void View::mousePressed(int x,int y)
@@ -125,6 +201,21 @@ void View::mouseDragged(int x,int y)
       glm::rotate(glm::mat4(1.0),delta.x/trackballRadius,glm::vec3(0.0f,1.0f,0.0f)) *
       glm::rotate(glm::mat4(1.0),delta.y/trackballRadius,glm::vec3(1.0f,0.0f,0.0f)) *
       trackballTransform;
+}
+
+void View::keyReleased(int key)
+{
+    switch (key) {
+    case Qt::Key_T:
+        Camera::s_MainCamera = revolveCamera;
+        break;
+    case Qt::Key_G:
+        Camera::s_MainCamera = staticCamera;
+        break;
+    default:
+        break;
+    }
+
 }
 
 void View::reshape(util::OpenGLFunctions& gl,int width,int height)

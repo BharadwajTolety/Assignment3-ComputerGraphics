@@ -5,6 +5,7 @@
 #include <QtGui/QOpenGLWindow>
 #include <QCoreApplication>
 #include <QMouseEvent>
+#include <QKeyEvent>
 #include <OpenGLFunctions.h>
 #include <QOpenGLShaderProgram>
 #include <QTime>
@@ -60,6 +61,8 @@ protected:
                  */
   void mouseReleaseEvent(QMouseEvent *);
 
+
+  void keyReleaseEvent(QKeyEvent *e);
 
   /*
          * this class encapsulates all our program-specific rendering.

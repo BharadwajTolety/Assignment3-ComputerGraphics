@@ -16,16 +16,14 @@ OpenGLWindow::OpenGLWindow(QWindow *parent)
     //resize the window to (400,400). This will result in a call to resizeGL
     this->resize(500,500);
 
-    //make sure we have OpenGL 3.1 (major.minor), with 16-bit buffers
+    //make sure we have OpenGL 3.3 (major.minor), with 16-bit buffers
     QSurfaceFormat format;
-    format.setDepthBufferSize(24);
+    format.setDepthBufferSize(16);
     format.setStencilBufferSize(8);
-    format.setSamples(16);
-    format.setVersion(3,3); //this line should be uncommented for Mac OSX
+    format.setMajorVersion(3);
+    format.setMinorVersion(3);
     format.setProfile(QSurfaceFormat::CoreProfile);
-    format.setMajorVersion(4);
     this->setFormat(format);
-    QSurfaceFormat::setDefaultFormat(format);
 
     isDragged = false;
     frames = 0;
@@ -61,11 +59,13 @@ void OpenGLWindow::initializeGL()
         //assuming we cannot recover from this error, shut down the application
         exit(1);
     }
-    view.initScenegraph(*gl,string("scenegraphmodels/two_buildings.xml"));
+//    view.initScenegraph(*gl,string("scenegraphmodels/building.xml"));
+    view.initScenegraph(*gl);
 }
 
 void OpenGLWindow::paintGL()
 {
+    view.Update();
     //simply delegate to the view's draw
     view.draw(*gl);
 
@@ -125,7 +125,10 @@ void OpenGLWindow::mouseReleaseEvent(QMouseEvent *e)
     view.mouseReleased(e->x(),e->y());
 }
 
-
+void OpenGLWindow::keyReleaseEvent(QKeyEvent *e)
+{
+    view.keyReleased(e->key());
+}
 
 /*
  * This function helps us to automatically start animating

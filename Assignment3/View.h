@@ -12,6 +12,14 @@ using namespace std;
 #include "VertexAttrib.h"
 #include "sgraph/GLScenegraphRenderer.h"
 #include <stack>
+
+#include "Camera.h"
+#include "RevolveCamera.h"
+
+
+#define CONFIG_SCENE_GRAPH_PATH_SLOT 0
+#define CONFIG_CAMERA_INIT_POS_SLOT 1
+
 using namespace std;
 
 /*
@@ -34,6 +42,7 @@ public:
     void init(util::OpenGLFunctions& e) throw(runtime_error);
 
     void initScenegraph(util::OpenGLFunctions& e,const string& in) throw(runtime_error);
+    void initScenegraph(util::OpenGLFunctions &gl) throw(runtime_error);
 
     /*
      * This function is called whenever the window is to be redrawn
@@ -54,6 +63,11 @@ public:
     void mouseReleased(int x,int y);
     void mouseDragged(int x,int y);
 
+    void keyReleased(int key);
+
+    void Update();
+
+    std::vector<std::string> ParseConfig(const std::string& _path);
 private:
     //record the current window width and height
     int WINDOW_WIDTH,WINDOW_HEIGHT;
@@ -74,6 +88,12 @@ private:
     //the GLSL shader
     util::ShaderProgram program;
     sgraph::GLScenegraphRenderer renderer;
+
+    Camera* staticCamera;
+    RevolveCamera* revolveCamera;
+    std::vector<GameObject*> gameObjects;
+
+    std::string sceneGraphPath;
 };
 
 #endif // VIEW_H
