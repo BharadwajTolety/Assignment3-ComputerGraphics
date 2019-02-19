@@ -1,0 +1,18 @@
+<scene>
+    <group>
+        <transform>
+            <set>
+                <translate>-30 0 0</translate>
+            </set>
+            <group name="1st_building" from="scenegraphmodels/building/building.xml">
+            </group>
+        </transform>
+        <transform>
+            <set>
+                <translate>30 0 0</translate>
+            </set>
+            <group name="2nd_floor" from="scenegraphmodels/building/building.xml">
+            </group>
+        </transform>
+    </group>
+</scene>

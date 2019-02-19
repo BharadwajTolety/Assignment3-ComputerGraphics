@@ -6,7 +6,7 @@
     <transform>
         <set>
             <translate>0 0 0</translate>
-            <scale>2 2 2</scale>
+            <scale>1 1 1</scale>
         </set>
         <group name="floor">
             <transform>
@@ -45,8 +45,8 @@
                                 </transform>
                                 <transform name="wall-block-left">
                                     <set>
-                                        <translate>-10 0 0</translate>
-                                        <scale>10 10 0.125</scale>
+                                        <translate>-7 0 0</translate>
+                                        <scale>12 10 0.125</scale>
                                     </set>
                                     <object instanceof="box">
                                         <material>
@@ -56,8 +56,8 @@
                                 </transform>
                                 <transform name="wall-block-right">
                                     <set>
-                                        <translate>10 0 0</translate>
-                                        <scale>10 10 0.125</scale>
+                                        <translate>7 0 0</translate>
+                                        <scale>12 10 0.125</scale>
                                     </set>
                                     <object instanceof="box">
                                         <material>
@@ -233,12 +233,25 @@
                     <group name="ground">
                         <transform>
                             <set>
-                                <translate>0 -2.5 0</translate>
+                                <translate>0 -15 0</translate>
                                 <scale>30 0.125 30</scale>
                             </set>
                             <object instanceof="box">
                                 <material>
                                     <color>1 1 0</color>
+                                </material>
+                            </object>
+                        </transform>
+                    </group>
+                    <group name="roof">
+                        <transform>
+                            <set>
+                                <translate>0 15 0</translate>
+                                <scale>30 0.75 30</scale>
+                            </set>
+                            <object instanceof="box">
+                                <material>
+                                    <color>1 0 0</color>
                                 </material>
                             </object>
                         </transform>

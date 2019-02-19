@@ -61,7 +61,7 @@ void OpenGLWindow::initializeGL()
         //assuming we cannot recover from this error, shut down the application
         exit(1);
     }
-    view.initScenegraph(*gl,string("scenegraphmodels/face-hierarchy.xml"));
+    view.initScenegraph(*gl,string("scenegraphmodels/two_buildings.xml"));
 }
 
 void OpenGLWindow::paintGL()
