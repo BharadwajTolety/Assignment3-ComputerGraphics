@@ -64,6 +64,7 @@ protected:
 
   void keyReleaseEvent(QKeyEvent *e);
 
+  void keyPressEvent(QKeyEvent *e);
   /*
          * this class encapsulates all our program-specific rendering.
          * This provides a clean divide from Qt-specific window setup and

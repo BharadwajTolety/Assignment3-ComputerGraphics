@@ -125,6 +125,12 @@ void OpenGLWindow::mouseReleaseEvent(QMouseEvent *e)
     view.mouseReleased(e->x(),e->y());
 }
 
+void OpenGLWindow::keyPressEvent(QKeyEvent *e)
+{
+    view.keyPressed(e->key());
+}
+
+
 void OpenGLWindow::keyReleaseEvent(QKeyEvent *e)
 {
     view.keyReleased(e->key());

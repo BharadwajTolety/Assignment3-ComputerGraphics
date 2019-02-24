@@ -13,7 +13,7 @@
 using namespace std;
 
 View::View()
-    : staticCamera(nullptr), revolveCamera(nullptr)
+    : ctrl(nullptr), staticCamera(nullptr), keyCtrlCamera(nullptr)
 {   
   WINDOW_WIDTH = WINDOW_HEIGHT = 0;
   trackballRadius = 300;
@@ -115,21 +115,28 @@ void View::init(util::OpenGLFunctions& gl) throw(runtime_error)
   glm::vec3 camInitPos(atof(tokens[CONFIG_CAMERA_INIT_POS_SLOT + 0].c_str()),
                        atof(tokens[CONFIG_CAMERA_INIT_POS_SLOT + 1].c_str()),
                        atof(tokens[CONFIG_CAMERA_INIT_POS_SLOT + 2].c_str()));
+
+  ctrl = new Controller();
+
   staticCamera = new Camera();
   staticCamera->GetTransform()->SetPosition(camInitPos);
 
-  revolveCamera = new RevolveCamera(glm::vec3(0.0f, 1.0f, 0.0f), 2.0f, 80.0f);
-  revolveCamera->GetTransform()->SetPosition(camInitPos);
+//  revolveCamera = new RevolveCamera(glm::vec3(0.0f, 1.0f, 0.0f), 2.0f, 80.0f);
+//  revolveCamera->GetTransform()->SetPosition(camInitPos);
+
+  keyCtrlCamera = new KeyCtrlCamera(ctrl);
+  keyCtrlCamera->GetTransform()->SetPosition(camInitPos);
 
   gameObjects.push_back(staticCamera);
-  gameObjects.push_back(revolveCamera);
+//  gameObjects.push_back(revolveCamera);
+  gameObjects.push_back(keyCtrlCamera);
 
-  revolveCamera->SetToMainCamera();
+  keyCtrlCamera->SetToMainCamera();
 }
 
 void View::draw(util::OpenGLFunctions& gl)
 {
-  gl.glClearColor(0,0,0,1);
+  gl.glClearColor(0,0.6f,0.8f,1);
   gl.glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT);
   gl.glEnable(GL_DEPTH_TEST);
 
@@ -203,18 +210,58 @@ void View::mouseDragged(int x,int y)
       trackballTransform;
 }
 
+void View::keyPressed(int key)
+{
+    ctrl->KeysCallback(ctrl->QtKeyCodeTranslate(key), KEY_PRESSED);
+}
+
 void View::keyReleased(int key)
 {
-    switch (key) {
-    case Qt::Key_T:
-        Camera::s_MainCamera = revolveCamera;
-        break;
-    case Qt::Key_G:
-        Camera::s_MainCamera = staticCamera;
-        break;
-    default:
-        break;
-    }
+    ctrl->KeysCallback(ctrl->QtKeyCodeTranslate(key), KEY_RELEASED);
+//    switch (key) {
+////    case Qt::Key_T:
+////        Camera::s_MainCamera = revolveCamera;
+////        break;
+////    case Qt::Key_G:
+////        Camera::s_MainCamera = staticCamera;
+////        break;
+//    case Qt::Key_Up:
+//        // TODO:
+//        break;
+//    case Qt::Key_Down:
+//        // TODO:
+//        break;
+//    case Qt::Key_Left:
+//        // TODO:
+//        break;
+//    case Qt::Key_Right:
+//        // TODO:
+//        break;
+//    case Qt::Key_W:
+//        // TODO:
+//        break;
+//    case Qt::Key_S:
+//        // TODO:
+//        break;
+//    case Qt::Key_A:
+//        // TODO:
+//        break;
+//    case Qt::Key_D:
+//        // TODO:
+//        break;
+//    case Qt::Key_F:
+//        // TODO:
+//        break;
+//    case Qt::Key_C:
+//        // TODO:
+//        break;
+//    case Qt::Key_Space:
+//        // TODO:
+//        Camera::s_MainCamera = (Camera::s_MainCamera == keyCtrlCamera)? staticCamera: keyCtrlCamera;
+//        break;
+//    default:
+//        break;
+//    }
 
 }
 

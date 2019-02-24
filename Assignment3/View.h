@@ -15,7 +15,7 @@ using namespace std;
 
 #include "Camera.h"
 #include "RevolveCamera.h"
-
+#include "KeyCtrlCamera.h"
 
 #define CONFIG_SCENE_GRAPH_PATH_SLOT 0
 #define CONFIG_CAMERA_INIT_POS_SLOT 1
@@ -64,6 +64,7 @@ public:
     void mouseDragged(int x,int y);
 
     void keyReleased(int key);
+    void keyPressed(int key);
 
     void Update();
 
@@ -89,8 +90,10 @@ private:
     util::ShaderProgram program;
     sgraph::GLScenegraphRenderer renderer;
 
+    Controller* ctrl;
+
     Camera* staticCamera;
-    RevolveCamera* revolveCamera;
+    KeyCtrlCamera* keyCtrlCamera;
     std::vector<GameObject*> gameObjects;
 
     std::string sceneGraphPath;

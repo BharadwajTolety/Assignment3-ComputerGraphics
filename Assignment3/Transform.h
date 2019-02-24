@@ -3,9 +3,14 @@
 
 #include <glm/glm.hpp>
 
+#define AXIS_X glm::vec3(1.0f, 0.0f, 0.0f)
+#define AXIS_Y glm::vec3(0.0f, 1.0f, 0.0f)
+#define AXIS_Z glm::vec3(0.0f, 0.0f, 1.0f)
+
 /**
     Transform is the storage of gameobjects' transformations.
 **/
+
 class Transform
 {
 public:
@@ -27,18 +32,26 @@ public:
 
 public:
     inline glm::vec3 GetForward() const { return glm::normalize(m_Direction);}
-    inline glm::vec3 GetRight() const { return glm::normalize(glm::cross(GetForward(), Up));}
+    inline glm::vec3 GetRight() const { return glm::normalize(glm::cross(GetForward(), m_Up));}
 
-    inline glm::vec3 GetUp() const { return glm::normalize(glm::cross(GetForward(), GetRight()));}
+    inline glm::vec3 GetUp() const { return glm::normalize(m_Up);}
 
 public:
     glm::mat4 GetModelTransformMat() const;
+
+public:
+    void DirRotate(const float& _ang, const glm::vec3& _axis);
+    void UpRotate(const float& _ang);
+
+    void Translate(const glm::vec3& _vec);
+
 private:
     glm::vec3 m_Position;
     glm::vec4 m_Rotation;
     glm::vec3 m_Scale;
 
     glm::vec3 m_Direction;
+    glm::vec3 m_Up;
 };
 
 #endif // TRANSFORM_H
