@@ -14,6 +14,7 @@ using namespace std;
 #include <stack>
 
 #include "Camera.h"
+#include "CameraSwitchcer.h"
 #include "RevolveCamera.h"
 #include "KeyCtrlCamera.h"
 
@@ -91,7 +92,7 @@ private:
     sgraph::GLScenegraphRenderer renderer;
 
     Controller* ctrl;
-
+    CameraSwitchcer* switcher;
     Camera* staticCamera;
     KeyCtrlCamera* keyCtrlCamera;
     std::vector<GameObject*> gameObjects;

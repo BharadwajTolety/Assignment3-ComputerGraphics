@@ -21,8 +21,7 @@ public:
     inline glm::mat4 GetProjMat() const { return m_Proj; }
     inline void SetProjMat(const glm::mat4& _proj) { m_Proj = _proj; }
     inline float GetFOV() const { return m_FOV; }
-    void SetToMainCamera() { s_MainCamera = this; }
-
+    inline void SetToMainCamera() { s_MainCamera = this; }
 protected:
     void m_ViewMatUpdate();
     void m_ProjMatUpdate();
@@ -32,6 +31,7 @@ protected:
     glm::mat4 m_Proj;
     float m_Pitch;
     float m_Yaw;
+    float m_Roll;
     float m_FOV;
 };
 

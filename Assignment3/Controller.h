@@ -9,10 +9,13 @@
 class Controller
 {
 public:
+    static Controller* s_GlobalController;
+public:
     Controller();
     ~Controller();
     void Update();
 public:
+    inline void SetToGlobalController() { s_GlobalController = this; }
     inline std::vector<float> GetMouseLast() const { return {m_LastPosX, m_LastPosY}; }
 
     inline void SetMouseCurr(const float& _x, const float& _y) { m_CurrPosX = _x; m_CurrPosY = _y; }

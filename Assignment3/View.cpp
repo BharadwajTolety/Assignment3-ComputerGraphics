@@ -13,7 +13,7 @@
 using namespace std;
 
 View::View()
-    : ctrl(nullptr), staticCamera(nullptr), keyCtrlCamera(nullptr)
+    : ctrl(nullptr), switcher(nullptr), staticCamera(nullptr), keyCtrlCamera(nullptr)
 {   
   WINDOW_WIDTH = WINDOW_HEIGHT = 0;
   trackballRadius = 300;
@@ -117,6 +117,7 @@ void View::init(util::OpenGLFunctions& gl) throw(runtime_error)
                        atof(tokens[CONFIG_CAMERA_INIT_POS_SLOT + 2].c_str()));
 
   ctrl = new Controller();
+  ctrl->SetToGlobalController();
 
   staticCamera = new Camera();
   staticCamera->GetTransform()->SetPosition(camInitPos);
@@ -126,6 +127,8 @@ void View::init(util::OpenGLFunctions& gl) throw(runtime_error)
 
   keyCtrlCamera = new KeyCtrlCamera(ctrl);
   keyCtrlCamera->GetTransform()->SetPosition(camInitPos);
+
+  switcher = new CameraSwitchcer(keyCtrlCamera, staticCamera);
 
   gameObjects.push_back(staticCamera);
 //  gameObjects.push_back(revolveCamera);
@@ -160,7 +163,7 @@ void View::draw(util::OpenGLFunctions& gl)
 //                  glm::vec3(0.0f,1.0f,0.0f)) *
 //      trackballTransform;
 
-  modelview.top() = modelview.top() * Camera::s_MainCamera->GetViewMat();
+  modelview.top() = modelview.top() * switcher->GetCam1()->GetViewMat();
 
 
   /*
@@ -172,15 +175,31 @@ void View::draw(util::OpenGLFunctions& gl)
                         glm::value_ptr(proj));
 
   //gl.glPolygonMode(GL.GL_FRONT_AND_BACK,GL3.GL_LINE); //OUTLINES
-
   scenegraph->draw(modelview);
+
   gl.glFlush();
+
+  while (!modelview.empty())
+    modelview.pop();
+  modelview.push(glm::mat4(1.0));
+  modelview.top() = modelview.top() * switcher->GetCam2()->GetViewMat();
+
+  gl.glScissor(WINDOW_WIDTH * 0.7f, WINDOW_WIDTH * 0.7f, WINDOW_WIDTH * 0.3f, WINDOW_HEIGHT * 0.3f);
+  gl.glEnable(GL_SCISSOR_TEST);
+  gl.glViewport(WINDOW_WIDTH * 0.7f, WINDOW_WIDTH * 0.7f, WINDOW_WIDTH * 0.3f, WINDOW_HEIGHT * 0.3f);
+  gl.glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT);
+  scenegraph->draw(modelview);
+  gl.glDisable(GL_SCISSOR_TEST);
+  gl.glFlush();
+
+  gl.glViewport(0, 0, WINDOW_WIDTH, WINDOW_HEIGHT);
 
   program.disable(gl);
 }
 
 void View::Update()
 {
+    switcher->Update();
     for (auto gobj: gameObjects)
     {
         gobj->Update();
@@ -218,51 +237,6 @@ void View::keyPressed(int key)
 void View::keyReleased(int key)
 {
     ctrl->KeysCallback(ctrl->QtKeyCodeTranslate(key), KEY_RELEASED);
-//    switch (key) {
-////    case Qt::Key_T:
-////        Camera::s_MainCamera = revolveCamera;
-////        break;
-////    case Qt::Key_G:
-////        Camera::s_MainCamera = staticCamera;
-////        break;
-//    case Qt::Key_Up:
-//        // TODO:
-//        break;
-//    case Qt::Key_Down:
-//        // TODO:
-//        break;
-//    case Qt::Key_Left:
-//        // TODO:
-//        break;
-//    case Qt::Key_Right:
-//        // TODO:
-//        break;
-//    case Qt::Key_W:
-//        // TODO:
-//        break;
-//    case Qt::Key_S:
-//        // TODO:
-//        break;
-//    case Qt::Key_A:
-//        // TODO:
-//        break;
-//    case Qt::Key_D:
-//        // TODO:
-//        break;
-//    case Qt::Key_F:
-//        // TODO:
-//        break;
-//    case Qt::Key_C:
-//        // TODO:
-//        break;
-//    case Qt::Key_Space:
-//        // TODO:
-//        Camera::s_MainCamera = (Camera::s_MainCamera == keyCtrlCamera)? staticCamera: keyCtrlCamera;
-//        break;
-//    default:
-//        break;
-//    }
-
 }
 
 void View::reshape(util::OpenGLFunctions& gl,int width,int height)

@@ -1,5 +1,6 @@
 #include "Controller.h"
 
+Controller* Controller::s_GlobalController = nullptr;
 
 Controller::Controller()
     : m_LastPosX(0.0f), m_LastPosY(0.0f),
