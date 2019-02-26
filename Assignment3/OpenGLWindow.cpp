@@ -18,12 +18,14 @@ OpenGLWindow::OpenGLWindow(QWindow *parent)
 
     //make sure we have OpenGL 3.3 (major.minor), with 16-bit buffers
     QSurfaceFormat format;
-    format.setDepthBufferSize(16);
+    format.setDepthBufferSize(24);
     format.setStencilBufferSize(8);
-    format.setMajorVersion(3);
-    format.setMinorVersion(3);
+    format.setSamples(16);
+    format.setVersion(3,3); //this line should be uncommented for Mac OSX
     format.setProfile(QSurfaceFormat::CoreProfile);
+    format.setMajorVersion(4);
     this->setFormat(format);
+    QSurfaceFormat::setDefaultFormat(format);
 
     isDragged = false;
     frames = 0;

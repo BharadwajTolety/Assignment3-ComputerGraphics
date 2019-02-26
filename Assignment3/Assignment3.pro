@@ -14,7 +14,14 @@ TEMPLATE = app
 
 SOURCES += main.cpp \
     OpenGLWindow.cpp \
-    View.cpp
+    View.cpp \
+    Camera.cpp \
+    CameraSwitchcer.cpp \
+    Component.cpp \
+    Controller.cpp \
+    FileReader.cpp \
+    GameObject.cpp \
+    KeyCtrlCamera.cpp
 
 HEADERS += \
     OpenGLWindow.h \
@@ -31,7 +38,12 @@ HEADERS += \
     sgraph/SceneXMLReader.h \
     sgraph/TransformNode.h \
     Camera.h \
-    FileReader.h
+    CameraSwitchcer.h \
+    Component.h \
+    Controller.h \
+    FileReader.h \
+    GameObject.h \
+    KeyCtrlCamera.h
 
 DISTFILES += \
     shaders/default.frag \
