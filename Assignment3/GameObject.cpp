@@ -1,4 +1,6 @@
 #include "GameObject.h"
+#include "XMLMeshrenderer.h"
+#include "Camera.h"
 
 GameObject::GameObject(const char* _tag)
     : m_Tag(_tag), m_Parent(nullptr), m_Transform(nullptr)
@@ -13,6 +15,15 @@ GameObject::GameObject(const char* _tag)
 void GameObject::Update()
 {
 
+}
+
+void GameObject::Render(Camera* _cam)
+{
+    if (GetComponents()[XMLMeshRenderer::ComponentID] != nullptr)
+    {
+        XMLMeshRenderer* mr = (XMLMeshRenderer*)GetComponents()[XMLMeshRenderer::ComponentID];
+        mr->Render(_cam);
+    }
 }
 
 void GameObject::AddComponent(Component* _c, const unsigned int& _id)
@@ -31,6 +42,13 @@ GameObject::~GameObject()
     {
         if (child != nullptr)
             delete child;
+    }
+    for (int i=0; i<MAX_COMPONENT_NUM; ++i)
+    {
+        if (m_Components[i] != nullptr)
+        {
+            delete m_Components[i];
+        }
     }
 }
 

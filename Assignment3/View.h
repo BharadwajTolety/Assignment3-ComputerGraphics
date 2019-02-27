@@ -7,10 +7,10 @@ using namespace std;
 #include <glm/glm.hpp>
 #include "ShaderProgram.h"
 #include "sgraph/Scenegraph.h"
+#include "sgraph/GLScenegraphRenderer.h"
 #include "ShaderLocationsVault.h"
 #include "ObjectInstance.h"
 #include "VertexAttrib.h"
-#include "sgraph/GLScenegraphRenderer.h"
 #include <stack>
 
 #include "Camera.h"
@@ -19,7 +19,8 @@ using namespace std;
 #include "KeyCtrlCamera.h"
 
 #define CONFIG_SCENE_GRAPH_PATH_SLOT 0
-#define CONFIG_CAMERA_INIT_POS_SLOT 1
+#define CONFIG_CAMERA_MODEL_SLOT 1
+#define CONFIG_CAMERA_INIT_POS_SLOT 2
 
 using namespace std;
 
@@ -44,7 +45,7 @@ public:
 
     void initScenegraph(util::OpenGLFunctions& e,const string& in) throw(runtime_error);
     void initScenegraph(util::OpenGLFunctions &gl) throw(runtime_error);
-
+    void initMeshRendererForGameObjs(util::OpenGLFunctions &gl) throw (runtime_error);
     /*
      * This function is called whenever the window is to be redrawn
      */
@@ -68,6 +69,7 @@ public:
     void keyPressed(int key);
 
     void Update();
+
 
     std::vector<std::string> ParseConfig(const std::string& _path);
 private:
@@ -98,6 +100,7 @@ private:
     std::vector<GameObject*> gameObjects;
 
     std::string sceneGraphPath;
+    std::string cameraModelPath;
 };
 
 #endif // VIEW_H

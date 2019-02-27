@@ -6,6 +6,8 @@
 #include <vector>
 #define MAX_COMPONENT_NUM 10
 
+class Camera;
+
 /**
     Every object within the scene should be derived from GameObject
 **/
@@ -16,7 +18,7 @@ public:
     virtual ~GameObject();
 public:
     virtual void Update();
-
+    virtual void Render(Camera* _cam);
 public:
     inline Transform* GetTransform() const { return m_Transform; }
     inline Component** GetComponents() { return m_Components; }

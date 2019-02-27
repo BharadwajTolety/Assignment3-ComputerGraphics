@@ -50,6 +50,7 @@ private:
     glm::vec4 m_Rotation;
     glm::vec3 m_Scale;
 
+    glm::mat4 m_RotMat;
     glm::vec3 m_Direction;
     glm::vec3 m_Up;
 };

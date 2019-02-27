@@ -6,7 +6,7 @@
     <transform>
     	<set>
             <translate>0 0 0</translate>
-            <scale>1 1 1</scale>
+            <scale>0.1 0.1 0.1</scale>
         </set>
         <group name="drone">
         	<transform>

@@ -9,6 +9,7 @@
 #include <string>
 #include <iostream>
 
+#include "XMLMeshrenderer.h"
 #include "FileReader.h"
 using namespace std;
 
@@ -76,6 +77,18 @@ void View::initScenegraph(util::OpenGLFunctions &gl) throw(runtime_error)
 
 }
 
+void View::initMeshRendererForGameObjs(util::OpenGLFunctions &gl) throw (runtime_error)
+{
+    XMLMeshRenderer* xmr = new XMLMeshRenderer(staticCamera, cameraModelPath, &renderer);
+    xmr->SetMeshOffset(glm::vec3(0.0f, 10.0f, -30.0f));
+    staticCamera->AddComponent((Component*)xmr, XMLMeshRenderer::ComponentID);
+
+    XMLMeshRenderer* xmr2 = new XMLMeshRenderer(keyCtrlCamera, cameraModelPath, &renderer);
+    xmr2->SetMeshOffset(glm::vec3(0.0f, 10.0f, -30.0f));
+    keyCtrlCamera->AddComponent((Component*)xmr2, XMLMeshRenderer::ComponentID);
+
+    //    keyCtrlCamera->AddComponent((Component*)new XMLMeshRenderer(keyCtrlCamera, cameraModelPath, &renderer), XMLMeshRenderer::ComponentID);
+}
 
 std::vector<std::string> View::ParseConfig(const std::string& _path)
 {
@@ -112,6 +125,7 @@ void View::init(util::OpenGLFunctions& gl) throw(runtime_error)
   std::cin >> configFileName;
   std::vector<std::string> tokens = ParseConfig(configFileName);
   sceneGraphPath = tokens[CONFIG_SCENE_GRAPH_PATH_SLOT];
+  cameraModelPath = tokens[CONFIG_CAMERA_MODEL_SLOT];
   glm::vec3 camInitPos(atof(tokens[CONFIG_CAMERA_INIT_POS_SLOT + 0].c_str()),
                        atof(tokens[CONFIG_CAMERA_INIT_POS_SLOT + 1].c_str()),
                        atof(tokens[CONFIG_CAMERA_INIT_POS_SLOT + 2].c_str()));
@@ -148,24 +162,14 @@ void View::draw(util::OpenGLFunctions& gl)
 
   program.enable(gl);
 
+  ///////////////////////////////
+  ///// DRAW FIRST VIEWPORT /////
+  ///////////////////////////////
   while (!modelview.empty())
     modelview.pop();
 
-  /*
-         *In order to change the shape of this triangle, we can either move the vertex positions above, or "transform" them
-         * We use a modelview matrix to store the transformations to be applied to our triangle.
-         * Right now this matrix is identity, which means "no transformations"
-         */
   modelview.push(glm::mat4(1.0));
-//  modelview.top() = modelview.top() *
-//      glm::lookAt(glm::vec3(0.0f,50.0f,80.0f),
-//                  glm::vec3(0.0f,50.0f,0.0f),
-//                  glm::vec3(0.0f,1.0f,0.0f)) *
-//      trackballTransform;
-
   modelview.top() = modelview.top() * switcher->GetCam1()->GetViewMat();
-
-
   /*
         *Supply the shader with all the matrices it expects.
         */
@@ -176,9 +180,16 @@ void View::draw(util::OpenGLFunctions& gl)
 
   //gl.glPolygonMode(GL.GL_FRONT_AND_BACK,GL3.GL_LINE); //OUTLINES
   scenegraph->draw(modelview);
+  for (auto obj: gameObjects)
+  {
+      obj->Render(switcher->GetCam1());
+  }
 
   gl.glFlush();
 
+  ////////////////////////////////
+  ///// DRAW SECOND VIEWPORT /////
+  ////////////////////////////////
   while (!modelview.empty())
     modelview.pop();
   modelview.push(glm::mat4(1.0));
@@ -189,9 +200,17 @@ void View::draw(util::OpenGLFunctions& gl)
   gl.glViewport(WINDOW_WIDTH * 0.7f, WINDOW_WIDTH * 0.7f, WINDOW_WIDTH * 0.3f, WINDOW_HEIGHT * 0.3f);
   gl.glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT);
   scenegraph->draw(modelview);
+  for (auto obj: gameObjects)
+  {
+      obj->Render(switcher->GetCam2());
+  }
   gl.glDisable(GL_SCISSOR_TEST);
   gl.glFlush();
 
+
+  ////////////////////////////////
+  /////     RESET VIEWPORT   /////
+  ////////////////////////////////
   gl.glViewport(0, 0, WINDOW_WIDTH, WINDOW_HEIGHT);
 
   program.disable(gl);
