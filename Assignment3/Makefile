@@ -59,7 +59,8 @@ SOURCES       = main.cpp \
 		Controller.cpp \
 		FileReader.cpp \
 		GameObject.cpp \
-		KeyCtrlCamera.cpp moc_OpenGLWindow.cpp
+		KeyCtrlCamera.cpp \
+		Transform.cpp moc_OpenGLWindow.cpp
 OBJECTS       = main.o \
 		OpenGLWindow.o \
 		View.o \
@@ -70,6 +71,7 @@ OBJECTS       = main.o \
 		FileReader.o \
 		GameObject.o \
 		KeyCtrlCamera.o \
+		Transform.o \
 		moc_OpenGLWindow.o
 DIST          = shaders/default.frag \
 		shaders/default.vert \
@@ -284,7 +286,8 @@ DIST          = shaders/default.frag \
 		Controller.h \
 		FileReader.h \
 		GameObject.h \
-		KeyCtrlCamera.h main.cpp \
+		KeyCtrlCamera.h \
+		Transform.h main.cpp \
 		OpenGLWindow.cpp \
 		View.cpp \
 		Camera.cpp \
@@ -293,7 +296,8 @@ DIST          = shaders/default.frag \
 		Controller.cpp \
 		FileReader.cpp \
 		GameObject.cpp \
-		KeyCtrlCamera.cpp
+		KeyCtrlCamera.cpp \
+		Transform.cpp
 QMAKE_TARGET  = Scenegraphs
 DESTDIR       = 
 TARGET        = Scenegraphs
@@ -724,8 +728,8 @@ distdir: FORCE
 	@test -d $(DISTDIR) || mkdir -p $(DISTDIR)
 	$(COPY_FILE) --parents $(DIST) $(DISTDIR)/
 	$(COPY_FILE) --parents /Users/sribharadwajtolety/Qt/5.12.0/clang_64/mkspecs/features/data/dummy.cpp $(DISTDIR)/
-	$(COPY_FILE) --parents OpenGLWindow.h VertexAttrib.h View.h sgraph/AbstractNode.h sgraph/GLScenegraphRenderer.h sgraph/GroupNode.h sgraph/INode.h sgraph/IScenegraph.h sgraph/LeafNode.h sgraph/Scenegraph.h sgraph/scenegraphinfo.h sgraph/SceneXMLReader.h sgraph/TransformNode.h Camera.h CameraSwitchcer.h Component.h Controller.h FileReader.h GameObject.h KeyCtrlCamera.h $(DISTDIR)/
-	$(COPY_FILE) --parents main.cpp OpenGLWindow.cpp View.cpp Camera.cpp CameraSwitchcer.cpp Component.cpp Controller.cpp FileReader.cpp GameObject.cpp KeyCtrlCamera.cpp $(DISTDIR)/
+	$(COPY_FILE) --parents OpenGLWindow.h VertexAttrib.h View.h sgraph/AbstractNode.h sgraph/GLScenegraphRenderer.h sgraph/GroupNode.h sgraph/INode.h sgraph/IScenegraph.h sgraph/LeafNode.h sgraph/Scenegraph.h sgraph/scenegraphinfo.h sgraph/SceneXMLReader.h sgraph/TransformNode.h Camera.h CameraSwitchcer.h Component.h Controller.h FileReader.h GameObject.h KeyCtrlCamera.h Transform.h $(DISTDIR)/
+	$(COPY_FILE) --parents main.cpp OpenGLWindow.cpp View.cpp Camera.cpp CameraSwitchcer.cpp Component.cpp Controller.cpp FileReader.cpp GameObject.cpp KeyCtrlCamera.cpp Transform.cpp $(DISTDIR)/
 
 
 clean: compiler_clean 
@@ -1738,6 +1742,92 @@ KeyCtrlCamera.o: KeyCtrlCamera.cpp KeyCtrlCamera.h \
 		../headers/glm/gtc/constants.inl \
 		../headers/glm/gtc/matrix_transform.inl
 	$(CXX) -c $(CXXFLAGS) $(INCPATH) -o KeyCtrlCamera.o KeyCtrlCamera.cpp
+
+Transform.o: Transform.cpp Transform.h \
+		../headers/glm/glm.hpp \
+		../headers/glm/detail/_fixes.hpp \
+		../headers/glm/fwd.hpp \
+		../headers/glm/detail/type_int.hpp \
+		../headers/glm/detail/setup.hpp \
+		../headers/glm/detail/type_float.hpp \
+		../headers/glm/detail/type_vec.hpp \
+		../headers/glm/detail/precision.hpp \
+		../headers/glm/detail/type_mat.hpp \
+		../headers/glm/vec2.hpp \
+		../headers/glm/detail/type_vec2.hpp \
+		../headers/glm/detail/_swizzle.hpp \
+		../headers/glm/detail/_swizzle_func.hpp \
+		../headers/glm/detail/type_vec2.inl \
+		../headers/glm/vec3.hpp \
+		../headers/glm/detail/type_vec3.hpp \
+		../headers/glm/detail/type_vec3.inl \
+		../headers/glm/vec4.hpp \
+		../headers/glm/detail/type_vec4.hpp \
+		../headers/glm/detail/type_vec4.inl \
+		../headers/glm/detail/type_vec4_sse2.inl \
+		../headers/glm/detail/type_vec4_avx.inl \
+		../headers/glm/detail/type_vec4_avx2.inl \
+		../headers/glm/mat2x2.hpp \
+		../headers/glm/detail/type_mat2x2.hpp \
+		../headers/glm/detail/type_mat2x2.inl \
+		../headers/glm/mat2x3.hpp \
+		../headers/glm/detail/type_mat2x3.hpp \
+		../headers/glm/detail/type_mat2x3.inl \
+		../headers/glm/mat2x4.hpp \
+		../headers/glm/detail/type_mat2x4.hpp \
+		../headers/glm/detail/type_mat2x4.inl \
+		../headers/glm/mat3x2.hpp \
+		../headers/glm/detail/type_mat3x2.hpp \
+		../headers/glm/detail/type_mat3x2.inl \
+		../headers/glm/mat3x3.hpp \
+		../headers/glm/detail/type_mat3x3.hpp \
+		../headers/glm/detail/type_mat3x3.inl \
+		../headers/glm/mat3x4.hpp \
+		../headers/glm/detail/type_mat3x4.hpp \
+		../headers/glm/detail/type_mat3x4.inl \
+		../headers/glm/mat4x2.hpp \
+		../headers/glm/detail/type_mat4x2.hpp \
+		../headers/glm/detail/type_mat4x2.inl \
+		../headers/glm/mat4x3.hpp \
+		../headers/glm/detail/type_mat4x3.hpp \
+		../headers/glm/detail/type_mat4x3.inl \
+		../headers/glm/mat4x4.hpp \
+		../headers/glm/detail/type_mat4x4.hpp \
+		../headers/glm/detail/type_mat4x4.inl \
+		../headers/glm/trigonometric.hpp \
+		../headers/glm/detail/func_trigonometric.hpp \
+		../headers/glm/detail/func_trigonometric.inl \
+		../headers/glm/detail/_vectorize.hpp \
+		../headers/glm/detail/type_vec1.hpp \
+		../headers/glm/detail/type_vec1.inl \
+		../headers/glm/exponential.hpp \
+		../headers/glm/detail/func_exponential.hpp \
+		../headers/glm/detail/func_exponential.inl \
+		../headers/glm/detail/func_vector_relational.hpp \
+		../headers/glm/detail/func_vector_relational.inl \
+		../headers/glm/common.hpp \
+		../headers/glm/detail/func_common.hpp \
+		../headers/glm/detail/func_common.inl \
+		../headers/glm/packing.hpp \
+		../headers/glm/detail/func_packing.hpp \
+		../headers/glm/detail/func_packing.inl \
+		../headers/glm/detail/type_half.hpp \
+		../headers/glm/detail/type_half.inl \
+		../headers/glm/geometric.hpp \
+		../headers/glm/detail/func_geometric.hpp \
+		../headers/glm/detail/func_geometric.inl \
+		../headers/glm/matrix.hpp \
+		../headers/glm/detail/func_matrix.hpp \
+		../headers/glm/detail/func_matrix.inl \
+		../headers/glm/vector_relational.hpp \
+		../headers/glm/integer.hpp \
+		../headers/glm/detail/func_integer.hpp \
+		../headers/glm/detail/func_integer.inl \
+		../headers/glm/gtc/matrix_transform.hpp \
+		../headers/glm/gtc/constants.hpp \
+		../headers/glm/gtc/constants.inl \
+		../headers/glm/gtc/matrix_transform.inl
+	$(CXX) -c $(CXXFLAGS) $(INCPATH) -o Transform.o Transform.cpp
 
 moc_OpenGLWindow.o: moc_OpenGLWindow.cpp 
 	$(CXX) -c $(CXXFLAGS) $(INCPATH) -o moc_OpenGLWindow.o moc_OpenGLWindow.cpp

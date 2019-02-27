@@ -21,7 +21,8 @@ SOURCES += main.cpp \
     Controller.cpp \
     FileReader.cpp \
     GameObject.cpp \
-    KeyCtrlCamera.cpp
+    KeyCtrlCamera.cpp \
+    Transform.cpp
 
 HEADERS += \
     OpenGLWindow.h \
@@ -43,7 +44,8 @@ HEADERS += \
     Controller.h \
     FileReader.h \
     GameObject.h \
-    KeyCtrlCamera.h
+    KeyCtrlCamera.h \
+    Transform.h
 
 DISTFILES += \
     shaders/default.frag \
