@@ -26,6 +26,19 @@ void GameObject::Render(Camera* _cam)
     }
 }
 
+void GameObject::RenderCF(Camera* _cam) // render with children first
+{
+    for (auto child: m_Childs)
+    {
+        child->RenderCF(_cam);
+    }
+    if (GetComponents()[XMLMeshRenderer::ComponentID] != nullptr)
+    {
+        XMLMeshRenderer* mr = (XMLMeshRenderer*)GetComponents()[XMLMeshRenderer::ComponentID];
+        mr->Render(_cam);
+    }
+}
+
 void GameObject::AddComponent(Component* _c, const unsigned int& _id)
 {
     m_Components[_id] = _c;
@@ -34,15 +47,16 @@ void GameObject::AddComponent(Component* _c, const unsigned int& _id)
 void GameObject::AddChild(GameObject *_obj)
 {
     m_Childs.push_back(_obj);
+    _obj->SetParent(this);
 }
 
 GameObject::~GameObject()
 {
-    for (auto child: m_Childs)
-    {
-        if (child != nullptr)
-            delete child;
-    }
+//    for (auto child: m_Childs)
+//    {
+//        if (child != nullptr)
+//            delete child;
+//    }
     for (int i=0; i<MAX_COMPONENT_NUM; ++i)
     {
         if (m_Components[i] != nullptr)

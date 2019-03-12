@@ -19,6 +19,7 @@ public:
 public:
     virtual void Update();
     virtual void Render(Camera* _cam);
+
 public:
     inline Transform* GetTransform() const { return m_Transform; }
     inline Component** GetComponents() { return m_Components; }
@@ -28,8 +29,10 @@ public:
     inline GameObject* GetParent() const { return m_Parent; }
     inline std::vector<GameObject*> GetChilds() const { return m_Childs; }
 
+public:
     void AddComponent(Component* _c, const unsigned int& _id);
     void AddChild(GameObject* _obj);
+    void RenderCF(Camera* _cam); // render with children first
 
 protected:
     const char* m_Name;

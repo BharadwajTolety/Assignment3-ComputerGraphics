@@ -4,6 +4,9 @@
 #include "Camera.h"
 #include "Controller.h"
 
+#define CAMERA_ZOOM_IN 0x00
+#define CAMERA_ZOOM_OUT 0x01
+
 class KeyCtrlCamera: public Camera
 {
 public:
@@ -19,9 +22,14 @@ public:
     inline float GetRotSpeed() const { return m_RotSpeed; }
 
 private:
+    void m_FovUpdate(const unsigned char& _in_or_out);
+
+private:
     Controller* m_Ctrl;
+
     float m_MoveSpeed;
     float m_RotSpeed;
+    float m_FovIncre;
 };
 
 #endif // KEYCTRLCAMERA_H

@@ -4,6 +4,9 @@
     <instance name="cylinder" path="models/cylinder"></instance>
     <instance name="cone" path="models/cone"></instance>
     <transform>
+        <set>
+            <scale>0.5 0.5 0.5</scale>
+        </set>
         <group name="propeller">
             <group name="p1">
                 <transform>

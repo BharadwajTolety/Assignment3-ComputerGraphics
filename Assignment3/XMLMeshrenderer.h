@@ -19,6 +19,10 @@ public:
     void Render(Camera* _cam);
 public:
     inline void SetMeshOffset(const glm::vec3& _offset) { m_MeshOffset = _offset; }
+
+public:
+    glm::mat4 GetModelTransformGlobal() const;
+
 private:
     sgraph::Scenegraph* m_Model;
     glm::vec3 m_MeshOffset;

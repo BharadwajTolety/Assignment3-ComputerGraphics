@@ -16,11 +16,17 @@ using namespace std;
 #include "Camera.h"
 #include "CameraSwitchcer.h"
 #include "RevolveCamera.h"
+#include "Drone.h"
+#include "DronePropeller.h"
+#include "DroneLight.h"
 #include "KeyCtrlCamera.h"
 
 #define CONFIG_SCENE_GRAPH_PATH_SLOT 0
-#define CONFIG_CAMERA_MODEL_SLOT 1
-#define CONFIG_CAMERA_INIT_POS_SLOT 2
+#define CONFIG_CONTROLLER_MODEL_SLOT 1
+#define CONFIG_PROPELLER_MODEL_SLOT 2
+#define CONFIG_LIGHT_STRUCTURE_MODEL_SLOT 3
+#define CONFIG_CAMERA_MODEL_SLOT 4
+#define CONFIG_CAMERA_INIT_POS_SLOT 5
 
 using namespace std;
 
@@ -98,9 +104,15 @@ private:
     Camera* staticCamera;
     KeyCtrlCamera* keyCtrlCamera;
     std::vector<GameObject*> gameObjects;
+    Drone *drone;
+    DroneLight *drone_light;
+    DronePropeller *dp1, *dp2;
 
     std::string sceneGraphPath;
     std::string cameraModelPath;
+    std::string controllerModelPath;
+    std::string propellerModelPath;
+    std::string droneLightModelPath;
 };
 
 #endif // VIEW_H

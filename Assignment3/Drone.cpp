@@ -1,36 +1,17 @@
-#include "KeyCtrlCamera.h"
-#include <QKeyEvent>
-#include "glm/gtc/matrix_transform.hpp"
-#include <iostream>
+#include "Drone.h"
+#include "DronePropeller.h"
 
-KeyCtrlCamera::KeyCtrlCamera(Controller* _ctrl)
-    : Camera(), m_Ctrl(nullptr), m_MoveSpeed(2.0f), m_RotSpeed(glm::radians(1.0f)), m_FovIncre(0.2f)
+Drone::Drone(Controller* _ctrl)
+    : m_Ctrl(_ctrl), m_RotSpeed(glm::radians(1.0f)), m_MoveSpeed(2.0f)
 {
-    m_Ctrl = _ctrl;
 }
-KeyCtrlCamera::~KeyCtrlCamera()
-{
 
-}
-void KeyCtrlCamera::Update()
+void Drone::Update()
 {
     KeyUpdate();
-    m_View = glm::lookAt(GetTransform()->GetPosition(), GetTransform()->GetPosition() + GetTransform()->GetForward(), GetTransform()->GetUp());
-    m_ProjMatUpdate();
 }
 
-void KeyCtrlCamera::m_FovUpdate(const unsigned char &_in_or_out)
-{
-    float incre = m_FovIncre;
-    if (_in_or_out == CAMERA_ZOOM_IN)
-        incre *= -1;
-
-    m_FOV += incre;
-    if (m_FOV < 45) m_FOV = 45.0f;
-    if (m_FOV > 120) m_FOV = 120.0f;
-}
-
-void KeyCtrlCamera::KeyUpdate()
+void Drone::KeyUpdate()
 {
     unsigned char w = m_Ctrl->GetKeys()[m_Ctrl->QtKeyCodeTranslate(Qt::Key_W)];
     if (w) GetTransform()->DirRotate(m_RotSpeed, GetTransform()->GetRight());
@@ -65,14 +46,4 @@ void KeyCtrlCamera::KeyUpdate()
     }
     unsigned char right = m_Ctrl->GetKeys()[m_Ctrl->QtKeyCodeTranslate(Qt::Key_Right)];
     if (right) GetTransform()->Translate(glm::vec3(m_MoveSpeed, 0.0f, 0.0f));
-
-    unsigned char plus = m_Ctrl->GetKeys()[m_Ctrl->QtKeyCodeTranslate(Qt::Key_Plus)];
-    if (plus) m_FovUpdate(CAMERA_ZOOM_IN);
-
-    unsigned char minus = m_Ctrl->GetKeys()[m_Ctrl->QtKeyCodeTranslate(Qt::Key_Minus)];
-    if (minus)
-    {
-//        printf("minus pressed.");
-        m_FovUpdate(CAMERA_ZOOM_OUT);
-    }
 }

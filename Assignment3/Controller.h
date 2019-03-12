@@ -3,8 +3,13 @@
 
 #include <vector>
 #include <QKeyEvent>
+#include <unordered_map>
 #define KEY_PRESSED 0x01
 #define KEY_RELEASED  0x00
+
+#define TOGGLE_PRESSED 0x01
+#define TOGGLE_RELEASED 0x02
+#define TOGGLE_UNCHANGED 0x00
 
 class Controller
 {
@@ -33,12 +38,13 @@ public:
     inline int  QtKeyCodeTranslate(int _qt_code) { return (_qt_code >= Qt::Key_Escape)? (_qt_code - Qt::Key_Escape + (Qt::Key_Z - Qt::Key_Space)):(_qt_code - Qt::Key_Space); }
 public:
     void KeysCallback(int _key, int _action);
-
+    unsigned char GetAndResetToggle(int _key);
 private:
     float m_LastPosX, m_LastPosY, m_CurrPosX, m_CurrPosY;
     bool m_IsPressed;
     float m_MovingSensitivity;
     unsigned char* m_Keys;
+    unsigned char* m_Toggles;
 };
 
 #endif // CONTROLLER_H

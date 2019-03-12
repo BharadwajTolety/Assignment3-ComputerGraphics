@@ -11,6 +11,7 @@
 
 #include "XMLMeshrenderer.h"
 #include "FileReader.h"
+
 using namespace std;
 
 View::View()
@@ -83,11 +84,26 @@ void View::initMeshRendererForGameObjs(util::OpenGLFunctions &gl) throw (runtime
     xmr->SetMeshOffset(glm::vec3(0.0f, 10.0f, -30.0f));
     staticCamera->AddComponent((Component*)xmr, XMLMeshRenderer::ComponentID);
 
-    XMLMeshRenderer* xmr2 = new XMLMeshRenderer(keyCtrlCamera, cameraModelPath, &renderer);
-    xmr2->SetMeshOffset(glm::vec3(0.0f, 10.0f, -30.0f));
-    keyCtrlCamera->AddComponent((Component*)xmr2, XMLMeshRenderer::ComponentID);
+//    XMLMeshRenderer* xmr2 = new XMLMeshRenderer(keyCtrlCamera, cameraModelPath, &renderer);
+//    xmr2->SetMeshOffset(glm::vec3(0.0f, 10.0f, -30.0f));
+//    keyCtrlCamera->AddComponent((Component*)xmr2, XMLMeshRenderer::ComponentID);
 
-    //    keyCtrlCamera->AddComponent((Component*)new XMLMeshRenderer(keyCtrlCamera, cameraModelPath, &renderer), XMLMeshRenderer::ComponentID);
+    XMLMeshRenderer* xmr2 = new XMLMeshRenderer(drone, controllerModelPath, &renderer);
+    xmr2->SetMeshOffset(glm::vec3(0.0f, -12.0f, -50.0f));
+    drone->AddComponent((Component*)xmr2, XMLMeshRenderer::ComponentID);
+
+    XMLMeshRenderer* xmr3 = new XMLMeshRenderer(dp1, propellerModelPath, &renderer);
+    xmr3->SetMeshOffset(glm::vec3(0.0f, 0.0f, 0.0f));
+    dp1->AddComponent((Component*)xmr3, XMLMeshRenderer::ComponentID);
+
+    XMLMeshRenderer* xmr4 = new XMLMeshRenderer(dp2, propellerModelPath, &renderer);
+    xmr4->SetMeshOffset(glm::vec3(0.0f, 0.0f, 0.0f));
+    dp2->AddComponent((Component*)xmr4, XMLMeshRenderer::ComponentID);
+
+    XMLMeshRenderer* xmr5 = new XMLMeshRenderer(drone_light, droneLightModelPath, &renderer);
+    xmr5->SetMeshOffset(glm::vec3(0.0f, 0.0f, 0.0f));
+    drone_light->AddComponent((Component*)xmr5, XMLMeshRenderer::ComponentID);
+
 }
 
 std::vector<std::string> View::ParseConfig(const std::string& _path)
@@ -129,9 +145,28 @@ void View::init(util::OpenGLFunctions& gl) throw(runtime_error)
   glm::vec3 camInitPos(atof(tokens[CONFIG_CAMERA_INIT_POS_SLOT + 0].c_str()),
                        atof(tokens[CONFIG_CAMERA_INIT_POS_SLOT + 1].c_str()),
                        atof(tokens[CONFIG_CAMERA_INIT_POS_SLOT + 2].c_str()));
+  controllerModelPath = tokens[CONFIG_CONTROLLER_MODEL_SLOT];
+  propellerModelPath = tokens[CONFIG_PROPELLER_MODEL_SLOT];
+  droneLightModelPath = tokens[CONFIG_LIGHT_STRUCTURE_MODEL_SLOT];
 
   ctrl = new Controller();
   ctrl->SetToGlobalController();
+
+  drone = new Drone(ctrl);
+//  drone->GetTransform()->DirRotate(180.0f, glm::vec3(0.0f, 1.0f, 0.0f));
+  drone->GetTransform()->SetDirection(glm::vec3(0.0f, 0.0f, -1.0f));
+  dp1 = new DronePropeller();
+  dp2 = new DronePropeller();
+  drone->AddChild(dp1);
+  drone->AddChild(dp2);
+  dp1->GetTransform()->Translate(glm::vec3(20.0f, 0.0f, -20.0f) + glm::vec3(0.0f, -12.0f, 50.0f));
+  dp2->GetTransform()->Translate(glm::vec3(-20.0f, 0.0f, -20.0f) + glm::vec3(0.0f, -12.0f, 50.0f));
+  drone_light = new DroneLight();
+  drone->AddChild(drone_light);
+  drone_light->GetTransform()->Translate(glm::vec3(0.0f, 5.0f, 0.0f) + glm::vec3(0.0f, -8.0f, 5.0f));
+  drone_light->GetTransform()->SetScale(glm::vec3(0.2f, 0.2f, 0.2f));
+  drone->GetTransform()->SetPosition(camInitPos);
+
 
   staticCamera = new Camera();
   staticCamera->GetTransform()->SetPosition(camInitPos);
@@ -147,6 +182,10 @@ void View::init(util::OpenGLFunctions& gl) throw(runtime_error)
   gameObjects.push_back(staticCamera);
 //  gameObjects.push_back(revolveCamera);
   gameObjects.push_back(keyCtrlCamera);
+  gameObjects.push_back(drone);
+  gameObjects.push_back(dp1);
+  gameObjects.push_back(dp2);
+  gameObjects.push_back(drone_light);
 
   keyCtrlCamera->SetToMainCamera();
 }
@@ -176,7 +215,7 @@ void View::draw(util::OpenGLFunctions& gl)
   gl.glUniformMatrix4fv(shaderLocations.getLocation("projection"),
                         1,
                         false,
-                        glm::value_ptr(proj));
+                        glm::value_ptr(switcher->GetCam1()->GetProjMat()));
 
   //gl.glPolygonMode(GL.GL_FRONT_AND_BACK,GL3.GL_LINE); //OUTLINES
   scenegraph->draw(modelview);
@@ -194,6 +233,11 @@ void View::draw(util::OpenGLFunctions& gl)
     modelview.pop();
   modelview.push(glm::mat4(1.0));
   modelview.top() = modelview.top() * switcher->GetCam2()->GetViewMat();
+
+  gl.glUniformMatrix4fv(shaderLocations.getLocation("projection"),
+                        1,
+                        false,
+                        glm::value_ptr(switcher->GetCam2()->GetProjMat()));
 
   gl.glScissor(WINDOW_WIDTH * 0.7f, WINDOW_WIDTH * 0.7f, WINDOW_WIDTH * 0.3f, WINDOW_HEIGHT * 0.3f);
   gl.glEnable(GL_SCISSOR_TEST);
