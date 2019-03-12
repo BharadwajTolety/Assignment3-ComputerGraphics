@@ -1,0 +1,83 @@
+<scene>
+    <instance name="sphere" path="models/sphere"></instance>
+    <instance name="box" path="models/box"></instance>
+    <instance name="cylinder" path="models/cylinder"></instance>
+    <instance name="cone" path="models/cone"></instance>
+    <transform>
+    	<set>
+            <translate>0 0 0</translate>
+            <scale>1 1 1</scale>
+        </set>
+        <group name="drone">
+        	<transform>
+        		<set>
+        			<scale>10 10 50</scale>
+                    <rotate>90 1 0 0</rotate>
+        		</set>
+        		<group name="body">
+        			<object instanceof="cylinder">
+        				<material>
+        					<color>1 1 1</color>
+        				</material>
+        			</object>
+        		</group>
+        	</transform>
+        	<group name="left-wing">
+        		<transform>
+        			<set>
+        				<translate>-25 0 25</translate>
+                        <rotate>-30 0 1 0</rotate>
+        				<scale>40 5 10</scale>
+        			</set>
+        			<object instanceof="box">
+        				<material>
+        					<color>0.8 0.2 0.3</color>
+        				</material>
+        			</object>
+        		</transform>
+        	</group>
+        	<group name="right-wing">
+        		<transform>
+        			<set>
+        				<translate>25 0 25</translate>
+                        <rotate>30 0 1 0</rotate>
+        				<scale>40 5 10</scale>
+        			</set>
+        			<object instanceof="box">
+        				<material>
+        					<color>0.8 0.2 0.3</color>
+        				</material>
+        			</object>
+        		</transform>
+        	</group>
+            <group name="left-back-wing">
+                <transform>
+                    <set>
+                        <translate>-10 0 5</translate>
+                        <rotate>-15 0 1 0</rotate>
+                        <scale>20 2.5 5</scale>
+                    </set>
+                    <object instanceof="box">
+                        <material>
+                            <color>0.8 0.2 0.3</color>
+                        </material>
+                    </object>
+                </transform>
+            </group>
+            <group name="right-back-wing">
+                <transform>
+                    <set>
+                        <translate>10 0 5</translate>
+                        <rotate>15 0 1 0</rotate>
+                        <scale>20 2.5 5</scale>
+                    </set>
+                    <object instanceof="box">
+                        <material>
+                            <color>0.8 0.2 0.3</color>
+                        </material>
+                    </object>
+                </transform>
+            </group>
+        </group>
+    </transform>
+</scene>

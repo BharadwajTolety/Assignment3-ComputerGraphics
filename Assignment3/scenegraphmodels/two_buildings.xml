@@ -11,7 +11,7 @@
             <set>
                 <translate>30 0 0</translate>
             </set>
-            <group name="2nd_building" from="scenegraphmodels/building/building.xml">
+            <group name="2nd_building" from="scenegraphmodels/building/building2.xml">
             </group>
         </transform>
         <transform>

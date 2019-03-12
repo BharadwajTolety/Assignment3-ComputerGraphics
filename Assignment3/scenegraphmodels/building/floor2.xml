@@ -1,0 +1,252 @@
+<scene>
+    <instance name="sphere" path="models/sphere"></instance>
+    <instance name="box" path="models/box"></instance>
+    <instance name="cylinder" path="models/cylinder"></instance>
+    <instance name="cone" path="models/cone"></instance>
+    <transform>
+        <set>
+            <translate>0 0 0</translate>
+            <scale>1 1 1</scale>
+        </set>
+        <group name="floor">
+            <transform>
+                <set>
+                    <scale>1 1 1</scale>
+                </set>
+                <group>
+                    <group name="left-wall-with-open-window">
+                        <transform>
+                            <set>
+                                <translate>-15 0 0</translate>
+                                <rotate>90 0 1 0</rotate>
+                            </set>
+                            <group>
+                                <transform name="wall-block-up">
+                                    <set>
+                                        <translate>0 10 0</translate>
+                                        <scale>30 10 0.0125</scale>
+                                    </set>
+                                    <object instanceof="box">
+                                        <material>
+                                            <color>1 1 0.9</color>
+                                        </material>
+                                    </object>
+                                </transform>
+                                <transform name="wall-block-down">
+                                    <set>
+                                        <translate>0 -10 0</translate>
+                                        <scale>30 10 0.0125</scale>
+                                    </set>
+                                    <object instanceof="box">
+                                        <material>
+                                            <color>1 1 0.9</color>
+                                        </material>
+                                    </object>
+                                </transform>
+                                <transform name="wall-block-left">
+                                    <set>
+                                        <translate>-10 0 0</translate>
+                                        <scale>10 10 0.125</scale>
+                                    </set>
+                                    <object instanceof="box">
+                                        <material>
+                                            <color>1 1 0.9</color>
+                                        </material>
+                                    </object>
+                                </transform>
+                                <transform name="wall-block-right">
+                                    <set>
+                                        <translate>10 0 0</translate>
+                                        <scale>10 10 0.125</scale>
+                                    </set>
+                                    <object instanceof="box">
+                                        <material>
+                                            <color>1 1 0.9</color>
+                                        </material>
+                                    </object>
+                                </transform>
+                            </group>
+                        </transform>
+                    </group>
+                    <group name="right-wall-with-open-window">
+                        <transform>
+                            <set>
+                                <translate>15 0 0</translate>
+                                <rotate>90 0 1 0</rotate>
+                            </set>
+                            <group>
+                                <transform name="wall-block-up">
+                                    <set>
+                                        <translate>0 10 0</translate>
+                                        <scale>30 10 0.0125</scale>
+                                    </set>
+                                    <object instanceof="box">
+                                        <material>
+                                            <color>1 1 0.9</color>
+                                        </material>
+                                    </object>
+                                </transform>
+                                <transform name="wall-block-down">
+                                    <set>
+                                        <translate>0 -10 0</translate>
+                                        <scale>30 10 0.0125</scale>
+                                    </set>
+                                    <object instanceof="box">
+                                        <material>
+                                            <color>1 1 0.9</color>
+                                        </material>
+                                    </object>
+                                </transform>
+                                <transform name="wall-block-left">
+                                    <set>
+                                        <translate>-10 0 0</translate>
+                                        <scale>10 10 0.125</scale>
+                                    </set>
+                                    <object instanceof="box">
+                                        <material>
+                                            <color>1 1 0.9</color>
+                                        </material>
+                                    </object>
+                                </transform>
+                                <transform name="wall-block-right">
+                                    <set>
+                                        <translate>10 0 0</translate>
+                                        <scale>10 10 0.125</scale>
+                                    </set>
+                                    <object instanceof="box">
+                                        <material>
+                                            <color>1 1 0.9</color>
+                                        </material>
+                                    </object>
+                                </transform>
+                            </group>
+                        </transform>
+                    </group>
+                    <group name="front-wall-with-door">
+                        <transform>
+                            <set>
+                                <translate>0 0 15</translate>
+                                <rotate>0 0 1 0</rotate>
+                            </set>
+                            <group>
+                                <transform name="wall-block-up">
+                                    <set>
+                                        <translate>0 10 0</translate>
+                                        <scale>30 10 0.0125</scale>
+                                    </set>
+                                    <object instanceof="box">
+                                        <material>
+                                            <color>1 1 0.9</color>
+                                        </material>
+                                    </object>
+                                </transform>
+                                <transform name="wall-block-left">
+                                    <set>
+                                        <translate>-10 -3 0</translate>
+                                        <scale>10 24 0.125</scale>
+                                    </set>
+                                    <object instanceof="box">
+                                        <material>
+                                            <color>1 1 0.9</color>
+                                        </material>
+                                    </object>
+                                </transform>
+                                <transform name="wall-block-right">
+                                    <set>
+                                        <translate>10 -3 0</translate>
+                                        <scale>10 24 0.125</scale>
+                                    </set>
+                                    <object instanceof="box">
+                                        <material>
+                                            <color>1 1 0.9</color>
+                                        </material>
+                                    </object>
+                                </transform>
+                                <transform name="door">
+                                    <set>
+                                        <translate>0 -3 0</translate>
+                                        <scale>10 24 0.050</scale>
+                                    </set>
+                                    <object instanceof="box">
+                                        <material>
+                                            <color>0.7 0.2 0</color>
+                                        </material>
+                                    </object>
+                                </transform>
+                            </group>
+                        </transform>
+                    </group>
+                    <group name="back-wall-with-open-window">
+                        <transform>
+                            <set>
+                                <translate>0 0 -15</translate>
+                                <rotate>0 0 1 0</rotate>
+                            </set>
+                            <group>
+                                <transform name="door">
+                                    <set>
+                                        <translate>0 -15 0</translate>
+                                        <scale>8 30 10</scale>
+                                    </set>
+                                    <object instanceof="cylinder">
+                                        <material>
+                                            <color>1 1 0.9</color>
+                                        </material>
+                                    </object>
+                                </transform>
+                                <transform name="wall-block-left">
+                                    <set>
+                                        <translate>-10 0 0</translate>
+                                        <scale>10 30 0.125</scale>
+                                    </set>
+                                    <object instanceof="box">
+                                        <material>
+                                            <color>1 1 0.9</color>
+                                        </material>
+                                    </object>
+                                </transform>
+                                <transform name="wall-block-right">
+                                    <set>
+                                        <translate>10 0 0</translate>
+                                        <scale>10 30 0.125</scale>
+                                    </set>
+                                    <object instanceof="box">
+                                        <material>
+                                            <color>1 1 0.9</color>
+                                        </material>
+                                    </object>
+                                </transform>
+                            </group>
+                        </transform>
+                    </group>
+                    <group name="ground">
+                        <transform>
+                            <set>
+                                <translate>0 -15 0</translate>
+                                <scale>30 0.125 30</scale>
+                            </set>
+                            <object instanceof="box">
+                                <material>
+                                    <color>1 0.2 0.1</color>
+                                </material>
+                            </object>
+                        </transform>
+                    </group>
+                    <group name="roof">
+                        <transform>
+                            <set>
+                                <translate>0 15 0</translate>
+                                <scale>35 1.0 35</scale>
+                            </set>
+                            <object instanceof="box">
+                                <material>
+                                    <color>1 1 0.7</color>
+                                </material>
+                            </object>
+                        </transform>
+                    </group>
+                </group>
+            </transform>
+        </group>
+    </transform>
+</scene>

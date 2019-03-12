@@ -1,0 +1,64 @@
+<scene>
+    <instance name="sphere" path="models/sphere"></instance>
+    <instance name="box" path="models/box"></instance>
+    <instance name="cylinder" path="models/cylinder"></instance>
+    <instance name="cone" path="models/cone"></instance>
+    <transform>
+        <group name="light_source">
+            <group name="ls_base">
+                <transform>
+                    <set>
+                        <translate>10 -2 0</translate>
+                        <scale>20 5 20</scale>
+                    </set>
+                    <object instanceof="cylinder">
+                        <material>
+                            <color>0.8 0.2 0.3</color>
+                        </material>
+                    </object>
+                </transform>
+            </group>
+            <group name="ls_bottom">
+                <transform>
+                    <set>
+                        <translate>12 0 0</translate>
+                        <rotate>30 0 0 1</rotate>
+                        <scale>5 30 5</scale>
+                    </set>
+                    <object instanceof="cylinder">
+                        <material>
+                            <color>0.8 0.2 0.3</color>
+                        </material>
+                    </object>
+                </transform>
+            </group>
+            <group name="ls_top">
+                <transform>
+                    <set>
+                        <translate>-5 30 0</translate>
+                        <rotate>-30 0 0 1</rotate>
+                        <scale>5 30 5</scale>
+                    </set>
+                    <object instanceof="cylinder">
+                        <material>
+                            <color>0.8 0.2 0.3</color>
+                        </material>
+                    </object>
+                </transform>
+            </group>
+            <group name="ls_bulb">
+                <transform>
+                    <set>
+                        <translate>10 62 0</translate>
+                        <scale>10 10 10</scale>
+                    </set>
+                    <object instanceof="sphere">
+                        <material>
+                            <color>1 1 0.2</color>
+                        </material>
+                    </object>
+                </transform>
+            </group>
+        </group>
+    </transform>
+</scene>
