@@ -8,7 +8,7 @@
             <group name="p1">
                 <transform>
                     <set>
-                        <translate>0 0 0</translate>
+                        <translate>0 -20 0</translate>
                         <scale>10 20 1</scale>
                     </set>
                     <object instanceof="cone">
@@ -21,7 +21,7 @@
             <group name="p2">
                 <transform>
                     <set>
-                        <translate>18 30 0</translate>
+                        <translate>18 10 0</translate>
                         <rotate>120 0 0 1</rotate>
                         <scale>10 20 1</scale>
                     </set>
@@ -35,7 +35,7 @@
             <group name="p3">
                 <transform>
                     <set>
-                        <translate>-18 30 0</translate>
+                        <translate>-18 10 0</translate>
                         <rotate>-120 0 0 1</rotate>
                         <scale>10 20 1</scale>
                     </set>
@@ -49,7 +49,7 @@
             <group name="center">
                 <transform>
                     <set>
-                        <translate>0 20 0</translate>
+                        <translate>0 0 0</translate>
                         <scale>5 5 5</scale>
                     </set>
                     <object instanceof="sphere">
