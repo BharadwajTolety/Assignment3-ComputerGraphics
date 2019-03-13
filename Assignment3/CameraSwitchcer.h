@@ -3,6 +3,8 @@
 
 #include "Camera.h"
 
+/*Used to switch cameras between drone and global.*/
+
 class CameraSwitchcer
 {
 public:

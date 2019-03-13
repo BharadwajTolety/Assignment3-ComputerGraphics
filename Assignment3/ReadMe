@@ -1,13 +1,8 @@
-Drone Camera:
-The drone camera is created using a scenegraph described in a XML file named 'drone_camera.xml'. We have divided the drone into 4 parts:
-1. The body is a sphere
-2. the 3 axes are composed of a cylinder for the body and a cone for the arrowhead.
-The Drone Camera axes:
-1. Blue: Right(x-axis)
-2. Red: Up(y-axis)
-3. Yellow: Opposite of gaze(-z direction)
 
-Our program has the following features:\pabilities:
+How to use?
+To load up the models for the scene and drone camera, use the file 'input_config_building.txt'. The first string is the path for loading up the model for the scene and the remaining path strings are used for loading up the model for the drone_camera.
+
+Our program has the following features:\abilities:
 1. The camera moves up using the “up” arrow key.
 2. The camera moves down using the “down” arrow key.
 3. The camera moves left using the “left” arrow key.
@@ -19,8 +14,12 @@ Our program has the following features:\pabilities:
 9. The camera tilts right in its place using the “f” or “F” key.
 10. The camera tilts left in its place using the “c” or “C” key.
 
-To load up the models for the scene and drone camera, use the file 'input_config_building.txt'. The first string is the path for loading up the model for the scene and the second path string is for loading up the model for the drone_camera.
 
 In our team we have two different platforms, one windows and one mac. This led to a few complications as stated below:
-1. The second viewport does not appear in the right-top corner of the screen in MAc as it does in Windows. We believe this is due to the differeinz sixes of the buffers OpenGL uses.
+1. The second viewport does not appear in the right-top corner of the screen in MAc as it does in Windows. We believe this is due to the different sizes of the buffers OpenGL uses.
 2. The drone does not show up on the Mac but does appear on the Windows system. 
+
+Animation:
+
+To animate our propeller i.e to rotate it, we created a class 'DronePropeller' where we apply transformations to the propeller individually.We use the rotation speed variable described in the class to dictate the transformations. Picking out which object to animate individually will require a lot of separate classes for each object but is easier to manage the animations. 
+If a developer where to pick up our project and wish to animate themselves, they could access our class header files and change the properties they require. As each object is individually animated they have more control on which objects need change.

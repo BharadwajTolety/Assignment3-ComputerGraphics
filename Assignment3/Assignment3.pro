@@ -23,7 +23,11 @@ SOURCES += main.cpp \
     GameObject.cpp \
     KeyCtrlCamera.cpp \
     Transform.cpp \
-    XMLMeshrenderer.cpp
+    XMLMeshrenderer.cpp \
+    Drone.cpp \
+    DroneLight.cpp \
+    DronePropeller.cpp \
+    MLight.cpp
 
 HEADERS += \
     OpenGLWindow.h \
@@ -47,7 +51,11 @@ HEADERS += \
     GameObject.h \
     KeyCtrlCamera.h \
     Transform.h \
-    XMLMeshrenderer.h
+    XMLMeshrenderer.h \
+    Drone.h \
+    DroneLight.h \
+    DronePropeller.h \
+    DroneWithCamera.h
 
 DISTFILES += \
     shaders/default.frag \

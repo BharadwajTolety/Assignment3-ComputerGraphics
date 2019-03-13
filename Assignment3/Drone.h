@@ -4,6 +4,8 @@
 #include "GameObject.h"
 #include "Controller.h"
 
+/*Inherits from GameObject class and sets speed for rotation and movement for the drone.*/
+
 class Drone: public GameObject
 {
 public:

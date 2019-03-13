@@ -4,6 +4,8 @@
 #include "GameObject.h"
 #include "MLight.h"
 
+/*This class will be used in the future to implement the lights for the assignment. */
+
 class DroneLight: public GameObject
 {
 public:

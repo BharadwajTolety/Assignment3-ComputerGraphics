@@ -4,6 +4,9 @@
 #include "glm/glm.hpp"
 #include "GameObject.h"
 
+/*This class is a child of class "Gameobject". It is used to update the camera when user updates its positions using the arrow keys.
+It updates the prjection matrices for the camera using SetProjMat, GetProjMat and GetViewMat, sets camera using the settomaincamera and zooms using GetFOV function.*/
+
 class Camera: public GameObject
 {
 public:

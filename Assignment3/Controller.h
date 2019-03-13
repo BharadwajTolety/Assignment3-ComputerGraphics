@@ -11,6 +11,8 @@
 #define TOGGLE_RELEASED 0x02
 #define TOGGLE_UNCHANGED 0x00
 
+/*This class provides functions for controlling the drone. It registers keyboard inputs and updates position variables used later to update the transformations. */
+
 class Controller
 {
 public:

@@ -3,6 +3,8 @@
 
 #include "GameObject.h"
 #include "glm/glm.hpp"
+
+/*Sets rotation speed for the propeller and also inherits from class GameObjects.*/
 class DronePropeller: public GameObject
 {
 public:
