@@ -53,6 +53,7 @@ namespace sgraph
         {
           info.scenegraph = handler.getScenegraph();
           info.meshes = handler.getMeshes();
+
         }
       else
         {
@@ -78,6 +79,10 @@ namespace sgraph
     map<string, sgraph::INode *> subgraph;
     vector<float> data;
 
+    bool isLightTag;
+    util::Light currLight;
+    std::vector<util::Light> lights;
+
   public:
     sgraph::Scenegraph *getScenegraph() {
       return scenegraph;
@@ -86,6 +91,11 @@ namespace sgraph
     map<string,util::PolygonMesh<K>> getMeshes()
     {
       return meshes;
+    }
+
+    std::vector<util::Light> getLights()
+    {
+        return lights;
     }
 
     MyHandler()
@@ -106,6 +116,7 @@ namespace sgraph
     {
       if (qName.compare("scene")==0)
         {
+          printf("<scene> node.\n");
           stackNodes.push(new sgraph::GroupNode(scenegraph, "Root of scene graph"));
           subgraph[stackNodes.top()->getName()] = stackNodes.top();
         }
@@ -161,6 +172,7 @@ namespace sgraph
         }
       else if (qName.compare("transform")==0)
         {
+          printf("<transform> node.\n");
           string name = "";
           for (int i = 0; i < atts.count(); i++)
             {
@@ -222,6 +234,14 @@ namespace sgraph
               meshes[name] = mesh;
             }
         }
+      else if (qName.compare("light")==0)
+      {
+          isLightTag = true;
+      }
+      else if (qName.compare("material")==0)
+      {
+          isLightTag = false;
+      }
 
       return true;
     }
@@ -272,6 +292,12 @@ namespace sgraph
           stackNodes.top()->setMaterial(material);
           material = util::Material();
         }
+      else if (qName.compare("light")==0)
+      {
+          stackNodes.top()->addLight(currLight);
+          lights.push_back(currLight);
+          currLight = util::Light();
+      }
       else if (qName.compare("color")==0)
         {
           if (data.size()!=3)
@@ -287,21 +313,24 @@ namespace sgraph
         {
           if (data.size()!=3)
             return false;
-          material.setAmbient(data[0],data[1],data[2]);
+          if (isLightTag) currLight.setAmbient(data[0],data[1],data[2]);
+          else material.setAmbient(data[0],data[1],data[2]);
           data.clear();
         }
       else if (qName.compare("diffuse")==0)
         {
           if (data.size()!=3)
             return false;
-          material.setDiffuse(data[0],data[1],data[2]);
+          if (isLightTag) currLight.setDiffuse(data[0],data[1],data[2]);
+          else material.setDiffuse(data[0],data[1],data[2]);
           data.clear();
         }
       else if (qName.compare("specular")==0)
         {
           if (data.size()!=3)
             return false;
-          material.setSpecular(data[0],data[1],data[2]);
+          if (isLightTag) currLight.setSpecular(data[0],data[1],data[2]);
+          else material.setSpecular(data[0],data[1],data[2]);
           data.clear();
         }
       else if (qName.compare("emissive")==0)
@@ -311,6 +340,7 @@ namespace sgraph
           material.setEmission(data[0],data[1],data[2]);
           data.clear();
         }
+
       else if (qName.compare("shininess")==0)
         {
           if (data.size()!=1)
@@ -346,6 +376,7 @@ namespace sgraph
           material.setRefractiveIndex(data[0]);
           data.clear();
         }
+
     return true;
 
     }
@@ -366,7 +397,7 @@ namespace sgraph
       for (int i=0;i<list.length();i++)
         {
           c=sscanf(list.at(i).toLatin1().constData(),"%f",&f);
-          printf("Read number: %f\n",f);
+//          printf("Read number: %f\n",f);
           data.push_back(f);
           if (c!=1)
             return true;

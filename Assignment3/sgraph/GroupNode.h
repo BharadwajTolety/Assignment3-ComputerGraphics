@@ -24,6 +24,7 @@ namespace sgraph
      */
   protected:
     vector<INode *> children;
+    util::Light light;
 
   public:
     GroupNode(sgraph::Scenegraph *graph,const string& name)
@@ -90,6 +91,13 @@ namespace sgraph
         }
     }
 
+    void drawLight(GLScenegraphRenderer& context, stack<glm::mat4>& modelView)
+    {
+        for (int i=0;i<children.size();i++)
+          {
+            children[i]->drawLight(context,modelView);
+          }
+    }
     /**
      * Makes a deep copy of the subtree rooted at this node
      * \return a deep copy of the subtree rooted at this node
@@ -139,6 +147,11 @@ namespace sgraph
     vector<INode *> getChildren()
     {
       return children;
+    }
+
+    void addLight(const util::Light& _l) throw(runtime_error)
+    {
+        light = _l;
     }
   };
 }
