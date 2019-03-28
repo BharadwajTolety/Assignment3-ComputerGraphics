@@ -16,6 +16,7 @@
 #include <vector>
 #include <map>
 #include <fstream>
+#include <iostream>
 using namespace std;
 
 namespace sgraph
@@ -114,6 +115,7 @@ namespace sgraph
 
     bool startElement( const QString & namespaceURI,const QString & localName,const QString & qName,const QXmlAttributes & atts)
     {
+        std::cout<<"start-" << qName.toStdString()<<std::endl;
       if (qName.compare("scene")==0)
         {
           printf("<scene> node.\n");
@@ -249,6 +251,7 @@ namespace sgraph
 
     bool endElement( const QString&, const QString&, const QString& qName)
     {
+        std::cout<<"end-" << qName.toStdString()<<std::endl;
       if (qName.compare("scene")==0)
         {
           if (stackNodes.top()->getName().compare("Root of scene graph")==0)
@@ -265,6 +268,7 @@ namespace sgraph
           stackNodes.top()->setTransform(transform);
           transform = glm::mat4(1.0);
         }
+
       else if (qName.compare("scale")==0)
         {
           if (data.size()!=3)
@@ -298,6 +302,27 @@ namespace sgraph
           stackNodes.top()->addLight(currLight);
           lights.push_back(currLight);
           currLight = util::Light();
+      }
+      else if (qName.compare("spotangle") == 0)
+      {
+          if (data.size()!=1)
+            return false;
+          currLight.setSpotAngle(data[0]);
+          data.clear();
+      }
+      else if (qName.compare("spotdirection") == 0)
+      {
+          if (data.size()!=3)
+            return false;
+          currLight.setSpotDirection(data[0], data[1], data[2]);
+          data.clear();
+      }
+      else if (qName.compare("position") == 0)
+      {
+          if (data.size()!=3)
+            return false;
+          currLight.setPosition(data[0], data[1], data[2]);
+          data.clear();
       }
       else if (qName.compare("color")==0)
         {

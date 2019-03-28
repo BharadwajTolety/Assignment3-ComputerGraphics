@@ -157,22 +157,22 @@ public:
     {
         if (meshRenderers.count(name)==1)
         {
-            int loc = shaderLocations.getLocation("vColor");
-            //set the color for all vertices to be drawn for this object
-            if (loc<0)
-                throw runtime_error("No shader variable for \" vColor \"");
+//            int loc = shaderLocations.getLocation("vColor");
+//            //set the color for all vertices to be drawn for this object
+//            if (loc<0)
+//                throw runtime_error("No shader variable for \" vColor \"");
 
-            glContext->glUniform3fv(loc,1,glm::value_ptr(material.getAmbient()));
+//            glContext->glUniform3fv(loc,1,glm::value_ptr(material.getAmbient()));
 
-//            /*Material properties are now being sent to the shader*/
-//            glContext->glUniform3fv(shaderLocations.getLocation("material.ambient"), 1, glm::value_ptr(material.getAmbient()));
-//            glContext->glUniform3fv(shaderLocations.getLocation("material.diffuse"), 1, glm::value_ptr(material.getDiffuse()));
-//            glContext->glUniform3fv(shaderLocations.getLocation("material.specular"), 1,glm::value_ptr(material.getSpecular()));
-//            glContext->glUniform1f(shaderLocations.getLocation("material.shininess"), material.getShininess());
+            /*Material properties are now being sent to the shader*/
+            glContext->glUniform3fv(shaderLocations.getLocation("material.ambient"), 1, glm::value_ptr(material.getAmbient()));
+            glContext->glUniform3fv(shaderLocations.getLocation("material.diffuse"), 1, glm::value_ptr(material.getDiffuse()));
+            glContext->glUniform3fv(shaderLocations.getLocation("material.specular"), 1,glm::value_ptr(material.getSpecular()));
+            glContext->glUniform1f(shaderLocations.getLocation("material.shininess"), material.getShininess());
 
             /*Sending the final modelview matrix which contains all the transformations from the root of the scenegraph to the respective
               leaf node.*/
-            loc = shaderLocations.getLocation("modelview");
+            int loc = shaderLocations.getLocation("modelview");
             if (loc<0)
                 throw runtime_error("No shader variable for \" modelview \"");
             glContext->glUniformMatrix4fv(loc,1,false,glm::value_ptr(transformation));
@@ -187,22 +187,41 @@ public:
     }
 
 
+    struct _lightLocation
+    {
+        int ambient = -1;
+        int diffuse = -1;
+        int specular = -1;
+        int position = -1;
+    };
+
     void drawLight(std::vector<util::Light> lights,
                   const glm::mat4& transformation)
     {
 
-            /*Light properties are now being sent to the shader*/
-        glContext->glUniform1i(shaderLocations.getLocation("numLights"), lights.size());
-
+        std::vector<_lightLocation> lls;
         for (int i=0; i<lights.size(); ++i)
         {
             std::stringstream ss;
             ss << "light[" << i << "]";
             std::string sVarName = ss.str();
+            _lightLocation ll;
+            ll.ambient = shaderLocations.getLocation(sVarName + ".ambient");
+            ll.diffuse = shaderLocations.getLocation(sVarName + ".diffuse");
+            ll.specular = shaderLocations.getLocation(sVarName + ".specular");
+            ll.position = shaderLocations.getLocation(sVarName + ".position");
+            lls.push_back(ll);
+        }
+            /*Light properties are now being sent to the shader*/
+        glContext->glUniform1i(shaderLocations.getLocation("numLights"), lights.size());
 
-            glContext->glUniform3fv(shaderLocations.getLocation(sVarName.append(".ambient")), 1, glm::value_ptr(lights[i].getAmbient()));
-            glContext->glUniform3fv(shaderLocations.getLocation(sVarName.append(".specular")), 1, glm::value_ptr(lights[i].getSpecular()));
-            glContext->glUniform3fv(shaderLocations.getLocation(sVarName.append(".diffuse")), 1, glm::value_ptr(lights[i].getDiffuse()));
+        for (int i=0; i<lights.size(); ++i)
+        {
+
+            glContext->glUniform3fv(lls[i].ambient, 1, glm::value_ptr(lights[i].getAmbient()));
+            glContext->glUniform3fv(lls[i].specular, 1, glm::value_ptr(lights[i].getSpecular()));
+            glContext->glUniform3fv(lls[i].diffuse, 1, glm::value_ptr(lights[i].getDiffuse()));
+            glContext->glUniform4fv(lls[i].position, 1, glm::value_ptr(glm::vec4(lights[i].getPosition())));
 
         }
 

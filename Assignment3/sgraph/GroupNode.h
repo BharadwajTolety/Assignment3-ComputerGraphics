@@ -97,8 +97,9 @@ namespace sgraph
         {
             glm::vec4 pos = light.getPosition();
             pos = modelView.top() * pos;
-            light.setPosition(pos);
-            lights.push_back(light);
+            util::Light l = light;
+            l.setPosition(pos);
+            lights.push_back(l);
         }
         for (int i=0;i<children.size();i++)
           {
