@@ -192,7 +192,7 @@ void View::init(util::OpenGLFunctions& gl) throw(runtime_error)
 
 void View::draw(util::OpenGLFunctions& gl)
 {
-  gl.glClearColor(0,0.6f,0.8f,1);
+  gl.glClearColor(0,0,0,1);
   gl.glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT);
   gl.glEnable(GL_DEPTH_TEST);
 
@@ -219,6 +219,7 @@ void View::draw(util::OpenGLFunctions& gl)
 
   //gl.glPolygonMode(GL.GL_FRONT_AND_BACK,GL3.GL_LINE); //OUTLINES
   scenegraph->draw(modelview);
+  scenegraph->drawLights(modelview);
   for (auto obj: gameObjects)
   {
       obj->Render(switcher->GetCam1());
