@@ -44,7 +44,7 @@ namespace sgraph
      * \param modelView the stack of modelview matrices
      */
     virtual void draw(GLScenegraphRenderer& context,stack<glm::mat4>& modelView)=0;
-
+    virtual void drawLight(GLScenegraphRenderer& context,stack<glm::mat4>& modelView) = 0;
     /**
      * Return a deep copy of the scene graph subtree rooted at this node
      * \return a reference to the root of the copied subtree
@@ -124,7 +124,7 @@ namespace sgraph
      * Adds a new light to this node.
      * \param l
      */
-    virtual void addLight(const util::Light& l)=0;
+    virtual void addLight(const util::Light& l) throw(runtime_error)=0;
 };
 }
 

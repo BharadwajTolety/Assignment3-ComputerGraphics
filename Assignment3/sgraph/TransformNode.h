@@ -34,6 +34,7 @@ namespace sgraph
      */
     INode *child;
 
+    util::Light light;
   public:
     TransformNode(sgraph::Scenegraph *graph,const string& name)
       :AbstractNode(graph,name)
@@ -133,11 +134,23 @@ namespace sgraph
       modelView.top() = modelView.top()
           * animation_transform
           * transform;
+
       if (child!=NULL)
         child->draw(context,modelView);
       modelView.pop();
     }
 
+    void drawLight(GLScenegraphRenderer& context,stack<glm::mat4>& modelView)
+    {
+      modelView.push(modelView.top());
+      modelView.top() = modelView.top()
+          * animation_transform
+          * transform;
+
+      if (child!=NULL)
+        child->drawLight(context,modelView);
+      modelView.pop();
+    }
 
     /**
      * Sets the animation transform of this node
@@ -187,6 +200,11 @@ namespace sgraph
           child->setScenegraph(graph);
         }
     }
+
+    void addLight(const util::Light& _l) throw(runtime_error)
+        {
+            light = _l;
+        }
   };
 }
 #endif

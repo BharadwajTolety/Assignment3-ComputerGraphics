@@ -126,6 +126,11 @@ public:
         root->draw(*this,modelView);
     }
 
+    void drawLight(INode *root, stack<glm::mat4>& _mv)
+    {
+        root->drawLight(*this, _mv);
+    }
+
     void dispose()
     {
         for (map<string,util::ObjectInstance *>::iterator it=meshRenderers.begin();
@@ -181,6 +186,34 @@ public:
     }
 
 
+    void drawLight(util::Light light,
+                  const glm::mat4& transformation)
+    {
+
+            /*Light properties are now being sent to the shader*/
+
+            glContext->glUniform3fv(shaderLocations.getLocation("Light.ambient"), 1, glm::value_ptr(light.getAmbient()));
+            glContext->glUniform3fv(shaderLocations.getLocation("light.diffuse"), 1, glm::value_ptr(light.getDiffuse()));
+            glContext->glUniform3fv(shaderLocations.getLocation("light.specular"), 1,glm::value_ptr(light.getSpecular()));
+
+            glm::vec4 pos = light.getPosition();
+            pos = transformation * pos;
+            glContext->glUniform3fv(shaderLocations.getLocation("light.position"), 1,glm::value_ptr(pos));
+
+            /*Sending the final modelview matrix which contains all the transformations from the root of the scenegraph to the respective
+              leaf node.*/
+//            int loc = shaderLocations.getLocation("modelview");
+//            if (loc<0)
+//                throw runtime_error("No shader variable for \" modelview \"");
+//            glContext->glUniformMatrix4fv(loc,1,false,glm::value_ptr(transformation));
+
+//            /*Creating and sending the normalmatrix the shader requires. The normal matrix is the inverse-transpose of the final modelview matrix.*/
+//            glm::mat4 normalmatrix = glm::inverse(glm::transpose((transformation)));
+//            glContext->glUniformMatrix4fv(shaderLocations.getLocation("normalmatrix"), 1, false,glm::value_ptr(normalmatrix));
+
+//            meshRenderers[name]->draw(*glContext);
+
+    }
 
     /**
      * Queries the shader program for all variables and locations, and adds them to itself

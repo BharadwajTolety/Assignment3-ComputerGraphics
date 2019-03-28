@@ -31,6 +31,8 @@ protected:
      */
     util::Material material;
 
+    util::Light light;
+
     string textureName;
 
 public:
@@ -93,6 +95,16 @@ public:
         {
             context.drawMesh(objInstanceName,material,textureName,modelView.top());
         }
+    }
+
+    void drawLight(GLScenegraphRenderer& context,stack<glm::mat4>& modelView)
+    {
+        context.drawLight(light, modelView.top());
+    }
+
+    void addLight(const util::Light& _l) throw(runtime_error)
+    {
+        light = _l;
     }
 };
 }

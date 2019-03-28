@@ -114,7 +114,13 @@ namespace sgraph
     }
 
 
-
+    void drawLights(stack<glm::mat4>& _mv)
+    {
+        if ((root!=NULL) && (renderer != NULL))
+        {
+            renderer->drawLight(root, _mv);
+        }
+    }
 
 
     void animate(float time)
