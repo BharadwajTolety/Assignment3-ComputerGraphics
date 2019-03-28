@@ -158,11 +158,11 @@ public:
 
             glContext->glUniform3fv(loc,1,glm::value_ptr(material.getAmbient()));
 
-//            /*Material properties are now being sent to the shader*/
+//           /* /*Material properties are now being sent to the shader*/
 //            glContext->glUniform3fv(shaderLocations.getLocation("material.ambient"), 1, glm::value_ptr(material.getAmbient()));
 //            glContext->glUniform3fv(shaderLocations.getLocation("material.diffuse"), 1, glm::value_ptr(material.getDiffuse()));
 //            glContext->glUniform3fv(shaderLocations.getLocation("material.specular"), 1,glm::value_ptr(material.getSpecular()));
-//            glContext->glUniform1f(shaderLocations.getLocation("material.shininess"), material.getShininess());
+//            glContext->glUniform1f(shaderLocations.getLocation("material.shininess"), material.getShininess());*/
 
             /*Sending the final modelview matrix which contains all the transformations from the root of the scenegraph to the respective
               leaf node.*/
