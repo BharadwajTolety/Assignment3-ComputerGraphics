@@ -151,22 +151,22 @@ public:
     {
         if (meshRenderers.count(name)==1)
         {
-            /*int loc = shaderLocations.getLocation("vColor");
+            int loc = shaderLocations.getLocation("vColor");
             //set the color for all vertices to be drawn for this object
             if (loc<0)
                 throw runtime_error("No shader variable for \" vColor \"");
 
-            glContext->glUniform3fv(loc,1,glm::value_ptr(material.getAmbient()));*/
+            glContext->glUniform3fv(loc,1,glm::value_ptr(material.getAmbient()));
 
-            /*Material properties are now being sent to the shader*/
-            glContext->glUniform3fv(shaderLocations.getLocation("material.ambient"), 1, glm::value_ptr(material.getAmbient()));
-            glContext->glUniform3fv(shaderLocations.getLocation("material.diffuse"), 1, glm::value_ptr(material.getDiffuse()));
-            glContext->glUniform3fv(shaderLocations.getLocation("material.specular"), 1,glm::value_ptr(material.getSpecular()));
-            glContext->glUniform1f(shaderLocations.getLocation("material.shininess"), material.getShininess());
+//            /*Material properties are now being sent to the shader*/
+//            glContext->glUniform3fv(shaderLocations.getLocation("material.ambient"), 1, glm::value_ptr(material.getAmbient()));
+//            glContext->glUniform3fv(shaderLocations.getLocation("material.diffuse"), 1, glm::value_ptr(material.getDiffuse()));
+//            glContext->glUniform3fv(shaderLocations.getLocation("material.specular"), 1,glm::value_ptr(material.getSpecular()));
+//            glContext->glUniform1f(shaderLocations.getLocation("material.shininess"), material.getShininess());
 
             /*Sending the final modelview matrix which contains all the transformations from the root of the scenegraph to the respective
               leaf node.*/
-            int loc = shaderLocations.getLocation("modelview");
+            loc = shaderLocations.getLocation("modelview");
             if (loc<0)
                 throw runtime_error("No shader variable for \" modelview \"");
             glContext->glUniformMatrix4fv(loc,1,false,glm::value_ptr(transformation));

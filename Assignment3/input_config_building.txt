@@ -1,1 +1,1 @@
-scenegraphmodels/humanoid-lights-textures.xml scenegraphmodels/drone/drone_body.xml scenegraphmodels/drone/propeller.xml scenegraphmodels/drone/light_source.xml scenegraphmodels/drone_camera.xml 0.0 50.0 80.0
+scenegraphmodels/two_buildings.xml scenegraphmodels/drone/drone_body.xml scenegraphmodels/drone/propeller.xml scenegraphmodels/drone/light_source.xml scenegraphmodels/drone_camera.xml 0.0 50.0 80.0
