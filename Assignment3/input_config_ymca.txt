@@ -1,1 +1,1 @@
-scenegraphmodels/Y-M-C-A.xml 0.0 50.0 80.0
+scenegraphmodels/test.xml 0.0 50.0 80.0

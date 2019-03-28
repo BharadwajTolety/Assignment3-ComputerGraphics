@@ -30,7 +30,7 @@ in vec4 vTexCoord;
 uniform mat4 projection;
 uniform mat4 modelview;
 uniform mat4 normalmatrix;
-uniform mat4 texturematrix;
+//uniform mat4 texturematrix;
 out vec4 fColor;
 out vec4 fPosition;
 out vec4 fTexCoord;
@@ -78,6 +78,6 @@ void main()
         fColor = fColor + vec4(ambient+diffuse+specular,1.0);
     }
 
-    //fTexCoord = texturematrix * vec4(1*vTexCoord.s,1*vTexCoord.t,0,1);
+    fTexCoord =/* texturematrix * */vec4(1*vTexCoord.s,1*vTexCoord.t,0,1);
 
 }
