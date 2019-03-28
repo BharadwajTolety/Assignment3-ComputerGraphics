@@ -122,6 +122,7 @@ namespace sgraph
         }
       else if (qName.compare("group")==0)
         {
+          printf("<group> node");
           string name = "";
           string copyof = "";
           string fromfile = "";

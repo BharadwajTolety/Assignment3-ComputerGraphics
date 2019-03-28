@@ -27,6 +27,9 @@ namespace sgraph
  */
   class INode
   {
+  protected:
+      bool isLightInUse;
+
   public:
     /**
      * In the scene graph rooted at this node, get the node whose name is as given
@@ -34,7 +37,7 @@ namespace sgraph
      * \return the node reference if it exists, null otherwise
      */
     virtual INode *getNode(const string& name)=0;
-    INode(){}
+    INode(): isLightInUse(false) {}
 
     virtual ~INode(){}
 
@@ -44,7 +47,7 @@ namespace sgraph
      * \param modelView the stack of modelview matrices
      */
     virtual void draw(GLScenegraphRenderer& context,stack<glm::mat4>& modelView)=0;
-    virtual void drawLight(GLScenegraphRenderer& context,stack<glm::mat4>& modelView) = 0;
+    virtual void drawLight(GLScenegraphRenderer& context,stack<glm::mat4>& modelView, std::vector<util::Light>& lights) = 0;
     /**
      * Return a deep copy of the scene graph subtree rooted at this node
      * \return a reference to the root of the copied subtree

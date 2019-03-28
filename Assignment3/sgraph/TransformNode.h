@@ -140,15 +140,23 @@ namespace sgraph
       modelView.pop();
     }
 
-    void drawLight(GLScenegraphRenderer& context,stack<glm::mat4>& modelView)
+    void drawLight(GLScenegraphRenderer& context,stack<glm::mat4>& modelView, std::vector<util::Light>& lights)
     {
-      modelView.push(modelView.top());
-      modelView.top() = modelView.top()
-          * animation_transform
-          * transform;
+        modelView.push(modelView.top());
+        modelView.top() = modelView.top()
+            * animation_transform
+            * transform;
+        if (isLightInUse)
+        {
+            glm::vec4 pos = light.getPosition();
+            pos = modelView.top() * pos;
+            light.setPosition(pos);
+            lights.push_back(light);
+        }
+
 
       if (child!=NULL)
-        child->drawLight(context,modelView);
+        child->drawLight(context, modelView, lights);
       modelView.pop();
     }
 
@@ -203,6 +211,7 @@ namespace sgraph
 
     void addLight(const util::Light& _l) throw(runtime_error)
         {
+            isLightInUse = true;
             light = _l;
         }
   };

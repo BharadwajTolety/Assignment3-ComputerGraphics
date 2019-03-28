@@ -97,13 +97,21 @@ public:
         }
     }
 
-    void drawLight(GLScenegraphRenderer& context,stack<glm::mat4>& modelView)
+    void drawLight(GLScenegraphRenderer& context,stack<glm::mat4>& modelView, std::vector<util::Light>& lights)
     {
-        context.drawLight(light, modelView.top());
+        if (isLightInUse)
+        {
+            glm::vec4 pos = light.getPosition();
+            pos = modelView.top() * pos;
+            light.setPosition(pos);
+            lights.push_back(light);
+        }
+        context.drawLight(lights, modelView.top());
     }
 
     void addLight(const util::Light& _l) throw(runtime_error)
     {
+        isLightInUse = true;
         light = _l;
     }
 };

@@ -128,7 +128,8 @@ public:
 
     void drawLight(INode *root, stack<glm::mat4>& _mv)
     {
-        root->drawLight(*this, _mv);
+        std::vector<util::Light> lights;
+        root->drawLight(*this, _mv, lights);
     }
 
     void dispose()
@@ -163,11 +164,11 @@ public:
 
             glContext->glUniform3fv(loc,1,glm::value_ptr(material.getAmbient()));
 
-//           /* /*Material properties are now being sent to the shader*/
+//            /*Material properties are now being sent to the shader*/
 //            glContext->glUniform3fv(shaderLocations.getLocation("material.ambient"), 1, glm::value_ptr(material.getAmbient()));
 //            glContext->glUniform3fv(shaderLocations.getLocation("material.diffuse"), 1, glm::value_ptr(material.getDiffuse()));
 //            glContext->glUniform3fv(shaderLocations.getLocation("material.specular"), 1,glm::value_ptr(material.getSpecular()));
-//            glContext->glUniform1f(shaderLocations.getLocation("material.shininess"), material.getShininess());*/
+//            glContext->glUniform1f(shaderLocations.getLocation("material.shininess"), material.getShininess());
 
             /*Sending the final modelview matrix which contains all the transformations from the root of the scenegraph to the respective
               leaf node.*/
@@ -186,19 +187,24 @@ public:
     }
 
 
-    void drawLight(util::Light light,
+    void drawLight(std::vector<util::Light> lights,
                   const glm::mat4& transformation)
     {
 
             /*Light properties are now being sent to the shader*/
+        glContext->glUniform1i(shaderLocations.getLocation("numLights"), lights.size());
 
-            glContext->glUniform3fv(shaderLocations.getLocation("Light.ambient"), 1, glm::value_ptr(light.getAmbient()));
-            glContext->glUniform3fv(shaderLocations.getLocation("light.diffuse"), 1, glm::value_ptr(light.getDiffuse()));
-            glContext->glUniform3fv(shaderLocations.getLocation("light.specular"), 1,glm::value_ptr(light.getSpecular()));
+        for (int i=0; i<lights.size(); ++i)
+        {
+            std::stringstream ss;
+            ss << "light[" << i << "]";
+            std::string sVarName = ss.str();
 
-            glm::vec4 pos = light.getPosition();
-            pos = transformation * pos;
-            glContext->glUniform3fv(shaderLocations.getLocation("light.position"), 1,glm::value_ptr(pos));
+            glContext->glUniform3fv(shaderLocations.getLocation(sVarName.append(".ambient")), 1, glm::value_ptr(lights[i].getAmbient()));
+            glContext->glUniform3fv(shaderLocations.getLocation(sVarName.append(".specular")), 1, glm::value_ptr(lights[i].getSpecular()));
+            glContext->glUniform3fv(shaderLocations.getLocation(sVarName.append(".diffuse")), 1, glm::value_ptr(lights[i].getDiffuse()));
+
+        }
 
             /*Sending the final modelview matrix which contains all the transformations from the root of the scenegraph to the respective
               leaf node.*/
