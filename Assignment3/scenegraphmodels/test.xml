@@ -1,0 +1,26 @@
+<scene>
+    <instance name="box" path="models/box"></instance>
+    <instance name="sphere" path="models/sphere"></instance>
+    <group name="ground">
+        <transform>
+            <set>
+                <translate>0 20 0</translate>
+                <scale>50 50 50</scale>
+            </set>
+            <object instanceof="sphere">
+                <light>
+                    <ambient>0.8 0.8 0.8</ambient>
+                    <diffuse>0.8 0.8 0.8</diffuse>
+                    <specular>0.8 0.8 0.8</specular>
+                    <position>0 0 100 </position>
+                </light>
+                <material>
+                    <ambient>0.2 0.7 0.9</ambient>
+                    <specular>0.5 0.5 0.5</specular>
+                    <diffuse>1.0 1.0 1.0</diffuse>
+                    <shininess>10</shininess>
+                </material>
+            </object>
+        </transform>
+    </group>
+</scene>

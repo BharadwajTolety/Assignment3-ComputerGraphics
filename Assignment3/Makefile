@@ -85,6 +85,10 @@ OBJECTS       = main.o \
 		moc_OpenGLWindow.o
 DIST          = shaders/default.frag \
 		shaders/default.vert \
+		shaders/gouraud-multiple.frag \
+		shaders/phong-multiple.frag \
+		shaders/gouraud-multiple.vert \
+		shaders/phong-multiple.vert \
 		/Users/sribharadwajtolety/Qt/5.12.0/clang_64/mkspecs/features/spec_pre.prf \
 		/Users/sribharadwajtolety/Qt/5.12.0/clang_64/mkspecs/qdevice.pri \
 		/Users/sribharadwajtolety/Qt/5.12.0/clang_64/mkspecs/features/device_config.prf \

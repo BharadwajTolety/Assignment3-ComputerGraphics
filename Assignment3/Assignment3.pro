@@ -59,5 +59,9 @@ HEADERS += \
 
 DISTFILES += \
     shaders/default.frag \
-    shaders/default.vert
+    shaders/default.vert \
+    shaders/gouraud-multiple.frag \
+    shaders/phong-multiple.frag \
+    shaders/gouraud-multiple.vert \
+    shaders/phong-multiple.vert
 
