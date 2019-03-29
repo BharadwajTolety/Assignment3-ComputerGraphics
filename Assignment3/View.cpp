@@ -80,29 +80,29 @@ void View::initScenegraph(util::OpenGLFunctions &gl) throw(runtime_error)
 
 void View::initMeshRendererForGameObjs(util::OpenGLFunctions &gl) throw (runtime_error)
 {
-//    XMLMeshRenderer* xmr = new XMLMeshRenderer(staticCamera, cameraModelPath, &renderer);
-//    xmr->SetMeshOffset(glm::vec3(0.0f, 10.0f, -30.0f));
-//    staticCamera->AddComponent((Component*)xmr, XMLMeshRenderer::ComponentID);
+    XMLMeshRenderer* xmr = new XMLMeshRenderer(staticCamera, cameraModelPath, &renderer);
+    xmr->SetMeshOffset(glm::vec3(0.0f, 10.0f, -30.0f));
+    staticCamera->AddComponent((Component*)xmr, XMLMeshRenderer::ComponentID);
 
-////    XMLMeshRenderer* xmr2 = new XMLMeshRenderer(keyCtrlCamera, cameraModelPath, &renderer);
-////    xmr2->SetMeshOffset(glm::vec3(0.0f, 10.0f, -30.0f));
-////    keyCtrlCamera->AddComponent((Component*)xmr2, XMLMeshRenderer::ComponentID);
+//    XMLMeshRenderer* xmr2 = new XMLMeshRenderer(keyCtrlCamera, cameraModelPath, &renderer);
+//    xmr2->SetMeshOffset(glm::vec3(0.0f, 10.0f, -30.0f));
+//    keyCtrlCamera->AddComponent((Component*)xmr2, XMLMeshRenderer::ComponentID);
 
-//    XMLMeshRenderer* xmr2 = new XMLMeshRenderer(drone, controllerModelPath, &renderer);
-//    xmr2->SetMeshOffset(glm::vec3(0.0f, -12.0f, -50.0f));
-//    drone->AddComponent((Component*)xmr2, XMLMeshRenderer::ComponentID);
+    XMLMeshRenderer* xmr2 = new XMLMeshRenderer(drone, controllerModelPath, &renderer);
+    xmr2->SetMeshOffset(glm::vec3(0.0f, -12.0f, -50.0f));
+    drone->AddComponent((Component*)xmr2, XMLMeshRenderer::ComponentID);
 
-//    XMLMeshRenderer* xmr3 = new XMLMeshRenderer(dp1, propellerModelPath, &renderer);
-//    xmr3->SetMeshOffset(glm::vec3(0.0f, 0.0f, 0.0f));
-//    dp1->AddComponent((Component*)xmr3, XMLMeshRenderer::ComponentID);
+    XMLMeshRenderer* xmr3 = new XMLMeshRenderer(dp1, propellerModelPath, &renderer);
+    xmr3->SetMeshOffset(glm::vec3(0.0f, 0.0f, 0.0f));
+    dp1->AddComponent((Component*)xmr3, XMLMeshRenderer::ComponentID);
 
-//    XMLMeshRenderer* xmr4 = new XMLMeshRenderer(dp2, propellerModelPath, &renderer);
-//    xmr4->SetMeshOffset(glm::vec3(0.0f, 0.0f, 0.0f));
-//    dp2->AddComponent((Component*)xmr4, XMLMeshRenderer::ComponentID);
+    XMLMeshRenderer* xmr4 = new XMLMeshRenderer(dp2, propellerModelPath, &renderer);
+    xmr4->SetMeshOffset(glm::vec3(0.0f, 0.0f, 0.0f));
+    dp2->AddComponent((Component*)xmr4, XMLMeshRenderer::ComponentID);
 
-//    XMLMeshRenderer* xmr5 = new XMLMeshRenderer(drone_light, droneLightModelPath, &renderer);
-//    xmr5->SetMeshOffset(glm::vec3(0.0f, 0.0f, 0.0f));
-//    drone_light->AddComponent((Component*)xmr5, XMLMeshRenderer::ComponentID);
+    XMLMeshRenderer* xmr5 = new XMLMeshRenderer(drone_light, droneLightModelPath, &renderer);
+    xmr5->SetMeshOffset(glm::vec3(0.0f, 0.0f, 0.0f));
+    drone_light->AddComponent((Component*)xmr5, XMLMeshRenderer::ComponentID);
 
 }
 
@@ -140,19 +140,19 @@ void View::init(util::OpenGLFunctions& gl) throw(runtime_error)
   printf("config file path: ");
   std::cin >> configFileName;
   std::vector<std::string> tokens = ParseConfig(configFileName);
-//  sceneGraphPath = tokens[CONFIG_SCENE_GRAPH_PATH_SLOT];
-//  cameraModelPath = tokens[CONFIG_CAMERA_MODEL_SLOT];
-//  glm::vec3 camInitPos(atof(tokens[CONFIG_CAMERA_INIT_POS_SLOT + 0].c_str()),
-//                       atof(tokens[CONFIG_CAMERA_INIT_POS_SLOT + 1].c_str()),
-//                       atof(tokens[CONFIG_CAMERA_INIT_POS_SLOT + 2].c_str()));
-//  controllerModelPath = tokens[CONFIG_CONTROLLER_MODEL_SLOT];
-//  propellerModelPath = tokens[CONFIG_PROPELLER_MODEL_SLOT];
-//  droneLightModelPath = tokens[CONFIG_LIGHT_STRUCTURE_MODEL_SLOT];
+  sceneGraphPath = tokens[CONFIG_SCENE_GRAPH_PATH_SLOT];
+  cameraModelPath = tokens[CONFIG_CAMERA_MODEL_SLOT];
+  glm::vec3 camInitPos(atof(tokens[CONFIG_CAMERA_INIT_POS_SLOT + 0].c_str()),
+                       atof(tokens[CONFIG_CAMERA_INIT_POS_SLOT + 1].c_str()),
+                       atof(tokens[CONFIG_CAMERA_INIT_POS_SLOT + 2].c_str()));
+  controllerModelPath = tokens[CONFIG_CONTROLLER_MODEL_SLOT];
+  propellerModelPath = tokens[CONFIG_PROPELLER_MODEL_SLOT];
+  droneLightModelPath = tokens[CONFIG_LIGHT_STRUCTURE_MODEL_SLOT];
 
-  sceneGraphPath = tokens[0];
-  glm::vec3 camInitPos(atof(tokens[1 + 0].c_str()),
-                       atof(tokens[1 + 1].c_str()),
-                       atof(tokens[1 + 2].c_str()));
+//  sceneGraphPath = tokens[0];
+//  glm::vec3 camInitPos(atof(tokens[1 + 0].c_str()),
+//                       atof(tokens[1 + 1].c_str()),
+//                       atof(tokens[1 + 2].c_str()));
 
 
 
@@ -166,11 +166,11 @@ void View::init(util::OpenGLFunctions& gl) throw(runtime_error)
   dp2 = new DronePropeller();
   drone->AddChild(dp1);
   drone->AddChild(dp2);
-  dp1->GetTransform()->Translate(glm::vec3(20.0f, 0.0f, -20.0f) + glm::vec3(0.0f, -12.0f, 50.0f));
-  dp2->GetTransform()->Translate(glm::vec3(-20.0f, 0.0f, -20.0f) + glm::vec3(0.0f, -12.0f, 50.0f));
+  dp1->GetTransform()->Translate(glm::vec3(20.0f, 0.0f, 0.0f) + glm::vec3(0.0f, -12.0f, 50.0f));
+  dp2->GetTransform()->Translate(glm::vec3(-20.0f, 0.0f, 0.0f) + glm::vec3(0.0f, -12.0f, 50.0f));
   drone_light = new DroneLight();
   drone->AddChild(drone_light);
-  drone_light->GetTransform()->Translate(glm::vec3(0.0f, 5.0f, 0.0f) + glm::vec3(0.0f, -8.0f, 5.0f));
+  drone_light->GetTransform()->Translate(glm::vec3(0.0f, 5.0f, 0.0f) + glm::vec3(0.0f, -8.0f, 10.0f));
   drone_light->GetTransform()->SetScale(glm::vec3(0.2f, 0.2f, 0.2f));
   drone->GetTransform()->SetPosition(camInitPos);
 

@@ -8,6 +8,12 @@
             <translate>0 0 0</translate>
             <scale>1 1 1</scale>
         </set>
+        <light>
+            <ambient>0.8 0.8 0.8</ambient>
+            <diffuse>0.8 0.8 0.8</diffuse>
+            <specular>0.8 0.8 0.8</specular>
+            <position>0 0 100 </position>
+        </light>
         <group name="floor">
             <transform>
                 <set>
