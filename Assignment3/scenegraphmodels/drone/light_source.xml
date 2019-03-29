@@ -62,6 +62,12 @@
                         <scale>10 10 10</scale>
                     </set>
                     <object instanceof="sphere">
+                        <light>
+                            <ambient>0.8 0.8 0.8</ambient>
+                            <diffuse>0.8 0.8 0.8</diffuse>
+                            <specular>0.8 0.8 0.8</specular>
+                            <position>0 0 100 </position>
+                        </light>
                         <material>
                             <ambient>0.9 1 0.3</ambient>
                             <specular>0.5 0.5 0.5</specular>
