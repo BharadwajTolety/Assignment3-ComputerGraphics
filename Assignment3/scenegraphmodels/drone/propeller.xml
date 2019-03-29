@@ -4,9 +4,6 @@
     <instance name="cylinder" path="models/cylinder"></instance>
     <instance name="cone" path="models/cone"></instance>
     <transform>
-        <set>
-            <scale>0.5 0.5 0.5</scale>
-        </set>
         <group name="propeller">
             <group name="p1">
                 <transform>
@@ -16,7 +13,10 @@
                     </set>
                     <object instanceof="cone">
                         <material>
-                            <color>0.1 1 1</color>
+                            <ambient>0.5 0.6 0.9</ambient>
+                            <specular>0.5 0.5 0.5</specular>
+                            <diffuse>0.5 0.5 0.5</diffuse>
+                            <shininess>10</shininess>
                         </material>
                     </object>
                 </transform>
@@ -30,7 +30,10 @@
                     </set>
                     <object instanceof="cone">
                         <material>
-                            <color>0.1 1 1</color>
+                            <ambient>0.5 0.6 0.9</ambient>
+                            <specular>0.5 0.5 0.5</specular>
+                            <diffuse>0.5 0.5 0.5</diffuse>
+                            <shininess>10</shininess>
                         </material>
                     </object>
                 </transform>
@@ -44,7 +47,10 @@
                     </set>
                     <object instanceof="cone">
                         <material>
-                            <color>0.1 1 1</color>
+                            <ambient>0.5 0.6 0.9</ambient>
+                            <specular>0.5 0.5 0.5</specular>
+                            <diffuse>0.5 0.5 0.5</diffuse>
+                            <shininess>10</shininess>
                         </material>
                     </object>
                 </transform>
@@ -57,7 +63,10 @@
                     </set>
                     <object instanceof="sphere">
                         <material>
-                            <color>0 0.1 1</color>
+                            <ambient>0.9 0.9 0.9</ambient>
+                            <specular>0.5 0.5 0.5</specular>
+                            <diffuse>0.5 0.5 0.5</diffuse>
+                            <shininess>10</shininess>
                         </material>
                     </object>
                 </transform>

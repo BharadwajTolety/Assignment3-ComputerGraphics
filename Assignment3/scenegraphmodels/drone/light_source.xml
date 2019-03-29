@@ -13,7 +13,10 @@
                     </set>
                     <object instanceof="cylinder">
                         <material>
-                            <color>0.8 0.2 0.3</color>
+                            <ambient>0.7 0 0</ambient>
+                            <specular>0.5 0.5 0.5</specular>
+                            <diffuse>0.5 0.5 0.5</diffuse>
+                            <shininess>10</shininess>
                         </material>
                     </object>
                 </transform>
@@ -27,7 +30,10 @@
                     </set>
                     <object instanceof="cylinder">
                         <material>
-                            <color>0.8 0.2 0.3</color>
+                            <ambient>0.7 0 0</ambient>
+                            <specular>0.5 0.5 0.5</specular>
+                            <diffuse>0.5 0.5 0.5</diffuse>
+                            <shininess>10</shininess>
                         </material>
                     </object>
                 </transform>
@@ -41,7 +47,10 @@
                     </set>
                     <object instanceof="cylinder">
                         <material>
-                            <color>0.8 0.2 0.3</color>
+                            <ambient>0.7 0 0</ambient>
+                            <specular>0.5 0.5 0.5</specular>
+                            <diffuse>0.5 0.5 0.5</diffuse>
+                            <shininess>10</shininess>
                         </material>
                     </object>
                 </transform>
@@ -54,7 +63,10 @@
                     </set>
                     <object instanceof="sphere">
                         <material>
-                            <color>1 1 0.2</color>
+                            <ambient>0.9 1 0.3</ambient>
+                            <specular>0.5 0.5 0.5</specular>
+                            <diffuse>0.5 0.5 0.5</diffuse>
+                            <shininess>10</shininess>
                         </material>
                     </object>
                 </transform>

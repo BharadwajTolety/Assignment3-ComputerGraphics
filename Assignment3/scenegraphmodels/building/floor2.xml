@@ -28,7 +28,7 @@
                                     </set>
                                     <object instanceof="box">
                                         <material>
-                                            <ambient>0.2 0.7 0.9</ambient>
+                                            <ambient>0.7 0 0.1</ambient>
                                             <specular>0.5 0.5 0.5</specular>
                                             <diffuse>0.5 0.5 0.5</diffuse>
                                             <shininess>10</shininess>
@@ -42,7 +42,7 @@
                                     </set>
                                     <object instanceof="box">
                                         <material>
-                                            <ambient>0.2 0.7 0.9</ambient>
+                                            <ambient>0.7 0 0.1</ambient>
                                             <specular>0.5 0.5 0.5</specular>
                                             <diffuse>0.5 0.5 0.5</diffuse>
                                             <shininess>10</shininess>
@@ -56,7 +56,7 @@
                                     </set>
                                     <object instanceof="box">
                                        <material>
-                                            <ambient>0.2 0.7 0.9</ambient>
+                                            <ambient>0.7 0 0.1</ambient>
                                             <specular>0.5 0.5 0.5</specular>
                                             <diffuse>0.5 0.5 0.5</diffuse>
                                             <shininess>10</shininess>
@@ -70,7 +70,7 @@
                                     </set>
                                     <object instanceof="box">
                                         <material>
-                                            <ambient>0.2 0.7 0.9</ambient>
+                                            <ambient>0.7 0 0.1</ambient>
                                             <specular>0.5 0.5 0.5</specular>
                                             <diffuse>0.5 0.5 0.5</diffuse>
                                             <shininess>10</shininess>
@@ -94,7 +94,7 @@
                                     </set>
                                     <object instanceof="box">
                                         <material>
-                                            <ambient>0.2 0.7 0.9</ambient>
+                                            <ambient>0.7 0 0.1</ambient>
                                             <specular>0.5 0.5 0.5</specular>
                                             <diffuse>0.5 0.5 0.5</diffuse>
                                             <shininess>10</shininess>
@@ -108,7 +108,7 @@
                                     </set>
                                     <object instanceof="box">
                                         <material>
-                                            <ambient>0.2 0.7 0.9</ambient>
+                                            <ambient>0.7 0 0.1</ambient>
                                             <specular>0.5 0.5 0.5</specular>
                                             <diffuse>0.5 0.5 0.5</diffuse>
                                             <shininess>10</shininess>
@@ -122,7 +122,7 @@
                                     </set>
                                     <object instanceof="box">
                                         <material>
-                                            <ambient>0.2 0.7 0.9</ambient>
+                                            <ambient>0.7 0 0.1</ambient>
                                             <specular>0.5 0.5 0.5</specular>
                                             <diffuse>0.5 0.5 0.5</diffuse>
                                             <shininess>10</shininess>
@@ -136,7 +136,7 @@
                                     </set>
                                     <object instanceof="box">
                                         <material>
-                                            <ambient>0.2 0.7 0.9</ambient>
+                                            <ambient>0.7 0 0.1</ambient>
                                             <specular>0.5 0.5 0.5</specular>
                                             <diffuse>0.5 0.5 0.5</diffuse>
                                             <shininess>10</shininess>
@@ -160,7 +160,7 @@
                                     </set>
                                     <object instanceof="box">
                                         <material>
-                                            <ambient>0.2 0.7 0.9</ambient>
+                                            <ambient>0.7 0 0.1</ambient>
                                             <specular>0.5 0.5 0.5</specular>
                                             <diffuse>0.5 0.5 0.5</diffuse>
                                             <shininess>10</shininess>
@@ -174,7 +174,7 @@
                                     </set>
                                     <object instanceof="box">
                                         <material>
-                                            <ambient>0.2 0.7 0.9</ambient>
+                                            <ambient>0.7 0 0.1</ambient>
                                             <specular>0.5 0.5 0.5</specular>
                                             <diffuse>0.5 0.5 0.5</diffuse>
                                             <shininess>10</shininess>
@@ -188,7 +188,7 @@
                                     </set>
                                     <object instanceof="box">
                                         <material>
-                                            <ambient>0.2 0.7 0.9</ambient>
+                                            <ambient>0.7 0 0.1</ambient>
                                             <specular>0.5 0.5 0.5</specular>
                                             <diffuse>0.5 0.5 0.5</diffuse>
                                             <shininess>10</shininess>
@@ -202,7 +202,7 @@
                                     </set>
                                     <object instanceof="box">
                                         <material>
-                                            <ambient>0.2 0.7 0.9</ambient>
+                                            <ambient>0.8 0.6 0.5</ambient>
                                             <specular>0.5 0.5 0.5</specular>
                                             <diffuse>0.5 0.5 0.5</diffuse>
                                             <shininess>10</shininess>
@@ -226,7 +226,7 @@
                                     </set>
                                     <object instanceof="cylinder">
                                         <material>
-                                            <ambient>0.2 0.7 0.9</ambient>
+                                            <ambient>0.7 0 0.1</ambient>
                                             <specular>0.5 0.5 0.5</specular>
                                             <diffuse>0.5 0.5 0.5</diffuse>
                                             <shininess>10</shininess>
@@ -240,7 +240,7 @@
                                     </set>
                                     <object instanceof="box">
                                         <material>
-                                            <ambient>0.2 0.7 0.9</ambient>
+                                            <ambient>0.7 0 0.1</ambient>
                                             <specular>0.5 0.5 0.5</specular>
                                             <diffuse>0.5 0.5 0.5</diffuse>
                                             <shininess>10</shininess>
@@ -254,7 +254,7 @@
                                     </set>
                                     <object instanceof="box">
                                         <material>
-                                            <ambient>0.2 0.7 0.9</ambient>
+                                            <ambient>0.7 0 0.1</ambient>
                                             <specular>0.5 0.5 0.5</specular>
                                             <diffuse>0.5 0.5 0.5</diffuse>
                                             <shininess>10</shininess>
@@ -272,7 +272,7 @@
                             </set>
                             <object instanceof="box">
                                 <material>
-                                    <ambient>0.2 0.7 0.9</ambient>
+                                    <ambient>0.7 0 0.1</ambient>
                                     <specular>0.5 0.5 0.5</specular>
                                     <diffuse>0.5 0.5 0.5</diffuse>
                                     <shininess>10</shininess>
@@ -288,7 +288,7 @@
                             </set>
                             <object instanceof="box">
                                 <material>
-                                    <color>1 1 0.7</color>
+                                    <color>0.9 0.9 0.9</color>
                                 </material>
                             </object>
                         </transform>
