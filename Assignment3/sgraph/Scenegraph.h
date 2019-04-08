@@ -333,7 +333,7 @@ namespace sgraph
                     }
                 }
 
-                survival = survival * shadowSurvival;
+//                survival = survival * shadowSurvival;
 
                 if (survival == 1)
                 {
@@ -341,6 +341,7 @@ namespace sgraph
                                                 ambient.y + diffuse.y + specular.y,
                                                 ambient.z + diffuse.z + specular.z,
                                                 0.0);
+
                 }
                 else
                 {
@@ -431,7 +432,11 @@ namespace sgraph
                 reflectRay.setStartPoint(reflectPoint);
                 reflectRay.setDirection(reflectDirection);
 
-                QColor colorReflect = this->raycast(reflectRay, modelView, ++bounce);
+//                QColor colorReflect = this->raycast(reflectRay, modelView, ++bounce);
+                QColor colorReflect;
+                colorReflect.setRedF(1.0f);
+                colorReflect.setGreenF(1.0f);
+                colorReflect.setBlueF(1.0f);
 
                 float colorRed = intersectPoint.getMaterial().getAbsorption() * color.redF()
                         + intersectPoint.getMaterial().getReflection() * colorReflect.redF();
