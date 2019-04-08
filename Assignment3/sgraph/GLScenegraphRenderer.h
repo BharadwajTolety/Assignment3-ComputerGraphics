@@ -109,12 +109,24 @@ public:
     {
         util::TextureImage *image = NULL;
         try {
+            std::cout << "[texture creating]: " << name << " -- " << path << "\n";
             image = new util::TextureImage(path,name);
         } catch (runtime_error e) {
             throw runtime_error("Texture "+path+" cannot be read!");
         }
         textures[name]=image;
     }
+
+
+    /**
+     * Begin updating the bounding box from the root
+     * \param root
+     * \param modelView
+     */
+    void updateBoundingBox(INode *root, stack<glm::mat4>& modelView){
+        root->updateBoundingBox(*this, modelView);
+    }
+
 
     /**
      * Begin rendering of the scene graph from the root
@@ -126,11 +138,11 @@ public:
         root->draw(*this,modelView);
     }
 
-    void drawLight(INode *root, stack<glm::mat4>& _mv)
-    {
-        std::vector<util::Light> lights;
-        root->drawLight(*this, _mv, lights);
-    }
+//    void drawLight(INode *root, stack<glm::mat4>& _mv)
+//    {
+//        std::vector<util::Light> lights;
+//        root->drawLight(*this, _mv, lights);
+//    }
 
     void dispose()
     {
@@ -153,17 +165,11 @@ public:
     void drawMesh(const string& name,
                   const util::Material& material,
                   const string& textureName,
-                  const glm::mat4& transformation)
+                  const glm::mat4& transformation,
+                  const glm::mat4& texturematrix)
     {
         if (meshRenderers.count(name)==1)
         {
-//            int loc = shaderLocations.getLocation("vColor");
-//            //set the color for all vertices to be drawn for this object
-//            if (loc<0)
-//                throw runtime_error("No shader variable for \" vColor \"");
-
-//            glContext->glUniform3fv(loc,1,glm::value_ptr(material.getAmbient()));
-
             /*Material properties are now being sent to the shader*/
             glContext->glUniform3fv(shaderLocations.getLocation("material.ambient"), 1, glm::value_ptr(material.getAmbient()));
             glContext->glUniform3fv(shaderLocations.getLocation("material.diffuse"), 1, glm::value_ptr(material.getDiffuse()));
@@ -181,71 +187,57 @@ public:
             glm::mat4 normalmatrix = glm::inverse(glm::transpose((transformation)));
             glContext->glUniformMatrix4fv(shaderLocations.getLocation("normalmatrix"), 1, false,glm::value_ptr(normalmatrix));
 
+            // Texture shader
+            loc = shaderLocations.getLocation("image");
+            //enable texture mapping
+            glContext->glEnable(GL_TEXTURE_2D);
+            glContext->glActiveTexture(GL_TEXTURE0);//up to 8 textures can be used.
+            //tell the shader to look for GL_TEXTURE"0"
+            glContext->glUniform1i(loc, 0);
 
+            bool hasTexture = false;
+            util::TextureImage *image;
+
+            loc = shaderLocations.getLocation("texturematrix");
+            glContext->glUniformMatrix4fv(loc, 1, false, glm::value_ptr(texturematrix));
+
+            //cout << "Texture Size : " << textures.size() << endl;
+            if (textures.find(textureName) != textures.end())
+            {
+                image = textures[textureName];
+                hasTexture = true;
+            }
+
+            if (hasTexture == false)
+            {
+                // using white textures;
+            }
+            else
+            {
+                if(textureName == "white")
+                {
+                    //cout << "texture is white!\n";
+                    loc = shaderLocations.getLocation("existImage");
+                    glContext->glUniform1i(loc, 0);
+                }
+                else
+                {
+                    loc = shaderLocations.getLocation("existImage");
+                    glContext->glUniform1i(loc, 1);
+                }
+                image->getTexture()->setWrapMode(QOpenGLTexture::Repeat);
+                image->getTexture()->setMinMagFilters(QOpenGLTexture::Nearest, QOpenGLTexture::Nearest);
+                image->getTexture()->bind();
+            }
             meshRenderers[name]->draw(*glContext);
         }
-    }
-
-
-    void drawLight(std::vector<util::Light> lights,
-                  const glm::mat4& transformation)
-    {
-
-        struct _lightLocation
-        {
-            int ambient = -1;
-            int diffuse = -1;
-            int specular = -1;
-            int position = -1;
-        };
-
-        std::vector<_lightLocation> lls;
-        for (int i=0; i<lights.size(); ++i)
-        {
-            std::stringstream ss;
-            ss << "light[" << i << "]";
-            std::string sVarName = ss.str();
-            _lightLocation ll;
-            ll.ambient = shaderLocations.getLocation(sVarName + ".ambient");
-            ll.diffuse = shaderLocations.getLocation(sVarName + ".diffuse");
-            ll.specular = shaderLocations.getLocation(sVarName + ".specular");
-            ll.position = shaderLocations.getLocation(sVarName + ".position");
-            lls.push_back(ll);
-        }
-            /*Light properties are now being sent to the shader*/
-        glContext->glUniform1i(shaderLocations.getLocation("numLights"), lights.size());
-
-        for (int i=0; i<lights.size(); ++i)
-        {
-
-            glContext->glUniform3fv(lls[i].ambient, 1, glm::value_ptr(lights[i].getAmbient()));
-            glContext->glUniform3fv(lls[i].specular, 1, glm::value_ptr(lights[i].getSpecular()));
-            glContext->glUniform3fv(lls[i].diffuse, 1, glm::value_ptr(lights[i].getDiffuse()));
-            glContext->glUniform4fv(lls[i].position, 1, glm::value_ptr(glm::vec4(lights[i].getPosition())));
-
-        }
-
-            /*Sending the final modelview matrix which contains all the transformations from the root of the scenegraph to the respective
-              leaf node.*/
-//            int loc = shaderLocations.getLocation("modelview");
-//            if (loc<0)
-//                throw runtime_error("No shader variable for \" modelview \"");
-//            glContext->glUniformMatrix4fv(loc,1,false,glm::value_ptr(transformation));
-
-//            /*Creating and sending the normalmatrix the shader requires. The normal matrix is the inverse-transpose of the final modelview matrix.*/
-//            glm::mat4 normalmatrix = glm::inverse(glm::transpose((transformation)));
-//            glContext->glUniformMatrix4fv(shaderLocations.getLocation("normalmatrix"), 1, false,glm::value_ptr(normalmatrix));
-
-//            meshRenderers[name]->draw(*glContext);
-
     }
 
     /**
      * Queries the shader program for all variables and locations, and adds them to itself
      * \param shaderProgram
      */
-    void initShaderProgram(util::ShaderProgram& shaderProgram,
-                           map<string,string>& shaderVarsToVertexAttribs)
+    void initShaderProgram(util::ShaderProgram& shaderProgram, map<string,string>& shaderVarsToVertexAttribs)
     {
         if (glContext==NULL)
           throw runtime_error("No context set");
@@ -259,6 +251,14 @@ public:
     int getShaderLocation(const string& name)
     {
         return shaderLocations.getLocation(name);
+    }
+
+    util::TextureImage getTextureImage(const string& textureName)
+    {
+        if (textures.find(textureName) != textures.end())
+            return *textures[textureName];
+        else
+            throw runtime_error("texture not found in scene renderer.\n");
     }
 };
 }

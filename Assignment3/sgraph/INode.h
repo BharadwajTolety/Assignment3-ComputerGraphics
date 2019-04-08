@@ -5,6 +5,8 @@
 #include <glm/glm.hpp>
 #include "Light.h"
 #include "Material.h"
+#include "ray.h"
+#include "hitrecord.h"
 #include <vector>
 #include <stack>
 #include <string>
@@ -27,9 +29,6 @@ namespace sgraph
  */
   class INode
   {
-  protected:
-      bool isLightInUse;
-
   public:
     /**
      * In the scene graph rooted at this node, get the node whose name is as given
@@ -37,7 +36,7 @@ namespace sgraph
      * \return the node reference if it exists, null otherwise
      */
     virtual INode *getNode(const string& name)=0;
-    INode(): isLightInUse(false) {}
+    INode(){}
 
     virtual ~INode(){}
 
@@ -47,7 +46,45 @@ namespace sgraph
      * \param modelView the stack of modelview matrices
      */
     virtual void draw(GLScenegraphRenderer& context,stack<glm::mat4>& modelView)=0;
-    virtual void drawLight(GLScenegraphRenderer& context,stack<glm::mat4>& modelView, std::vector<util::Light>& lights) = 0;
+
+    /**
+     * Update the scene graph's bounding box rooted at this node, using the modelview stack and context
+     * \param context the generic renderer context {@link sgraph.IScenegraphRenderer}
+     * \param modelView the stack of modelview matrices
+     */
+    virtual void updateBoundingBox(GLScenegraphRenderer& context,stack<glm::mat4>& modelView)=0;
+
+    /**
+     *
+     */
+    virtual void setMinBounds(glm::vec4 minBounds)=0;
+
+    /**
+     *
+     */
+    virtual void setMaxBounds(glm::vec4 maxBounds)=0;
+
+    /**
+     *
+     */
+    virtual glm::vec4 getMinBounds()=0;
+
+    /**
+     *
+     */
+    virtual glm::vec4 getMaxBounds()=0;
+
+    /**
+     *
+     */
+    virtual void setCenterofBoundingBox()=0;
+
+    /**
+     *
+     */
+    virtual glm::vec4 getCenterofBoundingBox()=0;
+
+
     /**
      * Return a deep copy of the scene graph subtree rooted at this node
      * \return a reference to the root of the copied subtree
@@ -59,6 +96,11 @@ namespace sgraph
      * \param parent the node that is to be the parent of this node
      */
     virtual void setParent(INode *parent)=0;
+
+    /**
+     * Get the parent of this node. Each node except the root has a parent
+     */
+    virtual INode *getParent()=0;
 
     /**
      * Traverse the scene graph rooted at this node, and store references to the scenegraph object
@@ -96,7 +138,6 @@ namespace sgraph
      */
     virtual void setTransform(const glm::mat4& m) throw(runtime_error)=0;
 
-
     /**
      * Set the animation transformation associated with this node. Not all types of nodes can have transformations.
      * If the node cannot store an animation transformation, this method throws a runtime_error
@@ -104,6 +145,12 @@ namespace sgraph
      * \throws runtime_error if this node is unable to store a transformation (all nodes except TransformNode)
      */
     virtual void setAnimationTransform(const glm::mat4& m) throw(runtime_error)=0;
+
+    /**
+     *
+     *
+     */
+    virtual void setTextureMatrix(const glm::mat4& m) throw(runtime_error)=0;
 
 
     /**
@@ -127,7 +174,9 @@ namespace sgraph
      * Adds a new light to this node.
      * \param l
      */
-    virtual void addLight(const util::Light& l) throw(runtime_error)=0;
+    virtual void addLight(const util::Light& l)=0;
+
+    virtual std::vector<HitRecord> raycast(Ray ray, stack<glm::mat4>& modelView, std::vector<HitRecord> hitrecords)=0;
 };
 }
 

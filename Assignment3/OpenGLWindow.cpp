@@ -61,7 +61,7 @@ void OpenGLWindow::initializeGL()
     }
 //    view.initScenegraph(*gl,string("scenegraphmodels/building.xml"));
     view.initScenegraph(*gl);
-    view.initMeshRendererForGameObjs(*gl);
+//    view.initMeshRendererForGameObjs(*gl);
 }
 
 void OpenGLWindow::paintGL()

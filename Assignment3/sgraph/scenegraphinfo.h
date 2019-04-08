@@ -15,6 +15,7 @@ namespace sgraph
     public:
       sgraph::Scenegraph *scenegraph;
       map<string,util::PolygonMesh<K> > meshes;
+      std::vector<util::Light> lights;
     };
 }
 

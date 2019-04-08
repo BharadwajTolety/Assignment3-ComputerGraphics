@@ -30,6 +30,18 @@ void XMLMeshRenderer::Init(const std::string& _xml_path, sgraph::GLScenegraphRen
     m_Model->setRenderer<VertexAttrib>(_renderer,sinfo.meshes);
 }
 
+void XMLMeshRenderer::Init(const std::string &_xml_path, sgraph::GLScenegraphRenderer *_renderer, std::vector<util::Light>& _lightsStorage)
+{
+    sgraph::ScenegraphInfo<VertexAttrib> sinfo;
+    sinfo = sgraph::SceneXMLReader::importScenegraph<VertexAttrib>(_xml_path);
+    m_Model = sinfo.scenegraph;
+    m_Model->setRenderer<VertexAttrib>(_renderer,sinfo.meshes);
+    for (auto l: sinfo.lights)
+    {
+        _lightsStorage.push_back(l);
+    }
+}
+
 void XMLMeshRenderer::Update()
 {
 

@@ -62,6 +62,10 @@ namespace sgraph
       this->parent = parent;
     }
 
+    INode *getParent(){
+        return this->parent;
+    }
+
     /**
      * Sets the scene graph object whose part this node is and then adds itself
      * to the scenegraph (in case the scene graph ever needs to directly access this node)
@@ -122,6 +126,17 @@ namespace sgraph
     void setAnimationTransform(const glm::mat4& t) throw(runtime_error)
     {
       throw runtime_error(getName()+" is not a transform node");
+    }
+
+    /**
+     * By default, throws an exception. Any nodes that are capable of storing transformations
+     * should override this method
+     * \param t
+     */
+
+    void setTextureMatrix(const glm::mat4& t) throw(runtime_error)
+    {
+      throw runtime_error(getName()+" is not a leaf node");
     }
 
     /**

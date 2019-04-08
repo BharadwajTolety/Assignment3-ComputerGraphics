@@ -3,11 +3,13 @@
 
 #include "OpenGLFunctions.h"
 #include "AbstractNode.h"
+#include "TransformNode.h"
 #include "glm/glm.hpp"
 #include "Light.h"
 #include <vector>
 #include <stack>
 #include <string>
+#include <glm/gtc/matrix_transform.hpp>
 using namespace std;
 
 namespace sgraph
@@ -24,14 +26,16 @@ namespace sgraph
      */
   protected:
     vector<INode *> children;
-    util::Light light;
+    glm::vec4 minBounds;
+    glm::vec4 maxBounds;
+    glm::vec4 center;
 
   public:
     GroupNode(sgraph::Scenegraph *graph,const string& name)
       :AbstractNode(graph,name)
-    {      
+    {
     }
-	
+
     ~GroupNode()
     {
       for (int i=0;i<children.size();i++)
@@ -78,6 +82,19 @@ namespace sgraph
       }
     }
 
+    void setCenterofBoundingBox(){
+        glm::vec4 minBounds = this->getMinBounds();
+        glm::vec4 maxBounds = this->getMaxBounds();
+        center.x = (minBounds.x + maxBounds.x) / 2.0f;
+        center.y = (minBounds.y + maxBounds.y) / 2.0f;
+        center.z = (minBounds.z + maxBounds.z) / 2.0f;
+        center.w = (minBounds.w + maxBounds.w) / 2.0f;
+    }
+
+    glm::vec4 getCenterofBoundingBox(){
+        return center;
+    }
+
     /**
      * To draw this node, it simply delegates to all its children
      * \param context the generic renderer context sgraph::IScenegraphRenderer
@@ -91,21 +108,79 @@ namespace sgraph
         }
     }
 
-    void drawLight(GLScenegraphRenderer& context, stack<glm::mat4>& modelView, std::vector<util::Light>& lights)
-    {
-        if (isLightInUse)
-        {
-            glm::vec4 pos = light.getPosition();
-            pos = modelView.top() * pos;
-            util::Light l = light;
-            l.setPosition(pos);
-            lights.push_back(l);
+    /**
+     * To update this node's bounding box, it simply delegates to all its children
+     * \param context the generic renderer context sgraph::IScenegraphRenderer
+     * \param modelView the stack of modelview matrices
+     */
+    void updateBoundingBox(GLScenegraphRenderer& context, stack<glm::mat4>& modelView){
+        vector<glm::vec4> boundingBox;
+        for (int i = 0; i < children.size(); i++){
+            children[i]->updateBoundingBox(context, modelView);
+            boundingBox.push_back(children[i]->getMinBounds());
+            boundingBox.push_back(children[i]->getMaxBounds());
         }
-        for (int i=0;i<children.size();i++)
-          {
-            children[i]->drawLight(context,modelView, lights);
-          }
+        glm::vec4 minBounds = boundingBox[0];
+        glm::vec4 maxBounds = boundingBox[0];
+        for (int i = 0; i < boundingBox.size(); i++)
+        {
+            glm::vec4 p = boundingBox[i];
+
+            if (p.x < minBounds.x)
+            {
+                minBounds.x = p.x;
+            }
+
+            if (p.x > maxBounds.x)
+            {
+                maxBounds.x = p.x;
+            }
+
+            if (p.y < minBounds.y)
+            {
+                minBounds.y = p.y;
+            }
+
+            if (p.y > maxBounds.y)
+            {
+                maxBounds.y = p.y;
+            }
+
+            if (p.z < minBounds.z)
+            {
+                minBounds.z = p.z;
+            }
+
+            if (p.z > maxBounds.z)
+            {
+                maxBounds.z = p.z;
+            }
+        }
+        this->setMinBounds(minBounds);
+        this->setMaxBounds(maxBounds);
+        this->setCenterofBoundingBox();;
     }
+
+    void setMinBounds(glm::vec4 minBounds){
+        this->minBounds.x = minBounds.x;
+        this->minBounds.y = minBounds.y;
+        this->minBounds.z = minBounds.z;
+        this->minBounds.w = minBounds.w;
+    }
+    void setMaxBounds(glm::vec4 maxBounds){
+        this->maxBounds.x = maxBounds.x;
+        this->maxBounds.y = maxBounds.y;
+        this->maxBounds.z = maxBounds.z;
+        this->maxBounds.w = maxBounds.w;
+    }
+
+    glm::vec4 getMinBounds(){
+        return this->minBounds;
+    }
+    glm::vec4 getMaxBounds(){
+        return this->maxBounds;
+    }
+
     /**
      * Makes a deep copy of the subtree rooted at this node
      * \return a deep copy of the subtree rooted at this node
@@ -157,10 +232,26 @@ namespace sgraph
       return children;
     }
 
-    void addLight(const util::Light& _l) throw(runtime_error)
-    {
-        isLightInUse = true;
-        light = _l;
+    std::vector<HitRecord> raycast(Ray ray, stack<glm::mat4>& modelView, std::vector<HitRecord> hitrecords){
+
+        for (int i = 0; i < children.size(); i++){
+            std::vector<HitRecord> childHitRecordList;
+            std::vector<HitRecord> childHitRecord = this->children[i]->raycast(ray, modelView, childHitRecordList);
+
+            if (!childHitRecord.empty())
+            {
+                for(std::vector<HitRecord>::iterator it = childHitRecord.begin(); it != childHitRecord.end(); it++)
+                {
+                    HitRecord tempHitRecord = *it;
+//                    if (tempHitRecord.getIntersectPoint() == glm::vec4(0.0f))
+//                    {
+//                        continue;
+//                    }
+                    hitrecords.push_back(tempHitRecord);
+                }
+            }
+        }
+        return hitrecords;
     }
   };
 }

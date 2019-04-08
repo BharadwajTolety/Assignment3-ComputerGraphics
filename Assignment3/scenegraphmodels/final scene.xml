@@ -1,0 +1,1807 @@
+<scene>
+	<instance name="sphere" path="models/sphere.obj" />
+    <instance name="box" path="models/box-outside.obj" />
+    <image name="white" path="textures/white.png" />
+    <image name="checkerboard" path="textures/checkerboard-busy-box.png" />
+    <image name="earthmap" path="textures/Solar System Texture Image/earthmap-cloud.jpg" />
+    <image name="venus" path="textures/Solar System Texture Image/venus.jpg" />
+    <group>
+        <light>
+            <ambient>0.2 0.2 0.2</ambient>
+            <diffuse>0.2 0.2 0.2</diffuse>
+            <specular>0.2 0.2 0.2</specular>
+            <position>5 5 5</position>
+            <spotdirection>-5 -5 -5</spotdirection>
+            <spotangle>120</spotangle>
+        </light>
+        <light>
+            <ambient>0.2 0.2 0.2</ambient>
+            <diffuse>0.2 0.2 0.2</diffuse>
+            <specular>0.2 0.2 0.2</specular>
+            <position>5 5 -5</position>
+            <spotdirection>-5 -5 5</spotdirection>
+            <spotangle>120</spotangle>
+        </light>
+        <light>
+            <ambient>0.2 0.2 0.2</ambient>
+            <diffuse>0.2 0.2 0.2</diffuse>
+            <specular>0.2 0.2 0.2</specular>
+            <position>-5 5 5</position>
+            <spotdirection>5 -5 -5</spotdirection>
+            <spotangle>120</spotangle>
+        </light>
+        <light>
+            <ambient>0.2 0.2 0.2</ambient>
+            <diffuse>0.2 0.2 0.2</diffuse>
+            <specular>0.2 0.2 0.2</specular>
+            <position>-5 5 -5</position>
+            <spotdirection>5 -5 5</spotdirection>
+            <spotangle>120</spotangle>
+        </light>
+        <!--first column-->
+        <transform>
+            <set>
+                <translate>-5 -0.5 -10</translate>
+                <scale>1 0.5 1</scale>
+            </set>
+            <object instanceof="sphere">
+                <material>
+                    <ambient>0 0 0</ambient>
+                    <diffuse>1.0 1.0 1.0</diffuse>
+                    <specular>1.0 1.0 1.0</specular>
+                    <absorption>0.8</absorption>
+                    <reflection>0.2</reflection>
+                    <transparency>0.0</transparency>
+                    <shininess>20</shininess>
+                </material>
+            </object>
+        </transform>
+        <transform>
+            <set>
+                <translate>-2.5 -0.5 -10</translate>
+                <scale>1 0.5 1</scale>
+            </set>
+            <object instanceof="sphere">
+                <material>
+                    <ambient>0 0 0</ambient>
+                    <diffuse>1.0 1.0 1.0</diffuse>
+                    <specular>1.0 1.0 1.0</specular>
+                    <absorption>0.8</absorption>
+                    <reflection>0.2</reflection>
+                    <transparency>0.0</transparency>
+                    <shininess>20</shininess>
+                </material>
+            </object>
+        </transform>
+        <transform>
+            <set>
+                <translate>0 -0.5 -10</translate>
+                <scale>1 0.5 1</scale>
+            </set>
+            <object instanceof="sphere">
+                <material>
+                    <ambient>0 0 0</ambient>
+                    <diffuse>1.0 1.0 1.0</diffuse>
+                    <specular>1.0 1.0 1.0</specular>
+                    <absorption>0.8</absorption>
+                    <reflection>0.2</reflection>
+                    <transparency>0.0</transparency>
+                    <shininess>20</shininess>
+                </material>
+            </object>
+        </transform>
+        <transform>
+            <set>
+                <translate>2.5 -0.5 -10</translate>
+                <scale>1 0.5 1</scale>
+            </set>
+            <object instanceof="sphere">
+                <material>
+                    <ambient>1 1 1</ambient>
+                    <diffuse>1.0 1.0 1.0</diffuse>
+                    <specular>1.0 1.0 1.0</specular>
+                    <absorption>0.8</absorption>
+                    <reflection>0.2</reflection>
+                    <transparency>0.0</transparency>
+                    <shininess>20</shininess>
+                </material>
+            </object>
+        </transform>
+        <transform>
+            <set>
+                <translate>5 -0.5 -10</translate>
+                <scale>1 0.5 1</scale>
+            </set>
+            <object instanceof="sphere">
+                <material>
+                    <ambient>1 1 1</ambient>
+                    <diffuse>1.0 1.0 1.0</diffuse>
+                    <specular>1.0 1.0 1.0</specular>
+                    <absorption>0.8</absorption>
+                    <reflection>0.2</reflection>
+                    <transparency>0.0</transparency>
+                    <shininess>20</shininess>
+                </material>
+            </object>
+        </transform>
+        <transform>
+            <set>
+                <translate>7.5 -0.5 -10</translate>
+                <scale>1 0.5 1</scale>
+            </set>
+            <object instanceof="sphere">
+                <material>
+                    <ambient>1 1 1</ambient>
+                    <diffuse>1.0 1.0 1.0</diffuse>
+                    <specular>1.0 1.0 1.0</specular>
+                    <absorption>0.8</absorption>
+                    <reflection>0.2</reflection>
+                    <transparency>0.0</transparency>
+                    <shininess>20</shininess>
+                </material>
+            </object>
+        </transform>
+        
+        <!--second column-->
+        <transform>
+            <set>
+                <translate>-7.5 -0.5 -7.5</translate>
+                <scale>1 0.5 1</scale>
+            </set>
+            <object instanceof="sphere">
+                <material>
+                    <ambient>0 0 0</ambient>
+                    <diffuse>1.0 1.0 1.0</diffuse>
+                    <specular>1.0 1.0 1.0</specular>
+                    <absorption>0.8</absorption>
+                    <reflection>0.2</reflection>
+                    <transparency>0.0</transparency>
+                    <shininess>20</shininess>
+                </material>
+            </object>
+        </transform>
+        <transform>
+            <set>
+                <translate>-5 -0.5 -7.5</translate>
+                <scale>1 0.5 1</scale>
+            </set>
+            <object instanceof="sphere">
+                <material>
+                    <ambient>0 0 0</ambient>
+                    <diffuse>1.0 1.0 1.0</diffuse>
+                    <specular>1.0 1.0 1.0</specular>
+                    <absorption>0.8</absorption>
+                    <reflection>0.2</reflection>
+                    <transparency>0.0</transparency>
+                    <shininess>20</shininess>
+                </material>
+            </object>
+        </transform>
+        <transform>
+            <set>
+                <translate>-2.5 -0.5 -7.5</translate>
+                <scale>1 0.5 1</scale>
+            </set>
+            <object instanceof="sphere">
+                <material>
+                    <ambient>0 0 0</ambient>
+                    <diffuse>1.0 1.0 1.0</diffuse>
+                    <specular>1.0 1.0 1.0</specular>
+                    <absorption>0.8</absorption>
+                    <reflection>0.2</reflection>
+                    <transparency>0.0</transparency>
+                    <shininess>20</shininess>
+                </material>
+            </object>
+        </transform>
+        <transform>
+            <set>
+                <translate>0 -0.5 -7.5</translate>
+                <scale>1 0.5 1</scale>
+            </set>
+            <object instanceof="sphere">
+                <material>
+                    <ambient>0 0 0</ambient>
+                    <diffuse>1.0 1.0 1.0</diffuse>
+                    <specular>1.0 1.0 1.0</specular>
+                    <absorption>0.8</absorption>
+                    <reflection>0.2</reflection>
+                    <transparency>0.0</transparency>
+                    <shininess>20</shininess>
+                </material>
+            </object>
+        </transform>
+        <transform>
+            <set>
+                <translate>2.5 -0.5 -7.5</translate>
+                <scale>1 0.5 1</scale>
+            </set>
+            <object instanceof="sphere">
+                <material>
+                    <ambient>0 0 0</ambient>
+                    <diffuse>1.0 1.0 1.0</diffuse>
+                    <specular>1.0 1.0 1.0</specular>
+                    <absorption>0.8</absorption>
+                    <reflection>0.2</reflection>
+                    <transparency>0.0</transparency>
+                    <shininess>20</shininess>
+                </material>
+            </object>
+        </transform>
+        <transform>
+            <set>
+                <translate>5 -0.5 -7.5</translate>
+                <scale>1 0.5 1</scale>
+            </set>
+            <object instanceof="sphere">
+                <material>
+                    <ambient>1 1 1</ambient>
+                    <diffuse>1.0 1.0 1.0</diffuse>
+                    <specular>1.0 1.0 1.0</specular>
+                    <absorption>0.8</absorption>
+                    <reflection>0.2</reflection>
+                    <transparency>0.0</transparency>
+                    <shininess>20</shininess>
+                </material>
+            </object>
+        </transform>
+        <transform>
+            <set>
+                <translate>7.5 -0.5 -7.5</translate>
+                <scale>1 0.5 1</scale>
+            </set>
+            <object instanceof="sphere">
+                <material>
+                    <ambient>1 1 1</ambient>
+                    <diffuse>1.0 1.0 1.0</diffuse>
+                    <specular>1.0 1.0 1.0</specular>
+                    <absorption>0.8</absorption>
+                    <reflection>0.2</reflection>
+                    <transparency>0.0</transparency>
+                    <shininess>20</shininess>
+                </material>
+            </object>
+        </transform>
+        <transform>
+            <set>
+                <translate>10 -0.5 -7.5</translate>
+                <scale>1 0.5 1</scale>
+            </set>
+            <object instanceof="sphere">
+                <material>
+                    <ambient>1 1 1</ambient>
+                    <diffuse>1.0 1.0 1.0</diffuse>
+                    <specular>1.0 1.0 1.0</specular>
+                    <absorption>0.8</absorption>
+                    <reflection>0.2</reflection>
+                    <transparency>0.0</transparency>
+                    <shininess>20</shininess>
+                </material>
+            </object>
+        </transform>
+        <!--third column-->
+        <transform>
+            <set>
+                <translate>-10 -0.5 -5</translate>
+                <scale>1 0.5 1</scale>
+            </set>
+            <object instanceof="sphere">
+                <material>
+                    <ambient>0 0 0</ambient>
+                    <diffuse>1.0 1.0 1.0</diffuse>
+                    <specular>1.0 1.0 1.0</specular>
+                    <absorption>0.8</absorption>
+                    <reflection>0.2</reflection>
+                    <transparency>0.0</transparency>
+                    <shininess>20</shininess>
+                </material>
+            </object>
+        </transform>
+        <transform>
+            <set>
+                <translate>-7.5 -0.5 -5</translate>
+                <scale>1 0.5 1</scale>
+            </set>
+            <object instanceof="sphere">
+                <material>
+                    <ambient>0 0 0</ambient>
+                    <diffuse>1.0 1.0 1.0</diffuse>
+                    <specular>1.0 1.0 1.0</specular>
+                    <absorption>0.8</absorption>
+                    <reflection>0.2</reflection>
+                    <transparency>0.0</transparency>
+                    <shininess>20</shininess>
+                </material>
+            </object>
+        </transform>
+        <transform>
+            <set>
+                <translate>-5 -0.5 -5</translate>
+                <scale>1 0.5 1</scale>
+            </set>
+            <object instanceof="sphere">
+                <material>
+                    <ambient>1 1 1</ambient>
+                    <diffuse>1.0 1.0 1.0</diffuse>
+                    <specular>1.0 1.0 1.0</specular>
+                    <absorption>0.8</absorption>
+                    <reflection>0.2</reflection>
+                    <transparency>0.0</transparency>
+                    <shininess>20</shininess>
+                </material>
+            </object>
+        </transform>
+        <transform>
+            <set>
+                <translate>-2.5 -0.5 -5</translate>
+                <scale>1 0.5 1</scale>
+            </set>
+            <object instanceof="sphere">
+                <material>
+                    <ambient>1 1 1</ambient>
+                    <diffuse>1.0 1.0 1.0</diffuse>
+                    <specular>1.0 1.0 1.0</specular>
+                    <absorption>0.8</absorption>
+                    <reflection>0.2</reflection>
+                    <transparency>0.0</transparency>
+                    <shininess>20</shininess>
+                </material>
+            </object>
+        </transform>
+        <transform>
+            <set>
+                <translate>0 -0.5 -5</translate>
+                <scale>1 0.5 1</scale>
+            </set>
+            <object instanceof="sphere">
+                <material>
+                    <ambient>0 0 0</ambient>
+                    <diffuse>1.0 1.0 1.0</diffuse>
+                    <specular>1.0 1.0 1.0</specular>
+                    <absorption>0.8</absorption>
+                    <reflection>0.2</reflection>
+                    <transparency>0.0</transparency>
+                    <shininess>20</shininess>
+                </material>
+            </object>
+        </transform>
+        <transform>
+            <set>
+                <translate>2.5 -0.5 -5</translate>
+                <scale>1 0.5 1</scale>
+            </set>
+            <object instanceof="sphere">
+                <material>
+                    <ambient>0 0 0</ambient>
+                    <diffuse>1.0 1.0 1.0</diffuse>
+                    <specular>1.0 1.0 1.0</specular>
+                    <absorption>0.8</absorption>
+                    <reflection>0.2</reflection>
+                    <transparency>0.0</transparency>
+                    <shininess>20</shininess>
+                </material>
+            </object>
+        </transform>
+        <transform>
+            <set>
+                <translate>5 -0.5 -5</translate>
+                <scale>1 0.5 1</scale>
+            </set>
+            <object instanceof="sphere">
+                <material>
+                    <ambient>1 1 1</ambient>
+                    <diffuse>1.0 1.0 1.0</diffuse>
+                    <specular>1.0 1.0 1.0</specular>
+                    <absorption>0.8</absorption>
+                    <reflection>0.2</reflection>
+                    <transparency>0.0</transparency>
+                    <shininess>20</shininess>
+                </material>
+            </object>
+        </transform>
+        <transform>
+            <set>
+                <translate>7.5 -0.5 -5</translate>
+                <scale>1 0.5 1</scale>
+            </set>
+            <object instanceof="sphere">
+                <material>
+                    <ambient>1 1 1</ambient>
+                    <diffuse>1.0 1.0 1.0</diffuse>
+                    <specular>1.0 1.0 1.0</specular>
+                    <absorption>0.8</absorption>
+                    <reflection>0.2</reflection>
+                    <transparency>0.0</transparency>
+                    <shininess>20</shininess>
+                </material>
+            </object>
+        </transform>
+        <transform>
+            <set>
+                <translate>10 -0.5 -5</translate>
+                <scale>1 0.5 1</scale>
+            </set>
+            <object instanceof="sphere">
+                <material>
+                    <ambient>1 1 1</ambient>
+                    <diffuse>1.0 1.0 1.0</diffuse>
+                    <specular>1.0 1.0 1.0</specular>
+                    <absorption>0.8</absorption>
+                    <reflection>0.2</reflection>
+                    <transparency>0.0</transparency>
+                    <shininess>20</shininess>
+                </material>
+            </object>
+        </transform>
+        <transform>
+            <set>
+                <translate>12.5 -0.5 -5</translate>
+                <scale>1 0.5 1</scale>
+            </set>
+            <object instanceof="sphere">
+                <material>
+                    <ambient>1 1 1</ambient>
+                    <diffuse>1.0 1.0 1.0</diffuse>
+                    <specular>1.0 1.0 1.0</specular>
+                    <absorption>0.8</absorption>
+                    <reflection>0.2</reflection>
+                    <transparency>0.0</transparency>
+                    <shininess>20</shininess>
+                </material>
+            </object>
+        </transform>
+        <!--fourth column-->
+        <transform>
+            <set>
+                <translate>-10 -0.5 -2.5</translate>
+                <scale>1 0.5 1</scale>
+            </set>
+            <object instanceof="sphere">
+                <material>
+                    <ambient>0 0 0</ambient>
+                    <diffuse>1.0 1.0 1.0</diffuse>
+                    <specular>1.0 1.0 1.0</specular>
+                    <absorption>0.8</absorption>
+                    <reflection>0.2</reflection>
+                    <transparency>0.0</transparency>
+                    <shininess>20</shininess>
+                </material>
+            </object>
+        </transform>
+        <transform>
+            <set>
+                <translate>-7.5 -0.5 -2.5</translate>
+                <scale>1 0.5 1</scale>
+            </set>
+            <object instanceof="sphere">
+                <material>
+                    <ambient>0 0 0</ambient>
+                    <diffuse>1.0 1.0 1.0</diffuse>
+                    <specular>1.0 1.0 1.0</specular>
+                    <absorption>0.8</absorption>
+                    <reflection>0.2</reflection>
+                    <transparency>0.0</transparency>
+                    <shininess>20</shininess>
+                </material>
+            </object>
+        </transform>
+        <transform>
+            <set>
+                <translate>-5 -0.5 -2.5</translate>
+                <scale>1 0.5 1</scale>
+            </set>
+            <object instanceof="sphere">
+                <material>
+                    <ambient>1 1 1</ambient>
+                    <diffuse>1.0 1.0 1.0</diffuse>
+                    <specular>1.0 1.0 1.0</specular>
+                    <absorption>0.8</absorption>
+                    <reflection>0.2</reflection>
+                    <transparency>0.0</transparency>
+                    <shininess>20</shininess>
+                </material>
+            </object>
+        </transform>
+        <transform>
+            <set>
+                <translate>-2.5 -0.5 -2.5</translate>
+                <scale>1 0.5 1</scale>
+            </set>
+            <object instanceof="sphere">
+                <material>
+                    <ambient>1 1 1</ambient>
+                    <diffuse>1.0 1.0 1.0</diffuse>
+                    <specular>1.0 1.0 1.0</specular>
+                    <absorption>0.8</absorption>
+                    <reflection>0.2</reflection>
+                    <transparency>0.0</transparency>
+                    <shininess>20</shininess>
+                </material>
+            </object>
+        </transform>
+        <transform>
+            <set>
+                <translate>0 -0.5 -2.5</translate>
+                <scale>1 0.5 1</scale>
+            </set>
+            <object instanceof="sphere">
+                <material>
+                    <ambient>0 0 0</ambient>
+                    <diffuse>1.0 1.0 1.0</diffuse>
+                    <specular>1.0 1.0 1.0</specular>
+                    <absorption>0.8</absorption>
+                    <reflection>0.2</reflection>
+                    <transparency>0.0</transparency>
+                    <shininess>20</shininess>
+                </material>
+            </object>
+        </transform>
+        <transform>
+            <set>
+                <translate>2.5 -0.5 -2.5</translate>
+                <scale>1 0.5 1</scale>
+            </set>
+            <object instanceof="sphere">
+                <material>
+                    <ambient>0 0 0</ambient>
+                    <diffuse>1.0 1.0 1.0</diffuse>
+                    <specular>1.0 1.0 1.0</specular>
+                    <absorption>0.8</absorption>
+                    <reflection>0.2</reflection>
+                    <transparency>0.0</transparency>
+                    <shininess>20</shininess>
+                </material>
+            </object>
+        </transform>
+        <transform>
+            <set>
+                <translate>5 -0.5 -2.5</translate>
+                <scale>1 0.5 1</scale>
+            </set>
+            <object instanceof="sphere">
+                <material>
+                    <ambient>1 1 1</ambient>
+                    <diffuse>1.0 1.0 1.0</diffuse>
+                    <specular>1.0 1.0 1.0</specular>
+                    <absorption>0.8</absorption>
+                    <reflection>0.2</reflection>
+                    <transparency>0.0</transparency>
+                    <shininess>20</shininess>
+                </material>
+            </object>
+        </transform>
+        <transform>
+            <set>
+                <translate>7.5 -0.5 -2.5</translate>
+                <scale>1 0.5 1</scale>
+            </set>
+            <object instanceof="sphere">
+                <material>
+                    <ambient>1 1 1</ambient>
+                    <diffuse>1.0 1.0 1.0</diffuse>
+                    <specular>1.0 1.0 1.0</specular>
+                    <absorption>0.8</absorption>
+                    <reflection>0.2</reflection>
+                    <transparency>0.0</transparency>
+                    <shininess>20</shininess>
+                </material>
+            </object>
+        </transform>
+        <transform>
+            <set>
+                <translate>10 -0.5 -2.5</translate>
+                <scale>1 0.5 1</scale>
+            </set>
+            <object instanceof="sphere">
+                <material>
+                    <ambient>1 1 1</ambient>
+                    <diffuse>1.0 1.0 1.0</diffuse>
+                    <specular>1.0 1.0 1.0</specular>
+                    <absorption>0.8</absorption>
+                    <reflection>0.2</reflection>
+                    <transparency>0.0</transparency>
+                    <shininess>20</shininess>
+                </material>
+            </object>
+        </transform>
+        <transform>
+            <set>
+                <translate>12.5 -0.5 -2.5</translate>
+                <scale>1 0.5 1</scale>
+            </set>
+            <object instanceof="sphere">
+                <material>
+                    <ambient>1 1 1</ambient>
+                    <diffuse>1.0 1.0 1.0</diffuse>
+                    <specular>1.0 1.0 1.0</specular>
+                    <absorption>0.8</absorption>
+                    <reflection>0.2</reflection>
+                    <transparency>0.0</transparency>
+                    <shininess>20</shininess>
+                </material>
+            </object>
+        </transform>
+        <!--fifth column-->
+        <transform>
+            <set>
+                <translate>-10 -0.5 0</translate>
+                <scale>1 0.5 1</scale>
+            </set>
+            <object instanceof="sphere">
+                <material>
+                    <ambient>0 0 0</ambient>
+                    <diffuse>1.0 1.0 1.0</diffuse>
+                    <specular>1.0 1.0 1.0</specular>
+                    <absorption>0.8</absorption>
+                    <reflection>0.2</reflection>
+                    <transparency>0.0</transparency>
+                    <shininess>20</shininess>
+                </material>
+            </object>
+        </transform>
+        <transform>
+            <set>
+                <translate>-7.5 -0.5 0</translate>
+                <scale>1 0.5 1</scale>
+            </set>
+            <object instanceof="sphere">
+                <material>
+                    <ambient>0 0 0</ambient>
+                    <diffuse>1.0 1.0 1.0</diffuse>
+                    <specular>1.0 1.0 1.0</specular>
+                    <absorption>0.8</absorption>
+                    <reflection>0.2</reflection>
+                    <transparency>0.0</transparency>
+                    <shininess>20</shininess>
+                </material>
+            </object>
+        </transform>
+        <transform>
+            <set>
+                <translate>-5 -0.5 0</translate>
+                <scale>1 0.5 1</scale>
+            </set>
+            <object instanceof="sphere">
+                <material>
+                    <ambient>0 0 0</ambient>
+                    <diffuse>1.0 1.0 1.0</diffuse>
+                    <specular>1.0 1.0 1.0</specular>
+                    <absorption>0.8</absorption>
+                    <reflection>0.2</reflection>
+                    <transparency>0.0</transparency>
+                    <shininess>20</shininess>
+                </material>
+            </object>
+        </transform>
+        <transform>
+            <set>
+                <translate>-2.5 -0.5 0</translate>
+                <scale>1 0.5 1</scale>
+            </set>
+            <object instanceof="sphere">
+                <material>
+                    <ambient>0 0 0</ambient>
+                    <diffuse>1.0 1.0 1.0</diffuse>
+                    <specular>1.0 1.0 1.0</specular>
+                    <absorption>0.8</absorption>
+                    <reflection>0.2</reflection>
+                    <transparency>0.0</transparency>
+                    <shininess>20</shininess>
+                </material>
+            </object>
+        </transform>
+        <transform>
+            <set>
+                <translate>0 -0.5 0</translate>
+                <scale>1 0.5 1</scale>
+            </set>
+            <object instanceof="sphere">
+                <material>
+                    <ambient>0 0 0</ambient>
+                    <diffuse>1.0 1.0 1.0</diffuse>
+                    <specular>1.0 1.0 1.0</specular>
+                    <absorption>0.8</absorption>
+                    <reflection>0.2</reflection>
+                    <transparency>0.0</transparency>
+                    <shininess>20</shininess>
+                </material>
+            </object>
+        </transform>
+        <transform>
+            <set>
+                <translate>2.5 -0.5 0</translate>
+                <scale>1 0.5 1</scale>
+            </set>
+            <object instanceof="sphere">
+                <material>
+                    <ambient>0 0 0</ambient>
+                    <diffuse>1.0 1.0 1.0</diffuse>
+                    <specular>1.0 1.0 1.0</specular>
+                    <absorption>0.8</absorption>
+                    <reflection>0.2</reflection>
+                    <transparency>0.0</transparency>
+                    <shininess>20</shininess>
+                </material>
+            </object>
+        </transform>
+        <transform>
+            <set>
+                <translate>5 -0.5 0</translate>
+                <scale>1 0.5 1</scale>
+            </set>
+            <object instanceof="sphere">
+                <material>
+                    <ambient>1 1 1</ambient>
+                    <diffuse>1.0 1.0 1.0</diffuse>
+                    <specular>1.0 1.0 1.0</specular>
+                    <absorption>0.8</absorption>
+                    <reflection>0.2</reflection>
+                    <transparency>0.0</transparency>
+                    <shininess>20</shininess>
+                </material>
+            </object>
+        </transform>
+        <transform>
+            <set>
+                <translate>7.5 -0.5 0</translate>
+                <scale>1 0.5 1</scale>
+            </set>
+            <object instanceof="sphere">
+                <material>
+                    <ambient>1 1 1</ambient>
+                    <diffuse>1.0 1.0 1.0</diffuse>
+                    <specular>1.0 1.0 1.0</specular>
+                    <absorption>0.8</absorption>
+                    <reflection>0.2</reflection>
+                    <transparency>0.0</transparency>
+                    <shininess>20</shininess>
+                </material>
+            </object>
+        </transform>
+        <transform>
+            <set>
+                <translate>10 -0.5 0</translate>
+                <scale>1 0.5 1</scale>
+            </set>
+            <object instanceof="sphere">
+                <material>
+                    <ambient>1 1 1</ambient>
+                    <diffuse>1.0 1.0 1.0</diffuse>
+                    <specular>1.0 1.0 1.0</specular>
+                    <absorption>0.8</absorption>
+                    <reflection>0.2</reflection>
+                    <transparency>0.0</transparency>
+                    <shininess>20</shininess>
+                </material>
+            </object>
+        </transform>
+        <transform>
+            <set>
+                <translate>12.5 -0.5 0</translate>
+                <scale>1 0.5 1</scale>
+            </set>
+            <object instanceof="sphere">
+                <material>
+                    <ambient>1 1 1</ambient>
+                    <diffuse>1.0 1.0 1.0</diffuse>
+                    <specular>1.0 1.0 1.0</specular>
+                    <absorption>0.8</absorption>
+                    <reflection>0.2</reflection>
+                    <transparency>0.0</transparency>
+                    <shininess>20</shininess>
+                </material>
+            </object>
+        </transform>
+        <!--sixth column-->
+        <transform>
+            <set>
+                <translate>-10 -0.5 2.5</translate>
+                <scale>1 0.5 1</scale>
+            </set>
+            <object instanceof="sphere">
+                <material>
+                    <ambient>0 0 0</ambient>
+                    <diffuse>1.0 1.0 1.0</diffuse>
+                    <specular>1.0 1.0 1.0</specular>
+                    <absorption>0.8</absorption>
+                    <reflection>0.2</reflection>
+                    <transparency>0.0</transparency>
+                    <shininess>20</shininess>
+                </material>
+            </object>
+        </transform>
+        <transform>
+            <set>
+                <translate>-7.5 -0.5 2.5</translate>
+                <scale>1 0.5 1</scale>
+            </set>
+            <object instanceof="sphere">
+                <material>
+                    <ambient>0 0 0</ambient>
+                    <diffuse>1.0 1.0 1.0</diffuse>
+                    <specular>1.0 1.0 1.0</specular>
+                    <absorption>0.8</absorption>
+                    <reflection>0.2</reflection>
+                    <transparency>0.0</transparency>
+                    <shininess>20</shininess>
+                </material>
+            </object>
+        </transform>
+        <transform>
+            <set>
+                <translate>-5 -0.5 2.5</translate>
+                <scale>1 0.5 1</scale>
+            </set>
+            <object instanceof="sphere">
+                <material>
+                    <ambient>0 0 0</ambient>
+                    <diffuse>1.0 1.0 1.0</diffuse>
+                    <specular>1.0 1.0 1.0</specular>
+                    <absorption>0.8</absorption>
+                    <reflection>0.2</reflection>
+                    <transparency>0.0</transparency>
+                    <shininess>20</shininess>
+                </material>
+            </object>
+        </transform>
+        <transform>
+            <set>
+                <translate>-2.5 -0.5 2.5</translate>
+                <scale>1 0.5 1</scale>
+            </set>
+            <object instanceof="sphere">
+                <material>
+                    <ambient>0 0 0</ambient>
+                    <diffuse>1.0 1.0 1.0</diffuse>
+                    <specular>1.0 1.0 1.0</specular>
+                    <absorption>0.8</absorption>
+                    <reflection>0.2</reflection>
+                    <transparency>0.0</transparency>
+                    <shininess>20</shininess>
+                </material>
+            </object>
+        </transform>
+        <transform>
+            <set>
+                <translate>0 -0.5 2.5</translate>
+                <scale>1 0.5 1</scale>
+            </set>
+            <object instanceof="sphere">
+                <material>
+                    <ambient>1 1 1</ambient>
+                    <diffuse>1.0 1.0 1.0</diffuse>
+                    <specular>1.0 1.0 1.0</specular>
+                    <absorption>0.8</absorption>
+                    <reflection>0.2</reflection>
+                    <transparency>0.0</transparency>
+                    <shininess>20</shininess>
+                </material>
+            </object>
+        </transform>
+        <transform>
+            <set>
+                <translate>2.5 -0.5 2.5</translate>
+                <scale>1 0.5 1</scale>
+            </set>
+            <object instanceof="sphere">
+                <material>
+                    <ambient>1 1 1</ambient>
+                    <diffuse>1.0 1.0 1.0</diffuse>
+                    <specular>1.0 1.0 1.0</specular>
+                    <absorption>0.8</absorption>
+                    <reflection>0.2</reflection>
+                    <transparency>0.0</transparency>
+                    <shininess>20</shininess>
+                </material>
+            </object>
+        </transform>
+        <transform>
+            <set>
+                <translate>5 -0.5 2.5</translate>
+                <scale>1 0.5 1</scale>
+            </set>
+            <object instanceof="sphere">
+                <material>
+                    <ambient>1 1 1</ambient>
+                    <diffuse>1.0 1.0 1.0</diffuse>
+                    <specular>1.0 1.0 1.0</specular>
+                    <absorption>0.8</absorption>
+                    <reflection>0.2</reflection>
+                    <transparency>0.0</transparency>
+                    <shininess>20</shininess>
+                </material>
+            </object>
+        </transform>
+        <transform>
+            <set>
+                <translate>7.5 -0.5 2.5</translate>
+                <scale>1 0.5 1</scale>
+            </set>
+            <object instanceof="sphere">
+                <material>
+                    <ambient>1 1 1</ambient>
+                    <diffuse>1.0 1.0 1.0</diffuse>
+                    <specular>1.0 1.0 1.0</specular>
+                    <absorption>0.8</absorption>
+                    <reflection>0.2</reflection>
+                    <transparency>0.0</transparency>
+                    <shininess>20</shininess>
+                </material>
+            </object>
+        </transform>
+        <transform>
+            <set>
+                <translate>10 -0.5 2.5</translate>
+                <scale>1 0.5 1</scale>
+            </set>
+            <object instanceof="sphere">
+                <material>
+                    <ambient>1 1 1</ambient>
+                    <diffuse>1.0 1.0 1.0</diffuse>
+                    <specular>1.0 1.0 1.0</specular>
+                    <absorption>0.8</absorption>
+                    <reflection>0.2</reflection>
+                    <transparency>0.0</transparency>
+                    <shininess>20</shininess>
+                </material>
+            </object>
+        </transform>
+        <transform>
+            <set>
+                <translate>12.5 -0.5 2.5</translate>
+                <scale>1 0.5 1</scale>
+            </set>
+            <object instanceof="sphere">
+                <material>
+                    <ambient>1 1 1</ambient>
+                    <diffuse>1.0 1.0 1.0</diffuse>
+                    <specular>1.0 1.0 1.0</specular>
+                    <absorption>0.8</absorption>
+                    <reflection>0.2</reflection>
+                    <transparency>0.0</transparency>
+                    <shininess>20</shininess>
+                </material>
+            </object>
+        </transform>
+        <!--seventh column-->
+        <transform>
+            <set>
+                <translate>-10 -0.5 5</translate>
+                <scale>1 0.5 1</scale>
+            </set>
+            <object instanceof="sphere">
+                <material>
+                    <ambient>0 0 0</ambient>
+                    <diffuse>1.0 1.0 1.0</diffuse>
+                    <specular>1.0 1.0 1.0</specular>
+                    <absorption>0.8</absorption>
+                    <reflection>0.2</reflection>
+                    <transparency>0.0</transparency>
+                    <shininess>20</shininess>
+                </material>
+            </object>
+        </transform>
+        <transform>
+            <set>
+                <translate>-7.5 -0.5 5</translate>
+                <scale>1 0.5 1</scale>
+            </set>
+            <object instanceof="sphere">
+                <material>
+                    <ambient>0 0 0</ambient>
+                    <diffuse>1.0 1.0 1.0</diffuse>
+                    <specular>1.0 1.0 1.0</specular>
+                    <absorption>0.8</absorption>
+                    <reflection>0.2</reflection>
+                    <transparency>0.0</transparency>
+                    <shininess>20</shininess>
+                </material>
+            </object>
+        </transform>
+        <transform>
+            <set>
+                <translate>-5 -0.5 5</translate>
+                <scale>1 0.5 1</scale>
+            </set>
+            <object instanceof="sphere">
+                <material>
+                    <ambient>0 0 0</ambient>
+                    <diffuse>1.0 1.0 1.0</diffuse>
+                    <specular>1.0 1.0 1.0</specular>
+                    <absorption>0.8</absorption>
+                    <reflection>0.2</reflection>
+                    <transparency>0.0</transparency>
+                    <shininess>20</shininess>
+                </material>
+            </object>
+        </transform>
+        <transform>
+            <set>
+                <translate>-2.5 -0.5 5</translate>
+                <scale>1 0.5 1</scale>
+            </set>
+            <object instanceof="sphere">
+                <material>
+                    <ambient>0 0 0</ambient>
+                    <diffuse>1.0 1.0 1.0</diffuse>
+                    <specular>1.0 1.0 1.0</specular>
+                    <absorption>0.8</absorption>
+                    <reflection>0.2</reflection>
+                    <transparency>0.0</transparency>
+                    <shininess>20</shininess>
+                </material>
+            </object>
+        </transform>
+        <transform>
+            <set>
+                <translate>0 -0.5 5</translate>
+                <scale>1 0.5 1</scale>
+            </set>
+            <object instanceof="sphere">
+                <material>
+                    <ambient>1 1 1</ambient>
+                    <diffuse>1.0 1.0 1.0</diffuse>
+                    <specular>1.0 1.0 1.0</specular>
+                    <absorption>0.8</absorption>
+                    <reflection>0.2</reflection>
+                    <transparency>0.0</transparency>
+                    <shininess>20</shininess>
+                </material>
+            </object>
+        </transform>
+        <transform>
+            <set>
+                <translate>2.5 -0.5 5</translate>
+                <scale>1 0.5 1</scale>
+            </set>
+            <object instanceof="sphere">
+                <material>
+                    <ambient>1 1 1</ambient>
+                    <diffuse>1.0 1.0 1.0</diffuse>
+                    <specular>1.0 1.0 1.0</specular>
+                    <absorption>0.8</absorption>
+                    <reflection>0.2</reflection>
+                    <transparency>0.0</transparency>
+                    <shininess>20</shininess>
+                </material>
+            </object>
+        </transform>
+        <transform>
+            <set>
+                <translate>5 -0.5 5</translate>
+                <scale>1 0.5 1</scale>
+            </set>
+            <object instanceof="sphere">
+                <material>
+                    <ambient>0 0 0</ambient>
+                    <diffuse>1.0 1.0 1.0</diffuse>
+                    <specular>1.0 1.0 1.0</specular>
+                    <absorption>0.8</absorption>
+                    <reflection>0.2</reflection>
+                    <transparency>0.0</transparency>
+                    <shininess>20</shininess>
+                </material>
+            </object>
+        </transform>
+        <transform>
+            <set>
+                <translate>7.5 -0.5 5</translate>
+                <scale>1 0.5 1</scale>
+            </set>
+            <object instanceof="sphere">
+                <material>
+                    <ambient>0 0 0</ambient>
+                    <diffuse>1.0 1.0 1.0</diffuse>
+                    <specular>1.0 1.0 1.0</specular>
+                    <absorption>0.8</absorption>
+                    <reflection>0.2</reflection>
+                    <transparency>0.0</transparency>
+                    <shininess>20</shininess>
+                </material>
+            </object>
+        </transform>
+        <transform>
+            <set>
+                <translate>10 -0.5 5</translate>
+                <scale>1 0.5 1</scale>
+            </set>
+            <object instanceof="sphere">
+                <material>
+                    <ambient>1 1 1</ambient>
+                    <diffuse>1.0 1.0 1.0</diffuse>
+                    <specular>1.0 1.0 1.0</specular>
+                    <absorption>0.8</absorption>
+                    <reflection>0.2</reflection>
+                    <transparency>0.0</transparency>
+                    <shininess>20</shininess>
+                </material>
+            </object>
+        </transform>
+        <transform>
+            <set>
+                <translate>12.5 -0.5 5</translate>
+                <scale>1 0.5 1</scale>
+            </set>
+            <object instanceof="sphere">
+                <material>
+                    <ambient>1 1 1</ambient>
+                    <diffuse>1.0 1.0 1.0</diffuse>
+                    <specular>1.0 1.0 1.0</specular>
+                    <absorption>0.8</absorption>
+                    <reflection>0.2</reflection>
+                    <transparency>0.0</transparency>
+                    <shininess>20</shininess>
+                </material>
+            </object>
+        </transform>
+        <!--eighth column-->
+        <transform>
+            <set>
+                <translate>-10 -0.5 7.5</translate>
+                <scale>1 0.5 1</scale>
+            </set>
+            <object instanceof="sphere">
+                <material>
+                    <ambient>0 0 0</ambient>
+                    <diffuse>1.0 1.0 1.0</diffuse>
+                    <specular>1.0 1.0 1.0</specular>
+                    <absorption>0.8</absorption>
+                    <reflection>0.2</reflection>
+                    <transparency>0.0</transparency>
+                    <shininess>20</shininess>
+                </material>
+            </object>
+        </transform>
+        <transform>
+            <set>
+                <translate>-7.5 -0.5 7.5</translate>
+                <scale>1 0.5 1</scale>
+            </set>
+            <object instanceof="sphere">
+                <material>
+                    <ambient>0 0 0</ambient>
+                    <diffuse>1.0 1.0 1.0</diffuse>
+                    <specular>1.0 1.0 1.0</specular>
+                    <absorption>0.8</absorption>
+                    <reflection>0.2</reflection>
+                    <transparency>0.0</transparency>
+                    <shininess>20</shininess>
+                </material>
+            </object>
+        </transform>
+        <transform>
+            <set>
+                <translate>-5 -0.5 7.5</translate>
+                <scale>1 0.5 1</scale>
+            </set>
+            <object instanceof="sphere">
+                <material>
+                    <ambient>0 0 0</ambient>
+                    <diffuse>1.0 1.0 1.0</diffuse>
+                    <specular>1.0 1.0 1.0</specular>
+                    <absorption>0.8</absorption>
+                    <reflection>0.2</reflection>
+                    <transparency>0.0</transparency>
+                    <shininess>20</shininess>
+                </material>
+            </object>
+        </transform>
+        <transform>
+            <set>
+                <translate>-2.5 -0.5 7.5</translate>
+                <scale>1 0.5 1</scale>
+            </set>
+            <object instanceof="sphere">
+                <material>
+                    <ambient>0 0 0</ambient>
+                    <diffuse>1.0 1.0 1.0</diffuse>
+                    <specular>1.0 1.0 1.0</specular>
+                    <absorption>0.8</absorption>
+                    <reflection>0.2</reflection>
+                    <transparency>0.0</transparency>
+                    <shininess>20</shininess>
+                </material>
+            </object>
+        </transform>
+        <transform>
+            <set>
+                <translate>0 -0.5 7.5</translate>
+                <scale>1 0.5 1</scale>
+            </set>
+            <object instanceof="sphere">
+                <material>
+                    <ambient>1 1 1</ambient>
+                    <diffuse>1.0 1.0 1.0</diffuse>
+                    <specular>1.0 1.0 1.0</specular>
+                    <absorption>0.8</absorption>
+                    <reflection>0.2</reflection>
+                    <transparency>0.0</transparency>
+                    <shininess>20</shininess>
+                </material>
+            </object>
+        </transform>
+        <transform>
+            <set>
+                <translate>2.5 -0.5 7.5</translate>
+                <scale>1 0.5 1</scale>
+            </set>
+            <object instanceof="sphere">
+                <material>
+                    <ambient>1 1 1</ambient>
+                    <diffuse>1.0 1.0 1.0</diffuse>
+                    <specular>1.0 1.0 1.0</specular>
+                    <absorption>0.8</absorption>
+                    <reflection>0.2</reflection>
+                    <transparency>0.0</transparency>
+                    <shininess>20</shininess>
+                </material>
+            </object>
+        </transform>
+        <transform>
+            <set>
+                <translate>5 -0.5 7.5</translate>
+                <scale>1 0.5 1</scale>
+            </set>
+            <object instanceof="sphere">
+                <material>
+                    <ambient>0 0 0</ambient>
+                    <diffuse>1.0 1.0 1.0</diffuse>
+                    <specular>1.0 1.0 1.0</specular>
+                    <absorption>0.8</absorption>
+                    <reflection>0.2</reflection>
+                    <transparency>0.0</transparency>
+                    <shininess>20</shininess>
+                </material>
+            </object>
+        </transform>
+        <transform>
+            <set>
+                <translate>7.5 -0.5 7.5</translate>
+                <scale>1 0.5 1</scale>
+            </set>
+            <object instanceof="sphere">
+                <material>
+                    <ambient>0 0 0</ambient>
+                    <diffuse>1.0 1.0 1.0</diffuse>
+                    <specular>1.0 1.0 1.0</specular>
+                    <absorption>0.8</absorption>
+                    <reflection>0.2</reflection>
+                    <transparency>0.0</transparency>
+                    <shininess>20</shininess>
+                </material>
+            </object>
+        </transform>
+        <transform>
+            <set>
+                <translate>10 -0.5 7.5</translate>
+                <scale>1 0.5 1</scale>
+            </set>
+            <object instanceof="sphere">
+                <material>
+                    <ambient>1 1 1</ambient>
+                    <diffuse>1.0 1.0 1.0</diffuse>
+                    <specular>1.0 1.0 1.0</specular>
+                    <absorption>0.8</absorption>
+                    <reflection>0.2</reflection>
+                    <transparency>0.0</transparency>
+                    <shininess>20</shininess>
+                </material>
+            </object>
+        </transform>
+        <transform>
+            <set>
+                <translate>12.5 -0.5 7.5</translate>
+                <scale>1 0.5 1</scale>
+            </set>
+            <object instanceof="sphere">
+                <material>
+                    <ambient>1 1 1</ambient>
+                    <diffuse>1.0 1.0 1.0</diffuse>
+                    <specular>1.0 1.0 1.0</specular>
+                    <absorption>0.8</absorption>
+                    <reflection>0.2</reflection>
+                    <transparency>0.0</transparency>
+                    <shininess>20</shininess>
+                </material>
+            </object>
+        </transform>
+        <!--ninth column-->
+        <transform>
+            <set>
+                <translate>-7.5 -0.5 10</translate>
+                <scale>1 0.5 1</scale>
+            </set>
+            <object instanceof="sphere">
+                <material>
+                    <ambient>0 0 0</ambient>
+                    <diffuse>1.0 1.0 1.0</diffuse>
+                    <specular>1.0 1.0 1.0</specular>
+                    <absorption>0.8</absorption>
+                    <reflection>0.2</reflection>
+                    <transparency>0.0</transparency>
+                    <shininess>20</shininess>
+                </material>
+            </object>
+        </transform>
+        <transform>
+            <set>
+                <translate>-5 -0.5 10</translate>
+                <scale>1 0.5 1</scale>
+            </set>
+            <object instanceof="sphere">
+                <material>
+                    <ambient>0 0 0</ambient>
+                    <diffuse>1.0 1.0 1.0</diffuse>
+                    <specular>1.0 1.0 1.0</specular>
+                    <absorption>0.8</absorption>
+                    <reflection>0.2</reflection>
+                    <transparency>0.0</transparency>
+                    <shininess>20</shininess>
+                </material>
+            </object>
+        </transform>
+        <transform>
+            <set>
+                <translate>-2.5 -0.5 10</translate>
+                <scale>1 0.5 1</scale>
+            </set>
+            <object instanceof="sphere">
+                <material>
+                    <ambient>0 0 0</ambient>
+                    <diffuse>1.0 1.0 1.0</diffuse>
+                    <specular>1.0 1.0 1.0</specular>
+                    <absorption>0.8</absorption>
+                    <reflection>0.2</reflection>
+                    <transparency>0.0</transparency>
+                    <shininess>20</shininess>
+                </material>
+            </object>
+        </transform>
+        <transform>
+            <set>
+                <translate>0 -0.5 10</translate>
+                <scale>1 0.5 1</scale>
+            </set>
+            <object instanceof="sphere">
+                <material>
+                    <ambient>1 1 1</ambient>
+                    <diffuse>1.0 1.0 1.0</diffuse>
+                    <specular>1.0 1.0 1.0</specular>
+                    <absorption>0.8</absorption>
+                    <reflection>0.2</reflection>
+                    <transparency>0.0</transparency>
+                    <shininess>20</shininess>
+                </material>
+            </object>
+        </transform>
+        <transform>
+            <set>
+                <translate>2.5 -0.5 10</translate>
+                <scale>1 0.5 1</scale>
+            </set>
+            <object instanceof="sphere">
+                <material>
+                    <ambient>1 1 1</ambient>
+                    <diffuse>1.0 1.0 1.0</diffuse>
+                    <specular>1.0 1.0 1.0</specular>
+                    <absorption>0.8</absorption>
+                    <reflection>0.2</reflection>
+                    <transparency>0.0</transparency>
+                    <shininess>20</shininess>
+                </material>
+            </object>
+        </transform>
+        <transform>
+            <set>
+                <translate>5 -0.5 10</translate>
+                <scale>1 0.5 1</scale>
+            </set>
+            <object instanceof="sphere">
+                <material>
+                    <ambient>1 1 1</ambient>
+                    <diffuse>1.0 1.0 1.0</diffuse>
+                    <specular>1.0 1.0 1.0</specular>
+                    <absorption>0.8</absorption>
+                    <reflection>0.2</reflection>
+                    <transparency>0.0</transparency>
+                    <shininess>20</shininess>
+                </material>
+            </object>
+        </transform>
+        <transform>
+            <set>
+                <translate>7.5 -0.5 10</translate>
+                <scale>1 0.5 1</scale>
+            </set>
+            <object instanceof="sphere">
+                <material>
+                    <ambient>1 1 1</ambient>
+                    <diffuse>1.0 1.0 1.0</diffuse>
+                    <specular>1.0 1.0 1.0</specular>
+                    <absorption>0.8</absorption>
+                    <reflection>0.2</reflection>
+                    <transparency>0.0</transparency>
+                    <shininess>20</shininess>
+                </material>
+            </object>
+        </transform>
+        <transform>
+            <set>
+                <translate>10 -0.5 10</translate>
+                <scale>1 0.5 1</scale>
+            </set>
+            <object instanceof="sphere">
+                <material>
+                    <ambient>1 1 1</ambient>
+                    <diffuse>1.0 1.0 1.0</diffuse>
+                    <specular>1.0 1.0 1.0</specular>
+                    <absorption>0.8</absorption>
+                    <reflection>0.2</reflection>
+                    <transparency>0.0</transparency>
+                    <shininess>20</shininess>
+                </material>
+            </object>
+        </transform>
+        <!--tenth column-->
+        <transform>
+            <set>
+                <translate>-5 -0.5 12.5</translate>
+                <scale>1 0.5 1</scale>
+            </set>
+            <object instanceof="sphere">
+                <material>
+                    <ambient>0 0 0</ambient>
+                    <diffuse>1.0 1.0 1.0</diffuse>
+                    <specular>1.0 1.0 1.0</specular>
+                    <absorption>0.8</absorption>
+                    <reflection>0.2</reflection>
+                    <transparency>0.0</transparency>
+                    <shininess>20</shininess>
+                </material>
+            </object>
+        </transform>
+        <transform>
+            <set>
+                <translate>-2.5 -0.5 12.5</translate>
+                <scale>1 0.5 1</scale>
+            </set>
+            <object instanceof="sphere">
+                <material>
+                    <ambient>0 0 0</ambient>
+                    <diffuse>1.0 1.0 1.0</diffuse>
+                    <specular>1.0 1.0 1.0</specular>
+                    <absorption>0.8</absorption>
+                    <reflection>0.2</reflection>
+                    <transparency>0.0</transparency>
+                    <shininess>20</shininess>
+                </material>
+            </object>
+        </transform>
+        <transform>
+            <set>
+                <translate>0 -0.5 12.5</translate>
+                <scale>1 0.5 1</scale>
+            </set>
+            <object instanceof="sphere">
+                <material>
+                    <ambient>0 0 0</ambient>
+                    <diffuse>1.0 1.0 1.0</diffuse>
+                    <specular>1.0 1.0 1.0</specular>
+                    <absorption>0.8</absorption>
+                    <reflection>0.2</reflection>
+                    <transparency>0.0</transparency>
+                    <shininess>20</shininess>
+                </material>
+            </object>
+        </transform>
+        <transform>
+            <set>
+                <translate>2.5 -0.5 12.5</translate>
+                <scale>1 0.5 1</scale>
+            </set>
+            <object instanceof="sphere">
+                <material>
+                    <ambient>1 1 1</ambient>
+                    <diffuse>1.0 1.0 1.0</diffuse>
+                    <specular>1.0 1.0 1.0</specular>
+                    <absorption>0.8</absorption>
+                    <reflection>0.2</reflection>
+                    <transparency>0.0</transparency>
+                    <shininess>20</shininess>
+                </material>
+            </object>
+        </transform>
+        <transform>
+            <set>
+                <translate>5 -0.5 12.5</translate>
+                <scale>1 0.5 1</scale>
+            </set>
+            <object instanceof="sphere">
+                <material>
+                    <ambient>1 1 1</ambient>
+                    <diffuse>1.0 1.0 1.0</diffuse>
+                    <specular>1.0 1.0 1.0</specular>
+                    <absorption>0.8</absorption>
+                    <reflection>0.2</reflection>
+                    <transparency>0.0</transparency>
+                    <shininess>20</shininess>
+                </material>
+            </object>
+        </transform>
+        <transform>
+            <set>
+                <translate>7.5 -0.5 12.5</translate>
+                <scale>1 0.5 1</scale>
+            </set>
+            <object instanceof="sphere">
+                <material>
+                    <ambient>1 1 1</ambient>
+                    <diffuse>1.0 1.0 1.0</diffuse>
+                    <specular>1.0 1.0 1.0</specular>
+                    <absorption>0.8</absorption>
+                    <reflection>0.2</reflection>
+                    <transparency>0.0</transparency>
+                    <shininess>20</shininess>
+                </material>
+            </object>
+        </transform>
+        <!--column end-->
+        
+        <!--<transform>
+            <set>
+                <translate>2.5 -0.5 0</translate>
+                <scale>1 0.5 1</scale>
+            </set>
+            <object instanceof="sphere">
+                <material>
+                    <ambient>0 0 0</ambient>
+                    <diffuse>1.0 1.0 1.0</diffuse>
+                    <specular>1.0 1.0 1.0</specular>
+                    <absorption>0.8</absorption>
+                    <reflection>0.2</reflection>
+                    <transparency>0.0</transparency>
+                    <shininess>20</shininess>
+                </material>
+            </object>
+        </transform>
+        <transform>
+            <set>
+                <translate>5 -0.5 0</translate>
+                <scale>1 0.5 1</scale>
+            </set>
+            <object instanceof="sphere">
+                <material>
+                    <ambient>0 0 0</ambient>
+                    <diffuse>1.0 1.0 1.0</diffuse>
+                    <specular>1.0 1.0 1.0</specular>
+                    <absorption>0.8</absorption>
+                    <reflection>0.2</reflection>
+                    <transparency>0.0</transparency>
+                    <shininess>20</shininess>
+                </material>
+            </object>
+        </transform>
+        <transform>
+            <set>
+                <translate>7.5 -0.5 0</translate>
+                <scale>1 0.5 1</scale>
+            </set>
+            <object instanceof="sphere">
+                <material>
+                    <ambient>0 0 0</ambient>
+                    <diffuse>1.0 1.0 1.0</diffuse>
+                    <specular>1.0 1.0 1.0</specular>
+                    <absorption>0.8</absorption>
+                    <reflection>0.2</reflection>
+                    <transparency>0.0</transparency>
+                    <shininess>20</shininess>
+                </material>
+            </object>
+        </transform>
+        <transform>
+            <set>
+                <translate>10 -0.5 0</translate>
+                <scale>1 0.5 1</scale>
+            </set>
+            <object instanceof="sphere">
+                <material>
+                    <ambient>1 1 1</ambient>
+                    <diffuse>1.0 1.0 1.0</diffuse>
+                    <specular>1.0 1.0 1.0</specular>
+                    <absorption>0.8</absorption>
+                    <reflection>0.2</reflection>
+                    <transparency>0.0</transparency>
+                    <shininess>20</shininess>
+                </material>
+            </object>
+        </transform>
+        <transform>
+            <set>
+                <translate>10 -0.5 -2.5</translate>
+                <scale>1 0.5 1</scale>
+            </set>
+            <object instanceof="sphere">
+                <material>
+                    <ambient>1 1 1</ambient>
+                    <diffuse>1.0 1.0 1.0</diffuse>
+                    <specular>1.0 1.0 1.0</specular>
+                    <absorption>0.8</absorption>
+                    <reflection>0.2</reflection>
+                    <transparency>0.0</transparency>
+                    <shininess>20</shininess>
+                </material>
+            </object>
+        </transform>
+        <transform>
+            <set>
+                <translate>7.5 -0.5 -2.5</translate>
+                <scale>1 0.5 1</scale>
+            </set>
+            <object instanceof="sphere">
+                <material>
+                    <ambient>1 1 1</ambient>
+                    <diffuse>1.0 1.0 1.0</diffuse>
+                    <specular>1.0 1.0 1.0</specular>
+                    <absorption>0.8</absorption>
+                    <reflection>0.2</reflection>
+                    <transparency>0.0</transparency>
+                    <shininess>20</shininess>
+                </material>
+            </object>
+        </transform>
+        <transform>
+            <set>
+                <translate>5 -0.5 -2.5</translate>
+                <scale>1 0.5 1</scale>
+            </set>
+            <object instanceof="sphere">
+                <material>
+                    <ambient>1 1 1</ambient>
+                    <diffuse>1.0 1.0 1.0</diffuse>
+                    <specular>1.0 1.0 1.0</specular>
+                    <absorption>0.8</absorption>
+                    <reflection>0.2</reflection>
+                    <transparency>0.0</transparency>
+                    <shininess>20</shininess>
+                </material>
+            </object>
+        </transform>
+        <transform>
+            <set>
+                <translate>2.5 -0.5 -2.5</translate>
+                <scale>1 0.5 1</scale>
+            </set>
+            <object instanceof="sphere">
+                <material>
+                    <ambient>0 0 0</ambient>
+                    <diffuse>1.0 1.0 1.0</diffuse>
+                    <specular>1.0 1.0 1.0</specular>
+                    <absorption>0.8</absorption>
+                    <reflection>0.2</reflection>
+                    <transparency>0.0</transparency>
+                    <shininess>20</shininess>
+                </material>
+            </object>
+        </transform>
+        <transform>
+            <set>
+                <translate>2.5 -0.5 -7.5</translate>
+                <scale>1 0.5 1</scale>
+            </set>
+            <object instanceof="sphere">
+                <material>
+                    <ambient>0 0 0</ambient>
+                    <diffuse>1.0 1.0 1.0</diffuse>
+                    <specular>1.0 1.0 1.0</specular>
+                    <absorption>0.8</absorption>
+                    <reflection>0.2</reflection>
+                    <transparency>0.0</transparency>
+                    <shininess>20</shininess>
+                </material>
+            </object>
+        </transform>
+        <transform>
+            <set>
+                <translate>2.5 -0.5 -12.5</translate>
+                <scale>1 0.5 1</scale>
+            </set>
+            <object instanceof="sphere">
+                <material>
+                    <ambient>1 1 1</ambient>
+                    <diffuse>1.0 1.0 1.0</diffuse>
+                    <specular>1.0 1.0 1.0</specular>
+                    <absorption>0.8</absorption>
+                    <reflection>0.2</reflection>
+                    <transparency>0.0</transparency>
+                    <shininess>20</shininess>
+                </material>
+            </object>
+        </transform>-->
+        
+        <transform>
+            <set>
+                <translate>0 -1.5 0</translate>
+                <scale>40 1 40</scale>
+            </set>
+            <object instanceof="box" texture="checkerboard">
+                <material>
+                    <ambient>0.5 0.4 0.4</ambient>
+                    <diffuse>1.0 1.0 0</diffuse>
+                    <specular>1.0 1.0 0</specular>
+                    <absorption>0.2</absorption>
+                    <reflection>0.8</reflection>
+                    <transparency>0.0</transparency>
+                    <shininess>20</shininess>
+                </material>
+            </object>
+        </transform>
+        <transform>
+            <set>
+                <translate>0 18.5 -20</translate>
+                <scale>40 40 1</scale>
+            </set>
+            <object instanceof="box">
+                <material>
+                    <ambient>0.3 0.3 0.4</ambient>
+                    <diffuse>1.0 1.0 0</diffuse>
+                    <specular>1.0 1.0 0</specular>
+                    <absorption>0.8</absorption>
+                    <reflection>0.2</reflection>
+                    <transparency>0.0</transparency>
+                    <shininess>20</shininess>
+                </material>
+            </object>
+        </transform>
+        <transform>
+            <set>
+                <translate>20 18.5 0</translate>
+                <scale>1 40 40</scale>
+            </set>
+            <object instanceof="box">
+                <material>
+                    <ambient>0.3 0.3 0.4</ambient>
+                    <diffuse>1.0 1.0 0</diffuse>
+                    <specular>1.0 1.0 0</specular>
+                    <absorption>0.8</absorption>
+                    <reflection>0.2</reflection>
+                    <transparency>0.0</transparency>
+                    <shininess>20</shininess>
+                </material>
+            </object>
+        </transform>
+        <transform>
+            <set>
+                <translate>-20 18.5 0</translate>
+                <scale>1 40 40</scale>
+            </set>
+            <object instanceof="box">
+                <material>
+                    <ambient>0.3 0.3 0.4</ambient>
+                    <diffuse>1.0 1.0 0</diffuse>
+                    <specular>1.0 1.0 0</specular>
+                    <absorption>0.8</absorption>
+                    <reflection>0.2</reflection>
+                    <transparency>0.0</transparency>
+                    <shininess>20</shininess>
+                </material>
+            </object>
+        </transform>
+        <transform>
+            <set>
+                <translate>0 18.5 20</translate>
+                <scale>40 40 1</scale>
+            </set>
+            <object instanceof="box">
+                <material>
+                    <ambient>0.3 0.3 0.4</ambient>
+                    <diffuse>1.0 1.0 0</diffuse>
+                    <specular>1.0 1.0 0</specular>
+                    <absorption>0.8</absorption>
+                    <reflection>0.2</reflection>
+                    <transparency>0.0</transparency>
+                    <shininess>20</shininess>
+                </material>
+            </object>
+        </transform>
+    </group>
+</scene>

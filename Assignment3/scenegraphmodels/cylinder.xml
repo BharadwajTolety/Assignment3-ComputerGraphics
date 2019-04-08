@@ -1,0 +1,56 @@
+<scene>
+    <image name="checkerboard" path="textures/checkerboard.jpg" />
+    <image name="white" path="textures/white.png" />
+	<instance name="cylinder" path="models/cylinder.obj" />
+    <instance name="box" path="models/box-outside.obj" />
+    <group>
+        <light>
+            <ambient>0.5 0.5 0.5</ambient>
+            <diffuse>0.6 0.5 0.3</diffuse>
+            <specular>1.0 1.0 1.0</specular>
+            <position>5 5 5</position>
+            <spotdirection>-5 -5 -5</spotdirection>
+            <spotangle>120</spotangle>
+        </light>
+        <light>
+            <ambient>0.5 0.5 0.5</ambient>
+            <diffuse>0.6 0.5 0.3</diffuse>
+            <specular>1.0 1.0 1.0</specular>
+            <position>-5 5 5</position>
+            <spotdirection>5 -5 -5</spotdirection>
+            <spotangle>120</spotangle>
+        </light>
+        <transform>
+            <set>
+            </set>
+            <object instanceof="cylinder" texture="checkerboard">
+                <material>
+                    <ambient>0.7 0.7 0.3</ambient>
+                    <diffuse>1.0 1.0 1.0</diffuse>
+                    <specular>1.0 1.0 1.0</specular>
+                    <absorption>0.5</absorption>
+                    <reflection>0.5</reflection>
+                    <transparency>0</transparency>
+                    <shininess>100</shininess>
+                </material>
+            </object>
+        </transform>
+        <transform>
+            <set>
+                <translate>0 -0.5 0</translate>
+                <scale>10 1 10</scale>
+            </set>
+            <object instanceof="box" texture="checkerboard">
+                <material>
+                    <ambient>0.2 0.3 0.6</ambient>
+                    <diffuse>1.0 1.0 1.0</diffuse>
+                    <specular>1.0 1.0 1.0</specular>
+                    <absorption>0.5</absorption>
+                    <reflection>0.5</reflection>
+                    <transparency>0</transparency>
+                    <shininess>20</shininess>
+                </material>
+            </object>
+        </transform>
+    </group>
+</scene>

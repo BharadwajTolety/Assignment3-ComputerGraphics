@@ -45,6 +45,7 @@ void View::initScenegraph(util::OpenGLFunctions &gl, const string& filename) thr
   sgraph::ScenegraphInfo<VertexAttrib> sinfo;
   sinfo = sgraph::SceneXMLReader::importScenegraph<VertexAttrib>(filename);
   scenegraph = sinfo.scenegraph;
+  lights = sinfo.lights;
 
   renderer.setContext(&gl);
   map<string,string> shaderVarsToVertexAttribs;
@@ -66,6 +67,8 @@ void View::initScenegraph(util::OpenGLFunctions &gl) throw(runtime_error)
   sgraph::ScenegraphInfo<VertexAttrib> sinfo;
   sinfo = sgraph::SceneXMLReader::importScenegraph<VertexAttrib>(sceneGraphPath);
   scenegraph = sinfo.scenegraph;
+  lights = sinfo.lights;
+  scenegraph->setLights(lights);
 
   renderer.setContext(&gl);
   map<string,string> shaderVarsToVertexAttribs;
@@ -82,11 +85,11 @@ void View::initMeshRendererForGameObjs(util::OpenGLFunctions &gl) throw (runtime
 {
     XMLMeshRenderer* xmr = new XMLMeshRenderer(staticCamera, cameraModelPath, &renderer);
     xmr->SetMeshOffset(glm::vec3(0.0f, 10.0f, -30.0f));
-    staticCamera->AddComponent((Component*)xmr, XMLMeshRenderer::ComponentID);
+    staticCamera->AddComponent(static_cast<Component*>(xmr), XMLMeshRenderer::ComponentID);
 
-//    XMLMeshRenderer* xmr2 = new XMLMeshRenderer(keyCtrlCamera, cameraModelPath, &renderer);
-//    xmr2->SetMeshOffset(glm::vec3(0.0f, 10.0f, -30.0f));
-//    keyCtrlCamera->AddComponent((Component*)xmr2, XMLMeshRenderer::ComponentID);
+////    XMLMeshRenderer* xmr2 = new XMLMeshRenderer(keyCtrlCamera, cameraModelPath, &renderer);
+////    xmr2->SetMeshOffset(glm::vec3(0.0f, 10.0f, -30.0f));
+////    keyCtrlCamera->AddComponent((Component*)xmr2, XMLMeshRenderer::ComponentID);
 
     XMLMeshRenderer* xmr2 = new XMLMeshRenderer(drone, controllerModelPath, &renderer);
     xmr2->SetMeshOffset(glm::vec3(0.0f, -12.0f, -50.0f));
@@ -128,8 +131,8 @@ void View::init(util::OpenGLFunctions& gl) throw(runtime_error)
 
   //create the shader program
   program.createProgram(gl,
-                        string("shaders/gouraud-multiple.vert"),
-                        string("shaders/gouraud-multiple.frag"));
+                        string("shaders/phong-multiple.vert"),
+                        string("shaders/phong-multiple.frag"));
 
   //assuming it got created, get all the shader variables that it uses
   //so we can initialize them at some point
@@ -159,40 +162,36 @@ void View::init(util::OpenGLFunctions& gl) throw(runtime_error)
   ctrl = new Controller();
   ctrl->SetToGlobalController();
 
-  drone = new Drone(ctrl);
-//  drone->GetTransform()->DirRotate(180.0f, glm::vec3(0.0f, 1.0f, 0.0f));
-  drone->GetTransform()->SetDirection(glm::vec3(0.0f, 0.0f, -1.0f));
-  dp1 = new DronePropeller();
-  dp2 = new DronePropeller();
-  drone->AddChild(dp1);
-  drone->AddChild(dp2);
-  dp1->GetTransform()->Translate(glm::vec3(20.0f, 0.0f, 0.0f) + glm::vec3(0.0f, -12.0f, 50.0f));
-  dp2->GetTransform()->Translate(glm::vec3(-20.0f, 0.0f, 0.0f) + glm::vec3(0.0f, -12.0f, 50.0f));
-  drone_light = new DroneLight();
-  drone->AddChild(drone_light);
-  drone_light->GetTransform()->Translate(glm::vec3(0.0f, 5.0f, 0.0f) + glm::vec3(0.0f, -8.0f, 10.0f));
-  drone_light->GetTransform()->SetScale(glm::vec3(0.2f, 0.2f, 0.2f));
-  drone->GetTransform()->SetPosition(camInitPos);
+//  drone = new Drone(ctrl);
+//  drone->GetTransform()->SetDirection(glm::vec3(0.0f, 0.0f, -1.0f));
+//  dp1 = new DronePropeller();
+//  dp2 = new DronePropeller();
+//  drone->AddChild(dp1);
+//  drone->AddChild(dp2);
+//  dp1->GetTransform()->Translate(glm::vec3(20.0f, 0.0f, 0.0f) + glm::vec3(0.0f, -12.0f, 50.0f));
+//  dp2->GetTransform()->Translate(glm::vec3(-20.0f, 0.0f, 0.0f) + glm::vec3(0.0f, -12.0f, 50.0f));
+//  drone_light = new DroneLight();
+//  drone->AddChild(drone_light);
+//  drone_light->GetTransform()->Translate(glm::vec3(0.0f, 5.0f, 0.0f) + glm::vec3(0.0f, -8.0f, 10.0f));
+//  drone_light->GetTransform()->SetScale(glm::vec3(0.2f, 0.2f, 0.2f));
+//  drone->GetTransform()->SetPosition(camInitPos);
 
 
   staticCamera = new Camera();
   staticCamera->GetTransform()->SetPosition(camInitPos);
 
-//  revolveCamera = new RevolveCamera(glm::vec3(0.0f, 1.0f, 0.0f), 2.0f, 80.0f);
-//  revolveCamera->GetTransform()->SetPosition(camInitPos);
-
   keyCtrlCamera = new KeyCtrlCamera(ctrl);
   keyCtrlCamera->GetTransform()->SetPosition(camInitPos);
 
   switcher = new CameraSwitchcer(keyCtrlCamera, staticCamera);
+  rayTracerSwitcher = new RayTracerSwitcher();
 
   gameObjects.push_back(staticCamera);
-//  gameObjects.push_back(revolveCamera);
   gameObjects.push_back(keyCtrlCamera);
-  gameObjects.push_back(drone);
-  gameObjects.push_back(dp1);
-  gameObjects.push_back(dp2);
-  gameObjects.push_back(drone_light);
+//  gameObjects.push_back(drone);
+//  gameObjects.push_back(dp1);
+//  gameObjects.push_back(dp2);
+//  gameObjects.push_back(drone_light);
 
   keyCtrlCamera->SetToMainCamera();
 }
@@ -217,15 +216,15 @@ void View::draw(util::OpenGLFunctions& gl)
   modelview.push(glm::mat4(1.0));
   modelview.top() = modelview.top() * switcher->GetCam1()->GetViewMat();
   /*
-        *Supply the shader with all the matrices it expects.
-        */
+   *Supply the shader with all the matrices it expects.
+   */
   gl.glUniformMatrix4fv(shaderLocations.getLocation("projection"),
                         1,
                         false,
                         glm::value_ptr(switcher->GetCam1()->GetProjMat()));
-
-  //gl.glPolygonMode(GL.GL_FRONT_AND_BACK,GL3.GL_LINE); //OUTLINES
-  scenegraph->drawLights(modelview);
+  // apply lights
+  ApplyLights(gl);
+  scenegraph->updateBoundingBox(modelview);
   scenegraph->draw(modelview);
   for (auto obj: gameObjects)
   {
@@ -237,28 +236,36 @@ void View::draw(util::OpenGLFunctions& gl)
   ////////////////////////////////
   ///// DRAW SECOND VIEWPORT /////
   ////////////////////////////////
-  while (!modelview.empty())
-    modelview.pop();
-  modelview.push(glm::mat4(1.0));
-  modelview.top() = modelview.top() * switcher->GetCam2()->GetViewMat();
+//  while (!modelview.empty())
+//    modelview.pop();
+//  modelview.push(glm::mat4(1.0));
+//  modelview.top() = modelview.top() * switcher->GetCam2()->GetViewMat();
 
-  gl.glUniformMatrix4fv(shaderLocations.getLocation("projection"),
-                        1,
-                        false,
-                        glm::value_ptr(switcher->GetCam2()->GetProjMat()));
+//  gl.glUniformMatrix4fv(shaderLocations.getLocation("projection"),
+//                        1,
+//                        false,
+//                        glm::value_ptr(switcher->GetCam2()->GetProjMat()));
 
-  gl.glScissor(WINDOW_WIDTH * 0.7f, WINDOW_WIDTH * 0.7f, WINDOW_WIDTH * 0.3f, WINDOW_HEIGHT * 0.3f);
-  gl.glEnable(GL_SCISSOR_TEST);
-  gl.glViewport(WINDOW_WIDTH * 0.7f, WINDOW_WIDTH * 0.7f, WINDOW_WIDTH * 0.3f, WINDOW_HEIGHT * 0.3f);
-  gl.glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT);
-  scenegraph->draw(modelview);
-  for (auto obj: gameObjects)
+//  gl.glScissor(WINDOW_WIDTH * 0.7f, WINDOW_WIDTH * 0.7f, WINDOW_WIDTH * 0.3f, WINDOW_HEIGHT * 0.3f);
+//  gl.glEnable(GL_SCISSOR_TEST);
+//  gl.glViewport(WINDOW_WIDTH * 0.7f, WINDOW_WIDTH * 0.7f, WINDOW_WIDTH * 0.3f, WINDOW_HEIGHT * 0.3f);
+//  gl.glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT);
+
+//  ApplyLights(gl);
+//  scenegraph->updateBoundingBox(modelview);
+//  scenegraph->draw(modelview);
+//  for (auto obj: gameObjects)
+//  {
+//      obj->Render(switcher->GetCam2());
+//  }
+//  gl.glDisable(GL_SCISSOR_TEST);
+//  gl.glFlush();
+
+  if (rayTracerSwitcher->IsRayTracerEnabled())
   {
-      obj->Render(switcher->GetCam2());
+      raytrace(2000, 2000, modelview);
+      rayTracerSwitcher->Reset();
   }
-  gl.glDisable(GL_SCISSOR_TEST);
-  gl.glFlush();
-
 
   ////////////////////////////////
   /////     RESET VIEWPORT   /////
@@ -271,11 +278,53 @@ void View::draw(util::OpenGLFunctions& gl)
 void View::Update()
 {
     switcher->Update();
+    rayTracerSwitcher->Update();
     for (auto gobj: gameObjects)
     {
         gobj->Update();
     }
 }
+
+void View::ApplyLights(util::OpenGLFunctions& gl) const
+{
+    struct _lightLocation
+    {
+        int ambient = -1;
+        int diffuse = -1;
+        int specular = -1;
+        int position = -1;
+        int spotdirection = -1;
+    };
+
+    std::vector<_lightLocation> lls;
+    for (int i=0; i<lights.size(); ++i)
+    {
+        std::stringstream ss;
+        ss << "light[" << i << "]";
+        std::string sVarName = ss.str();
+        _lightLocation ll;
+        ll.ambient = shaderLocations.getLocation(sVarName + ".ambient");
+        ll.diffuse = shaderLocations.getLocation(sVarName + ".diffuse");
+        ll.specular = shaderLocations.getLocation(sVarName + ".specular");
+        ll.position = shaderLocations.getLocation(sVarName + ".position");
+        ll.spotdirection = shaderLocations.getLocation(sVarName + ".spotdirection");
+        lls.push_back(ll);
+    }
+        /*Light properties are now being sent to the shader*/
+    gl.glUniform1i(shaderLocations.getLocation("numLights"), lights.size());
+
+    for (int i=0; i<lights.size(); ++i)
+    {
+
+        gl.glUniform3fv(lls[i].ambient, 1, glm::value_ptr(lights[i].getAmbient()));
+        gl.glUniform3fv(lls[i].specular, 1, glm::value_ptr(lights[i].getSpecular()));
+        gl.glUniform3fv(lls[i].diffuse, 1, glm::value_ptr(lights[i].getDiffuse()));
+        gl.glUniform4fv(lls[i].position, 1, glm::value_ptr(glm::vec4(modelview.top() * lights[i].getPosition())));
+        gl.glUniform4fv(lls[i].spotdirection, 1, glm::value_ptr(glm::vec4(modelview.top() * lights[i].getSpotDirection())));
+    }
+}
+
+
 
 void View::mousePressed(int x,int y)
 {
@@ -343,4 +392,39 @@ void View::dispose(util::OpenGLFunctions& gl)
   renderer.dispose();
   //release the shader resources
   program.releaseShaders(gl);
+}
+
+void View::raytrace(int width, int height, stack<glm::mat4> &modelView){
+
+    std::cout << "[raytrace] start\n";
+    glm::vec4 startPoint = glm::vec4(0, 0, 0, 1);// in the view coordinate system
+    float nearDistance = 0.1;//the distance of near plane with the startpoint
+    float farDistance = 10000.0;// the distance of far plane with the startpoint
+    float angle = 120.0f;
+    float windowHeight = nearDistance * tan(glm::radians(120.0f));
+    float ratio = width / height;
+    float windowWidth = ratio * windowHeight;
+    float widthRatio = windowWidth / (width / 2);
+    float heightRatio = windowHeight / (height / 2);
+    QImage image = QImage(width, height, QImage::Format_RGB32);
+    QColor color;
+    Ray ray;// the ray object
+    for(int widthIndex = 0; widthIndex < width; widthIndex++){
+        for(int heightIndex = 0; heightIndex < height; heightIndex++){
+            float directionX = (widthIndex - (width / 2)) * widthRatio;
+            float directionY = ((height / 2) - heightIndex) * heightRatio;
+            float directionZ = - nearDistance;
+            glm::vec4 direction = glm::normalize(glm::vec4(directionX, directionY, directionZ, 0.0f));// in the view coordinate system
+            ray.setStartPoint(startPoint);
+            ray.setDirection(direction);
+            color = scenegraph->raycast(ray, modelView, 0);
+//            cout << "Pixel Color :\nred : " << color.redF() << " green: " << color.greenF() << " blue : " << color.blueF() << endl;
+            image.setPixelColor((width - 1 - widthIndex), (height - 1 -heightIndex), color);
+            //delete ray;
+        }
+    }
+    image.save("image.png");
+    std::cout << "[raytrace] complete.\n";
+    //delete image;
+
 }

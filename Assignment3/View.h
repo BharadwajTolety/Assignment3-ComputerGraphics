@@ -20,6 +20,7 @@ using namespace std;
 #include "DronePropeller.h"
 #include "DroneLight.h"
 #include "KeyCtrlCamera.h"
+#include "raytracerswitcher.h"
 
 #define CONFIG_SCENE_GRAPH_PATH_SLOT 0
 #define CONFIG_CONTROLLER_MODEL_SLOT 1
@@ -76,8 +77,12 @@ public:
 
     void Update();
 
+    void ApplyLights(util::OpenGLFunctions& gl) const;
+
+    void raytrace(int width, int height, stack<glm::mat4> &modelView);
 
     std::vector<std::string> ParseConfig(const std::string& _path);
+
 private:
     //record the current window width and height
     int WINDOW_WIDTH,WINDOW_HEIGHT;
@@ -99,15 +104,25 @@ private:
     util::ShaderProgram program;
     sgraph::GLScenegraphRenderer renderer;
 
+    // -------------------------------------------------------------------
+
+    // basic stuff
     Controller* ctrl;
     CameraSwitchcer* switcher;
     Camera* staticCamera;
     KeyCtrlCamera* keyCtrlCamera;
+    RayTracerSwitcher* rayTracerSwitcher;
+
+    // scene stuff
     std::vector<GameObject*> gameObjects;
     Drone *drone;
     DroneLight *drone_light;
     DronePropeller *dp1, *dp2;
 
+    std::vector<util::Light> lights;
+
+
+    // input config stuff
     std::string sceneGraphPath;
     std::string cameraModelPath;
     std::string controllerModelPath;

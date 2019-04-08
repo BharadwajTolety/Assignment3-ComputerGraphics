@@ -14,7 +14,10 @@ public:
 public:
     XMLMeshRenderer(GameObject* _obj, const std::string& _xml_path, sgraph::GLScenegraphRenderer* _renderer);
     ~XMLMeshRenderer();
+
     void Init(const std::string& _xml_path, sgraph::GLScenegraphRenderer* _renderer);
+    void Init(const std::string &_xml_path, sgraph::GLScenegraphRenderer *_renderer, std::vector<util::Light>& _lightsStorage);
+
     void Update();
     void Render(Camera* _cam);
 public:
