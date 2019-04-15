@@ -333,7 +333,7 @@ namespace sgraph
                     }
                 }
 
-//                survival = survival * shadowSurvival;
+                survival = survival * shadowSurvival;
 
                 if (survival == 1)
                 {
@@ -412,7 +412,8 @@ namespace sgraph
                 }
             }// find the nearest point
             QColor color = shade(intersectPoint, modelView);
-            if(intersectPoint.getMaterial().getReflection() > 0.0f){
+            if(intersectPoint.getMaterial().getReflection() > 0.0f)
+            {
                 // if the object is reflective
                 glm::vec4 normal = intersectPoint.getNormal();
                 normal = glm::normalize(glm::vec4(normal.x,
@@ -432,11 +433,11 @@ namespace sgraph
                 reflectRay.setStartPoint(reflectPoint);
                 reflectRay.setDirection(reflectDirection);
 
-//                QColor colorReflect = this->raycast(reflectRay, modelView, ++bounce);
-                QColor colorReflect;
-                colorReflect.setRedF(1.0f);
-                colorReflect.setGreenF(1.0f);
-                colorReflect.setBlueF(1.0f);
+                QColor colorReflect = this->raycast(reflectRay, modelView, ++bounce);
+//                QColor colorReflect;
+//                colorReflect.setRedF(1.0f);
+//                colorReflect.setGreenF(1.0f);
+//                colorReflect.setBlueF(1.0f);
 
                 float colorRed = intersectPoint.getMaterial().getAbsorption() * color.redF()
                         + intersectPoint.getMaterial().getReflection() * colorReflect.redF();
@@ -445,13 +446,14 @@ namespace sgraph
                 float colorBlue = intersectPoint.getMaterial().getAbsorption() * color.blueF()
                         + intersectPoint.getMaterial().getReflection() * colorReflect.blueF();
                 color.setRgbF(colorRed, colorGreen, colorBlue, 1.0f);
-            } else {
-                //color = color;
             }
             return color;
-        } else {
+        }
+        else
+        {
             // return background color
-            if (bounce == 1){
+            if (bounce == 1)
+            {
                 //cout << "reflection not hit!\n";
             }
             QColor color;

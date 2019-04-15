@@ -394,7 +394,8 @@ void View::dispose(util::OpenGLFunctions& gl)
   program.releaseShaders(gl);
 }
 
-void View::raytrace(int width, int height, stack<glm::mat4> &modelView){
+void View::raytrace(int width, int height, stack<glm::mat4> &modelView)
+{
 
     std::cout << "[raytrace] start\n";
     glm::vec4 startPoint = glm::vec4(0, 0, 0, 1);// in the view coordinate system
